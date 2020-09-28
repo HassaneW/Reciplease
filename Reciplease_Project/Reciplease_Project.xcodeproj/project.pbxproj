@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,7 @@
 		506A1AFF2521EE4400CA8EDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 506A1AFE2521EE4400CA8EDD /* Assets.xcassets */; };
 		506A1B022521EE4400CA8EDD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 506A1B002521EE4400CA8EDD /* LaunchScreen.storyboard */; };
 		506A1B0D2521EE4500CA8EDD /* Reciplease_ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506A1B0C2521EE4500CA8EDD /* Reciplease_ProjectTests.swift */; };
+		506A1B19252201CF00CA8EDD /* Reciplease.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506A1B18252201CF00CA8EDD /* Reciplease.swift */; };
 		C2D2C4B9B033AB777738BB21 /* Pods_Reciplease_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 277D450AFC6F6020E421150A /* Pods_Reciplease_Project.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,7 @@
 		506A1B082521EE4500CA8EDD /* Reciplease_ProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Reciplease_ProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		506A1B0C2521EE4500CA8EDD /* Reciplease_ProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reciplease_ProjectTests.swift; sourceTree = "<group>"; };
 		506A1B0E2521EE4500CA8EDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		506A1B18252201CF00CA8EDD /* Reciplease.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reciplease.swift; sourceTree = "<group>"; };
 		812A04AFE545C5E22198D427 /* Pods-Reciplease_Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reciplease_Project.debug.xcconfig"; path = "Target Support Files/Pods-Reciplease_Project/Pods-Reciplease_Project.debug.xcconfig"; sourceTree = "<group>"; };
 		F1ABA34F78DFDC5A55863C2F /* Pods-Reciplease_ProjectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reciplease_ProjectTests.release.xcconfig"; path = "Target Support Files/Pods-Reciplease_ProjectTests/Pods-Reciplease_ProjectTests.release.xcconfig"; sourceTree = "<group>"; };
 		FA5F1D3E44FF412A5F74C67D /* Pods-Reciplease_ProjectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reciplease_ProjectTests.debug.xcconfig"; path = "Target Support Files/Pods-Reciplease_ProjectTests/Pods-Reciplease_ProjectTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 		506A1AF12521EE4000CA8EDD /* Reciplease_Project */ = {
 			isa = PBXGroup;
 			children = (
+				506A1B17252201AE00CA8EDD /* Model */,
 				506A1AF22521EE4000CA8EDD /* AppDelegate.swift */,
 				506A1AF42521EE4000CA8EDD /* SceneDelegate.swift */,
 				506A1AF62521EE4000CA8EDD /* ViewController.swift */,
@@ -114,6 +117,14 @@
 			path = Reciplease_ProjectTests;
 			sourceTree = "<group>";
 		};
+		506A1B17252201AE00CA8EDD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				506A1B18252201CF00CA8EDD /* Reciplease.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		A64D1BCD376131332C349400 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -131,7 +142,6 @@
 				FA5F1D3E44FF412A5F74C67D /* Pods-Reciplease_ProjectTests.debug.xcconfig */,
 				F1ABA34F78DFDC5A55863C2F /* Pods-Reciplease_ProjectTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -304,6 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				506A1AF72521EE4000CA8EDD /* ViewController.swift in Sources */,
+				506A1B19252201CF00CA8EDD /* Reciplease.swift in Sources */,
 				506A1AF32521EE4000CA8EDD /* AppDelegate.swift in Sources */,
 				506A1AFD2521EE4000CA8EDD /* Reciplease_Project.xcdatamodeld in Sources */,
 				506A1AF52521EE4000CA8EDD /* SceneDelegate.swift in Sources */,
