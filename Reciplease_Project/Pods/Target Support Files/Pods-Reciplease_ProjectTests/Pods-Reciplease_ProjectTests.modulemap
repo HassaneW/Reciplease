@@ -1,6 +1,0 @@
-framework module Pods_Reciplease_ProjectTests {
-  umbrella header "Pods-Reciplease_ProjectTests-umbrella.h"
-
-  export *
-  module * { export * }
-}

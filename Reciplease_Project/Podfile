@@ -3,14 +3,9 @@
 
 target 'Reciplease_Project' do
   # Comment the next line if you don't want to use dynamic frameworks
+
+
   use_frameworks!
 
-  # Pods for Reciplease_Project
-
-  target 'Reciplease_ProjectTests' do
-    inherit! :search_paths
-	pod 'Alamofire', '~> 5.2'
-    # Pods for testing
-  end
-
+pod  'Alamofire' ,  '~> 5.2'
 end
