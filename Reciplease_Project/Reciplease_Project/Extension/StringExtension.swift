@@ -15,7 +15,7 @@ extension String {
       }
 }
 
-
+// Out of range
 extension Collection {
     
     subscript(safe index: Index) -> Iterator.Element? {
