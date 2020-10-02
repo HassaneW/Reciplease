@@ -9,12 +9,55 @@
 import Foundation
 import UIKit
 
+class RecapView: UIView {
+    
+}
+
+class RecipeCell: UITableViewCell {
+    
+    var recipe: Recipe? {
+        didSet {
+            recipeName.text = recipe?.title
+            //comment convertir un tableau de string en une string separer par des virgules
+            //recipeIngredients.text = recipe.ingredients.
+        }
+    }
+    
+    private let recipeName = UILabel()
+    private let recipeIngredients = UILabel()
+    private let recipeImage = UIImageView()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupView()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupView()
+    }
+    
+    private func setupView() {
+        recipeName.textColor = UIColor.systemRed
+        recipeName.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(recipeName)
+        
+        let textStackView = UIStackView(arrangedSubviews: [recipeName, recipeIngredients])
+        textStackView.axis = .vertical
+        
+        NSLayoutConstraint.activate([
+            recipeName.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            recipeName.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+        ])
+    }
+}
 // tab bar search / favoris
 // search
 // lecran resultats avec custom cell
 // l ecran detail resultats
 
 // changer le nom
+//RecipeCell
 class TitleCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel : UILabel!
@@ -40,8 +83,8 @@ class TitleCell: UITableViewCell {
     
     func displayData(recipe : Recipe) {
         titleLabel.text = recipe.title
-        descriptionLabel.text = recipe.url
-        timeLabel.text = "Time : \(recipe.totalTime)"
+        //descriptionLabel.text = recipe.url
+        //timeLabel.text = "Time : \(recipe.totalTime)"
         ingredientsLabel.text = recipe.ingredients.first
         
         guard let urlIcon = URL(string: recipe.imageUrl)  else { return }

@@ -24,9 +24,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureDelegate()
-        
-        searchButton.clipsToBounds = true
-        searchButton.layer.cornerRadius = 10
+        setupView()
     }
     
     // MARK: Action Methods
@@ -64,6 +62,11 @@ class HomeViewController: UIViewController {
         ingredientsTableView.delegate = self
         ingredientsTableView.dataSource = self
         textIngredientField.delegate = self
+    }
+    
+    private func setupView() {
+        searchButton.clipsToBounds = true
+        searchButton.layer.cornerRadius = 10
     }
 }
 

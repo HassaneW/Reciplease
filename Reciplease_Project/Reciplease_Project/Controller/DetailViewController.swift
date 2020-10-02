@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreData
-
+import SafariServices
 
 class DetailViewController: UIViewController {
     
@@ -69,8 +69,13 @@ class DetailViewController: UIViewController {
                 }
             }
             
-            func getDirection(sender: UIButton) {
-                
+            @IBAction func getDirection(sender: UIButton) {
+                guard let recipeURLString = recipe?.url,
+                    let recipeURL = URL(string: recipeURLString) else {
+                    return
+                }
+                let safariVC = SFSafariViewController(url: recipeURL)
+                present(safariVC, animated: true, completion: nil)
             }
         }
 

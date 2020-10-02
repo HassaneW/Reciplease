@@ -16,7 +16,6 @@
 		506602A72523477D007759EC /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506602A62523477D007759EC /* FavoriteViewController.swift */; };
 		506A1AF32521EE4000CA8EDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506A1AF22521EE4000CA8EDD /* AppDelegate.swift */; };
 		506A1AF52521EE4000CA8EDD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506A1AF42521EE4000CA8EDD /* SceneDelegate.swift */; };
-		506A1AF72521EE4000CA8EDD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506A1AF62521EE4000CA8EDD /* ViewController.swift */; };
 		506A1AFA2521EE4000CA8EDD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 506A1AF82521EE4000CA8EDD /* Main.storyboard */; };
 		506A1AFD2521EE4000CA8EDD /* Reciplease_Project.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 506A1AFB2521EE4000CA8EDD /* Reciplease_Project.xcdatamodeld */; };
 		506A1AFF2521EE4400CA8EDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 506A1AFE2521EE4400CA8EDD /* Assets.xcassets */; };
@@ -25,6 +24,7 @@
 		506A1B19252201CF00CA8EDD /* Reciplease.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506A1B18252201CF00CA8EDD /* Reciplease.swift */; };
 		506A1B1C2522042100CA8EDD /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506A1B1B2522042100CA8EDD /* Config.swift */; };
 		506A1B1E2522043A00CA8EDD /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506A1B1D2522043A00CA8EDD /* Service.swift */; };
+		50A560DE252746C300FA8618 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50A560DD252746C300FA8618 /* Colors.xcassets */; };
 		C2D2C4B9B033AB777738BB21 /* Pods_Reciplease_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 277D450AFC6F6020E421150A /* Pods_Reciplease_Project.framework */; };
 /* End PBXBuildFile section */
 
@@ -51,7 +51,6 @@
 		506A1AEF2521EE4000CA8EDD /* Reciplease_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reciplease_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		506A1AF22521EE4000CA8EDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		506A1AF42521EE4000CA8EDD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		506A1AF62521EE4000CA8EDD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		506A1AF92521EE4000CA8EDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		506A1AFC2521EE4000CA8EDD /* Reciplease_Project.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Reciplease_Project.xcdatamodel; sourceTree = "<group>"; };
 		506A1AFE2521EE4400CA8EDD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -63,6 +62,7 @@
 		506A1B18252201CF00CA8EDD /* Reciplease.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reciplease.swift; sourceTree = "<group>"; };
 		506A1B1B2522042100CA8EDD /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		506A1B1D2522043A00CA8EDD /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		50A560DD252746C300FA8618 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		812A04AFE545C5E22198D427 /* Pods-Reciplease_Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reciplease_Project.debug.xcconfig"; path = "Target Support Files/Pods-Reciplease_Project/Pods-Reciplease_Project.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -96,12 +96,13 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		5044D6EB25233A4200384B62 /* CustomCell */ = {
+		5044D6EB25233A4200384B62 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				506A1AF82521EE4000CA8EDD /* Main.storyboard */,
 				5044D6EC25233A6300384B62 /* TitleCell.swift */,
 			);
-			path = CustomCell;
+			path = View;
 			sourceTree = "<group>";
 		};
 		5044D6F025233B8800384B62 /* Utilities */ = {
@@ -145,18 +146,13 @@
 			children = (
 				5044D6F325233BB700384B62 /* Extension */,
 				5044D6F025233B8800384B62 /* Utilities */,
-				5044D6EB25233A4200384B62 /* CustomCell */,
+				5044D6EB25233A4200384B62 /* View */,
 				5044D6E8252338D600384B62 /* Controller */,
 				506A1B1A2522040000CA8EDD /* Networking */,
 				506A1B17252201AE00CA8EDD /* Model */,
-				506A1AF22521EE4000CA8EDD /* AppDelegate.swift */,
-				506A1AF42521EE4000CA8EDD /* SceneDelegate.swift */,
-				506A1AF62521EE4000CA8EDD /* ViewController.swift */,
-				506A1AF82521EE4000CA8EDD /* Main.storyboard */,
-				506A1AFE2521EE4400CA8EDD /* Assets.xcassets */,
-				506A1B002521EE4400CA8EDD /* LaunchScreen.storyboard */,
+				50A560DC2527467800FA8618 /* Supporting Files */,
+				50A560DB2527462300FA8618 /* Resources */,
 				506A1B032521EE4400CA8EDD /* Info.plist */,
-				506A1AFB2521EE4000CA8EDD /* Reciplease_Project.xcdatamodeld */,
 			);
 			path = Reciplease_Project;
 			sourceTree = "<group>";
@@ -173,6 +169,7 @@
 		506A1B17252201AE00CA8EDD /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				506A1AFB2521EE4000CA8EDD /* Reciplease_Project.xcdatamodeld */,
 				506A1B18252201CF00CA8EDD /* Reciplease.swift */,
 			);
 			path = Model;
@@ -185,6 +182,25 @@
 				506A1B1D2522043A00CA8EDD /* Service.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		50A560DB2527462300FA8618 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				506A1AFE2521EE4400CA8EDD /* Assets.xcassets */,
+				50A560DD252746C300FA8618 /* Colors.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		50A560DC2527467800FA8618 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				506A1B002521EE4400CA8EDD /* LaunchScreen.storyboard */,
+				506A1AF22521EE4000CA8EDD /* AppDelegate.swift */,
+				506A1AF42521EE4000CA8EDD /* SceneDelegate.swift */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		A64D1BCD376131332C349400 /* Frameworks */ = {
@@ -288,6 +304,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				506A1B022521EE4400CA8EDD /* LaunchScreen.storyboard in Resources */,
+				50A560DE252746C300FA8618 /* Colors.xcassets in Resources */,
 				506A1AFF2521EE4400CA8EDD /* Assets.xcassets in Resources */,
 				506A1AFA2521EE4000CA8EDD /* Main.storyboard in Resources */,
 			);
@@ -350,7 +367,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				506602A5252344C9007759EC /* DetailViewController.swift in Sources */,
-				506A1AF72521EE4000CA8EDD /* ViewController.swift in Sources */,
 				5044D6F225233B9900384B62 /* Constants.swift in Sources */,
 				506602A3252342D2007759EC /* ListViewController.swift in Sources */,
 				506A1B1E2522043A00CA8EDD /* Service.swift in Sources */,
