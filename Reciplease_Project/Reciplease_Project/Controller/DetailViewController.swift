@@ -13,10 +13,10 @@ import SafariServices
 class DetailViewController: UIViewController {
     
     @IBOutlet weak var imgView : UIImageView!
-    
     @IBOutlet weak var titleLabel : UILabel!
-    
     @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var getDirecton: UIButton!
     
       let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
@@ -26,6 +26,9 @@ class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        getDirecton.layer.cornerRadius = 20
+        
         let button1 = UIBarButtonItem(image: UIImage(systemName: "star.fill"), style: .plain, target: self, action: #selector(favoriteTapped)) // action:#selector(Class.MethodName) for swift 3
                 self.navigationItem.rightBarButtonItem  = button1
                 

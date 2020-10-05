@@ -13,6 +13,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak private var textIngredientField: UITextField!
     @IBOutlet weak private var ingredientsTableView: UITableView!
     @IBOutlet weak private var searchButton: UIButton!
+    @IBOutlet weak private var add : UIButton!
+    @IBOutlet weak private var clear : UIButton!
     
     private var ingredientData: [String] = []
     
@@ -22,7 +24,13 @@ class HomeViewController: UIViewController {
     
     // MARK: View lifecycle
     override func viewDidLoad() {
+   
         super.viewDidLoad()
+        
+        clear.layer.cornerRadius = 20
+        add.layer.cornerRadius = 20
+        searchButton.layer.cornerRadius = 20
+        
         configureDelegate()
         setupView()
     }

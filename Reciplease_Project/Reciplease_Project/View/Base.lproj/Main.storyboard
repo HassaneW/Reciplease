@@ -239,11 +239,12 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="QCb-WI-z7a" userLabel="Stack View clear Ingredients">
                                 <rect key="frame" x="20" y="215.5" width="374" height="60"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Ingredients : " borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4SS-Fx-bhG">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Ingredients:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dgh-Bk-5Pv">
                                         <rect key="frame" x="0.0" y="0.0" width="306" height="60"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3uU-0F-tOD">
                                         <rect key="frame" x="314" y="0.0" width="60" height="60"/>
                                         <color key="backgroundColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -321,6 +322,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="h1D-uz-LNY"/>
                     <connections>
+                        <outlet property="add" destination="4VU-Zc-2Rk" id="9wp-QR-e6c"/>
+                        <outlet property="clear" destination="3uU-0F-tOD" id="Psf-2h-Cor"/>
                         <outlet property="ingredientsTableView" destination="MBx-6Z-Mvv" id="7Vm-cs-Ozv"/>
                         <outlet property="searchButton" destination="YZk-6h-nc2" id="LsF-9l-WKF"/>
                         <outlet property="textIngredientField" destination="CKc-8Q-DOf" id="Gyv-hC-11a"/>
@@ -522,14 +525,14 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="Y4j-nA-PXE">
-                                        <rect key="frame" x="0.0" y="28" width="374" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="374" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Y4j-nA-PXE" id="e00-2p-28J">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GpD-59-YHL">
-                                                    <rect key="frame" x="20" y="11" width="334" height="21.5"/>
+                                                    <rect key="frame" x="20" y="11" width="334" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -582,6 +585,7 @@
                         <viewLayoutGuide key="safeArea" id="g6G-S0-fvT"/>
                     </view>
                     <connections>
+                        <outlet property="getDirecton" destination="n24-U7-eKC" id="0xT-xI-hLX"/>
                         <outlet property="imgView" destination="eDT-hu-ege" id="LNx-sr-bC8"/>
                         <outlet property="tableView" destination="Qne-86-Nfr" id="yL8-BF-B4M"/>
                         <outlet property="titleLabel" destination="wHB-cK-Pbu" id="hce-hL-Vl5"/>
@@ -654,10 +658,10 @@
         <image name="slowmo" catalog="system" width="128" height="122"/>
         <image name="star" catalog="system" width="128" height="116"/>
         <namedColor name="brown">
-            <color red="0.38430012191928931" green="0.37299717715695724" blue="0.37299717715695724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.38400000333786011" green="0.37299999594688416" blue="0.37299999594688416" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="green">
-            <color red="0.34193745260000002" green="0.56547331810000001" blue="0.3804852366" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.34200000762939453" green="0.56499999761581421" blue="0.37999999523162842" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
