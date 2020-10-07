@@ -83,8 +83,8 @@ class FavoriteViewController: UIViewController {
            }
            
            func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-               let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TitleCell
-               cell.displayData(recipe: self.arrayRecipe.recipes[indexPath.row])
+               let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! RecipeCell
+                cell.recipe = arrayRecipe.recipes[indexPath.row]
                return cell
            }
            

@@ -27,8 +27,8 @@ class HomeViewController: UIViewController {
    
         super.viewDidLoad()
         
-        clear.layer.cornerRadius = 20
-        add.layer.cornerRadius = 20
+        clear.layer.cornerRadius = 10
+        add.layer.cornerRadius = 10
         searchButton.layer.cornerRadius = 20
         
         configureDelegate()

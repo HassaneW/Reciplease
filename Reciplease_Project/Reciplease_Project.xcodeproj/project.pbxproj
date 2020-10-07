@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5044D6ED25233A6300384B62 /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5044D6EC25233A6300384B62 /* TitleCell.swift */; };
+		5044D6ED25233A6300384B62 /* RecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5044D6EC25233A6300384B62 /* RecipeCell.swift */; };
 		5044D6F225233B9900384B62 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5044D6F125233B9900384B62 /* Constants.swift */; };
 		5044D6F525233BC700384B62 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5044D6F425233BC700384B62 /* StringExtension.swift */; };
 		506602A125233FA0007759EC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506602A025233FA0007759EC /* HomeViewController.swift */; };
@@ -41,7 +41,7 @@
 /* Begin PBXFileReference section */
 		24D1CB20AF9B119359EB00C9 /* Pods-Reciplease_Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reciplease_Project.release.xcconfig"; path = "Target Support Files/Pods-Reciplease_Project/Pods-Reciplease_Project.release.xcconfig"; sourceTree = "<group>"; };
 		277D450AFC6F6020E421150A /* Pods_Reciplease_Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reciplease_Project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5044D6EC25233A6300384B62 /* TitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
+		5044D6EC25233A6300384B62 /* RecipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCell.swift; sourceTree = "<group>"; };
 		5044D6F125233B9900384B62 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5044D6F425233BC700384B62 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		506602A025233FA0007759EC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -100,7 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				506A1AF82521EE4000CA8EDD /* Main.storyboard */,
-				5044D6EC25233A6300384B62 /* TitleCell.swift */,
+				5044D6EC25233A6300384B62 /* RecipeCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -371,7 +371,7 @@
 				506602A3252342D2007759EC /* ListViewController.swift in Sources */,
 				506A1B1E2522043A00CA8EDD /* Service.swift in Sources */,
 				506A1B19252201CF00CA8EDD /* Reciplease.swift in Sources */,
-				5044D6ED25233A6300384B62 /* TitleCell.swift in Sources */,
+				5044D6ED25233A6300384B62 /* RecipeCell.swift in Sources */,
 				5044D6F525233BC700384B62 /* StringExtension.swift in Sources */,
 				506A1AF32521EE4000CA8EDD /* AppDelegate.swift in Sources */,
 				506602A125233FA0007759EC /* HomeViewController.swift in Sources */,

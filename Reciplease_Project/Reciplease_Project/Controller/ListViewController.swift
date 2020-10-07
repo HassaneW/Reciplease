@@ -58,9 +58,10 @@ extension ListViewController :UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TitleCell
-       // cell.recipe = arrayData.recipes[indexPath.row]
-        cell.displayData(recipe: self.arrayData.recipes[indexPath.row])
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! RecipeCell
+        cell.recipe = arrayData.recipes[indexPath.row]
+        
+        //cell.displayData(recipe: self.arrayData.recipes[indexPath.row])
         return cell
     }
     
