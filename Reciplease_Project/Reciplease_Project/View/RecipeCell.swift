@@ -28,10 +28,10 @@ final class RecipeInfoView: UIView {
             
             let portionsString = String(portionsRecipe)
             
-            let imageClock = UIImage(systemName: "alarm")!
+            guard let imageClock = UIImage(systemName: "alarm") else { return }
             let imageClockView = UIImageView(image: imageClock)
-            let data = imageClockView.image!.pngData()
-            let imageClockPresentation =  String(decoding: data!, as: UTF8.self)
+            guard let data = imageClockView.image?.pngData() else { return }
+            let imageClockPresentation =  String(decoding: data, as: UTF8.self)
             
             
             imageClockLabel.text = imageClockPresentation
@@ -86,26 +86,55 @@ final class RecipeInfoView: UIView {
         addSubview(textStackView)
         
         
-        let stackView2 = UIStackView(arrangedSubviews: [portionLabel])
-        stackView2.axis = .vertical
-        stackView2.alignment = .fill
-        stackView2.distribution = .fill
-        stackView2.spacing = UIStackView.spacingUseDefault
-        stackView2.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(stackView2)
+        let textStackView2 = UIStackView(arrangedSubviews: [portionLabel])
+        textStackView2.axis = .vertical
+        textStackView2.alignment = .fill
+        textStackView2.distribution = .fill
+        textStackView2.spacing = UIStackView.spacingUseDefault
+        textStackView2.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(textStackView2)
         
-        let stackView3 = UIStackView(arrangedSubviews: [textStackView, stackView2])
-        stackView3.axis = .vertical
-        stackView3.alignment = .fill
-        stackView3.distribution = .fill
-        stackView3.spacing = UIStackView.spacingUseDefault
-        stackView3.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(stackView3)
+        let textStackView3 = UIStackView(arrangedSubviews: [textStackView, textStackView2])
+        textStackView3.axis = .vertical
+        textStackView3.alignment = .fill
+        textStackView3.distribution = .fill
+        textStackView3.spacing = UIStackView.spacingUseDefault
+        textStackView3.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(textStackView3)
         
         
         NSLayoutConstraint.activate([
             durationLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             durationLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            durationLabel.heightAnchor.constraint(equalTo: textStackView.heightAnchor),
+            durationLabel.topAnchor.constraint(equalToSystemSpacingBelow: textStackView.topAnchor, multiplier: 1.5),
+            durationLabel.bottomAnchor.constraint(equalTo: textStackView.bottomAnchor),
+            durationLabel.leadingAnchor.constraint(equalTo: textStackView.leadingAnchor),
+            durationLabel.trailingAnchor.constraint(equalTo: imageClockLabel.leadingAnchor),
+            
+            
+            imageClockLabel.heightAnchor.constraint(equalTo: textStackView.heightAnchor),
+            imageClockLabel.topAnchor.constraint(equalToSystemSpacingBelow: textStackView.topAnchor, multiplier: 1.5),
+            imageClockLabel.bottomAnchor.constraint(equalTo: textStackView.bottomAnchor),
+            imageClockLabel.leadingAnchor.constraint(equalTo: durationLabel.trailingAnchor),
+            imageClockLabel.trailingAnchor.constraint(equalTo: textStackView.leadingAnchor),
+            
+            
+//            textStackView.leadingAnchor.constraint(equalTo: <#T##NSLayoutAnchor<NSLayoutXAxisAnchor>#>)
+            
+            
+            portionLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            portionLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            portionLabel.heightAnchor.constraint(equalTo: textStackView2.heightAnchor),
+            portionLabel.topAnchor.constraint(equalToSystemSpacingBelow: textStackView2.topAnchor, multiplier: 1.5),
+            portionLabel.bottomAnchor.constraint(equalTo: textStackView2.bottomAnchor),
+            portionLabel.leadingAnchor.constraint(equalTo: textStackView2.leadingAnchor),
+            portionLabel.trailingAnchor.constraint(equalTo: textStackView2.trailingAnchor),
+            
+//            textStackView2.leadingAnchor.constraint(equalTo: <#T##NSLayoutAnchor<NSLayoutXAxisAnchor>#>)
+            
+            
+//            textStackView3.leadingAnchor.constraint(equalTo: <#T##NSLayoutAnchor<NSLayoutXAxisAnchor>#>)
         ])
     }
     
@@ -199,13 +228,7 @@ class RecipeCell: UITableViewCell {
         }
     }
 }
-// tab bar search / favoris
-// search
-// lecran resultats avec custom cell
-// l ecran detail resultats
 
-// changer le nom
-//RecipeCell
 class TitleCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel : UILabel!
