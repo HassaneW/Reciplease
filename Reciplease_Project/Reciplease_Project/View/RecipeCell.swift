@@ -11,40 +11,27 @@ import UIKit
 
 final class RecipeInfoView: UIView {
     
-    var recipe: Recipe? {
-        
-        // portions
+    var portions: Int? {
         didSet {
-            guard let time = recipe?.totalTime else {
-                // diration
-                return
-            }
-            
-            guard let portionsRecipe = recipe?.portions
-                else {
-                    return
-            }
-            
-            
-            let portionsString = String(portionsRecipe)
-            
-            guard let imageClock = UIImage(systemName: "alarm") else { return }
-            let imageClockView = UIImageView(image: imageClock)
-            guard let data = imageClockView.image?.pngData() else { return }
-            let imageClockPresentation =  String(decoding: data, as: UTF8.self)
-            
-            
-            imageClockLabel.text = imageClockPresentation
-            portionLabel.text = "\(recipe?.portions ?? 0) parts"
-            durationLabel.text = "\(recipe?.totalTime ?? 0) min"
-            // like
+            guard let portions = portions else { return }
+            portionLabel.text = "\(portions) p"
         }
     }
     
-    private let imageClockLabel = UILabel()
+    var duration: Int? {
+        didSet {
+            guard let duration = duration, duration != 0 else {
+                durationLabel.isHidden = true
+                clockImageView.isHidden = true
+                return
+            }
+            durationLabel.text = "\(duration) m" //TODO: Confirmer que c'est en min timeFormatter
+        }
+    }
+    
     private let portionLabel = UILabel()
     private let durationLabel = UILabel()
-    // like
+    private let clockImageView = UIImageView(image: UIImage(systemName: "stopwatch.fill"))
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -57,97 +44,65 @@ final class RecipeInfoView: UIView {
     }
     
     private func setupView() {
+        backgroundColor = UIColor.brown
         
-        backgroundColor = UIColor.systemBackground
-        
-        // lieStackView = 1 image view / 1 uilabel
-        // durationStackView = 1 iamge view / 1 uilabel
-        // contentStackView = 2 = Puis ajouter les contraintes
+        clockImageView.contentMode = .scaleAspectFit
+        clockImageView.tintColor = UIColor.label
+        clockImageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        clockImageView.translatesAutoresizingMaskIntoConstraints = false
         
         durationLabel.textColor = UIColor.label
         durationLabel.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(durationLabel)
+        
+        let durationStackView = UIStackView(arrangedSubviews: [durationLabel, clockImageView])
+        durationStackView.axis = .horizontal
+        durationStackView.alignment = .fill
+        durationStackView.distribution = .fill
+        durationStackView.spacing = UIStackView.spacingUseDefault
+        durationStackView.translatesAutoresizingMaskIntoConstraints = false
+
+        let portionImageView = UIImageView(image: UIImage(systemName: "circle.fill")) //TODO: find a better image
+        portionImageView.contentMode = .scaleAspectFit
+        portionImageView.tintColor = UIColor.label
+        portionImageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
         portionLabel.textColor = UIColor.label
         portionLabel.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(portionLabel)
         
-        imageClockLabel.textColor = UIColor.label
-        imageClockLabel.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(imageClockLabel)
+        let portionStackView = UIStackView(arrangedSubviews: [portionLabel, portionImageView])
+        portionStackView.axis = .horizontal
+        portionStackView.alignment = .fill
+        portionStackView.distribution = .fill
+        portionStackView.spacing = UIStackView.spacingUseDefault
+        portionStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        let textStackView = UIStackView(arrangedSubviews: [imageClockLabel, durationLabel])
-        
-        textStackView.axis = .vertical
-        textStackView.alignment = .fill
-        textStackView.distribution = .fill
-        textStackView.spacing = UIStackView.spacingUseDefault
-        textStackView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(textStackView)
-        
-        
-        let textStackView2 = UIStackView(arrangedSubviews: [portionLabel])
-        textStackView2.axis = .vertical
-        textStackView2.alignment = .fill
-        textStackView2.distribution = .fill
-        textStackView2.spacing = UIStackView.spacingUseDefault
-        textStackView2.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(textStackView2)
-        
-        let textStackView3 = UIStackView(arrangedSubviews: [textStackView, textStackView2])
-        textStackView3.axis = .vertical
-        textStackView3.alignment = .fill
-        textStackView3.distribution = .fill
-        textStackView3.spacing = UIStackView.spacingUseDefault
-        textStackView3.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(textStackView3)
-        
+        let contentStackView = UIStackView(arrangedSubviews: [durationStackView, portionStackView])
+        contentStackView.axis = .vertical
+        contentStackView.alignment = .fill
+        contentStackView.distribution = .fill
+        contentStackView.spacing = UIStackView.spacingUseDefault
+        contentStackView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(contentStackView)
         
         NSLayoutConstraint.activate([
-            durationLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            durationLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            durationLabel.heightAnchor.constraint(equalTo: textStackView.heightAnchor),
-            durationLabel.topAnchor.constraint(equalToSystemSpacingBelow: textStackView.topAnchor, multiplier: 1.5),
-            durationLabel.bottomAnchor.constraint(equalTo: textStackView.bottomAnchor),
-            durationLabel.leadingAnchor.constraint(equalTo: textStackView.leadingAnchor),
-            durationLabel.trailingAnchor.constraint(equalTo: imageClockLabel.leadingAnchor),
-            
-            
-            imageClockLabel.heightAnchor.constraint(equalTo: textStackView.heightAnchor),
-            imageClockLabel.topAnchor.constraint(equalToSystemSpacingBelow: textStackView.topAnchor, multiplier: 1.5),
-            imageClockLabel.bottomAnchor.constraint(equalTo: textStackView.bottomAnchor),
-            imageClockLabel.leadingAnchor.constraint(equalTo: durationLabel.trailingAnchor),
-            imageClockLabel.trailingAnchor.constraint(equalTo: textStackView.leadingAnchor),
-            
-            
-//            textStackView.leadingAnchor.constraint(equalTo: <#T##NSLayoutAnchor<NSLayoutXAxisAnchor>#>)
-            
-            
-            portionLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            portionLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            portionLabel.heightAnchor.constraint(equalTo: textStackView2.heightAnchor),
-            portionLabel.topAnchor.constraint(equalToSystemSpacingBelow: textStackView2.topAnchor, multiplier: 1.5),
-            portionLabel.bottomAnchor.constraint(equalTo: textStackView2.bottomAnchor),
-            portionLabel.leadingAnchor.constraint(equalTo: textStackView2.leadingAnchor),
-            portionLabel.trailingAnchor.constraint(equalTo: textStackView2.trailingAnchor),
-            
-//            textStackView2.leadingAnchor.constraint(equalTo: <#T##NSLayoutAnchor<NSLayoutXAxisAnchor>#>)
-            
-            
-//            textStackView3.leadingAnchor.constraint(equalTo: <#T##NSLayoutAnchor<NSLayoutXAxisAnchor>#>)
+            contentStackView.topAnchor.constraint(equalToSystemSpacingBelow: topAnchor, multiplier: 1.0),
+            contentStackView.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1.0),
+            trailingAnchor.constraint(equalToSystemSpacingAfter: contentStackView.trailingAnchor, multiplier: 1.0),
+            bottomAnchor.constraint(equalToSystemSpacingBelow: contentStackView.bottomAnchor, multiplier: 1.0)
         ])
     }
     
 }
 
-class RecipeCell: UITableViewCell {
+final class RecipeCell: UITableViewCell {
     
     var recipe: Recipe? {
         didSet {
             recipeName.text = recipe?.title
-            //comment convertir un tableau de string en une string separer par des virgules
+            //TODO: comment convertir un tableau de string en une string separer par des virgules
             recipeIngredients.text = recipe?.ingredients.first
-            recipeInfoView.recipe = recipe
+            recipeInfoView.duration = recipe?.totalTime
+            recipeInfoView.portions = recipe?.portions
             setupImage()
         }
     }
@@ -170,7 +125,7 @@ class RecipeCell: UITableViewCell {
     private func setupView() {
         backgroundColor = UIColor.systemBackground
         
-        recipeImage.contentMode = .scaleAspectFit
+        recipeImage.contentMode = .scaleAspectFill
         recipeImage.clipsToBounds = true
         recipeImage.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(recipeImage)
@@ -181,7 +136,6 @@ class RecipeCell: UITableViewCell {
         recipeIngredients.textColor = UIColor.secondaryLabel
         recipeIngredients.translatesAutoresizingMaskIntoConstraints = false
         
-        recipeInfoView.backgroundColor = UIColor.brown
         recipeInfoView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(recipeInfoView)
         
@@ -194,7 +148,7 @@ class RecipeCell: UITableViewCell {
         contentView.addSubview(textStackView)
         
         NSLayoutConstraint.activate([
-            recipeImage.heightAnchor.constraint(equalToConstant: 120),
+            recipeImage.heightAnchor.constraint(equalToConstant: 120.5),
             recipeImage.topAnchor.constraint(equalTo: contentView.topAnchor),
             recipeImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             recipeImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
@@ -205,13 +159,7 @@ class RecipeCell: UITableViewCell {
             contentView.bottomAnchor.constraint(equalToSystemSpacingBelow: textStackView.bottomAnchor, multiplier: 1.0),
             
             recipeInfoView.topAnchor.constraint(equalToSystemSpacingBelow: contentView.topAnchor, multiplier: 1.0),
-            trailingAnchor.constraint(equalToSystemSpacingAfter: recipeInfoView.trailingAnchor, multiplier: 1.0),
-            recipeInfoView.heightAnchor.constraint(equalToConstant: 60),
-            recipeInfoView.widthAnchor.constraint(equalToConstant: 60)
-            
-            //            textStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8.0)
-            
-            
+            trailingAnchor.constraint(equalToSystemSpacingAfter: recipeInfoView.trailingAnchor, multiplier: 1.0)
         ])
     }
     

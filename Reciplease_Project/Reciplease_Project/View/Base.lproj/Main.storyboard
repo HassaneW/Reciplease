@@ -450,6 +450,11 @@
                                     <action selector="getDirectionWithSender:" destination="VXY-CW-ZrC" eventType="touchUpInside" id="W3G-HV-5Qs"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NUs-0i-sNY" customClass="RecipeInfoView" customModule="Reciplease_Project" customModuleProvider="target">
+                                <rect key="frame" x="223" y="44" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
