@@ -91,9 +91,9 @@ class FavoriteViewController: UIViewController {
            
            func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
                let storyboard = UIStoryboard(name: Constants.Storyboard.main, bundle: nil)
-               guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.detailView) as? DetailViewController else { return }
-               vc.data = self.arrayRecipe.recipes[indexPath.row]
-               self.navigationController?.pushViewController(vc, animated: true)
+               guard let detailVC = storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.detailView) as? DetailViewController else { return }
+               detailVC.recipe = arrayRecipe.recipes[indexPath.row]
+               self.navigationController?.pushViewController(detailVC, animated: true)
            }
            
            func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

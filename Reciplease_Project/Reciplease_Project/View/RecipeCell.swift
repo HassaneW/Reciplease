@@ -61,7 +61,7 @@ final class RecipeInfoView: UIView {
         durationStackView.spacing = UIStackView.spacingUseDefault
         durationStackView.translatesAutoresizingMaskIntoConstraints = false
 
-        let portionImageView = UIImageView(image: UIImage(systemName: "circle.fill")) //TODO: find a better image
+        let portionImageView = UIImageView(image: UIImage(systemName: "chart.pie.fill")) //TODO: find a better image
         portionImageView.contentMode = .scaleAspectFit
         portionImageView.tintColor = UIColor.label
         portionImageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
@@ -91,7 +91,6 @@ final class RecipeInfoView: UIView {
             bottomAnchor.constraint(equalToSystemSpacingBelow: contentStackView.bottomAnchor, multiplier: 1.0)
         ])
     }
-    
 }
 
 final class RecipeCell: UITableViewCell {
@@ -124,6 +123,8 @@ final class RecipeCell: UITableViewCell {
     
     private func setupView() {
         backgroundColor = UIColor.systemBackground
+        
+        //TODO: UIView shadown (decoration et degradés)
         
         recipeImage.contentMode = .scaleAspectFill
         recipeImage.clipsToBounds = true
@@ -205,6 +206,8 @@ class TitleCell: UITableViewCell {
         //descriptionLabel.text = recipe.url
         //timeLabel.text = "Time : \(recipe.totalTime)"
         ingredientsLabel.text = recipe.ingredients.first
+        
+        
         
         guard let urlIcon = URL(string: recipe.imageUrl)  else { return }
         DispatchQueue.global().async { [weak self] in

@@ -12,88 +12,116 @@ import SafariServices
 
 class DetailViewController: UIViewController {
     
-    @IBOutlet weak var imgView : UIImageView!
+    @IBOutlet weak var recipeImageView : UIImageView!
     @IBOutlet weak var titleLabel : UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var getDirectonButton: UIButton!
+    @IBOutlet weak var recipeInfoView: RecipeInfoView!
     
-    @IBOutlet weak var getDirecton: UIButton!
-    
-      let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     var recipe: Recipe?
-       
-       var data = Recipe(title: "", imageUrl: "", url: "", portions: 0, ingredients: [""], totalTime: 0)
+    
+    //TODO: a bouger vers le constants global ?
+    private enum Constant {
+        static let ingredientCellId = "ingredientsCell"
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupDelegates()
+        setupView()
+    }
+    
+    private func setupDelegates() {
+        tableView.dataSource = self
+        tableView.delegate = self
+    }
+    
+    private func setupView() {
+        getDirectonButton.layer.cornerRadius = 20
+        //getDirectonButton.backgroundColor = #colorLiteral(red: 0.3419374526, green: 0.5654733181, blue: 0.3804852366, alpha: 1)
         
-        getDirecton.layer.cornerRadius = 20
+        //TODO: A faire sur le storyboard
+        //titleLabel.backgroundColor = #colorLiteral(red: 0.3419374526, green: 0.5654733181, blue: 0.3804852366, alpha: 1)
         
         let button1 = UIBarButtonItem(image: UIImage(systemName: "star.fill"), style: .plain, target: self, action: #selector(favoriteTapped)) // action:#selector(Class.MethodName) for swift 3
-                self.navigationItem.rightBarButtonItem  = button1
-                
-                self.tableView.dataSource = self
-                self.tableView.delegate = self
-                self.tableView.reloadData()
-                titleLabel.text = data.title
-                guard let urlIcon = URL(string: data.imageUrl)  else { return }
-                DispatchQueue.global().async { [weak self] in
-                    if let data = try? Data(contentsOf: urlIcon) {
-                        let image = UIImage.init(data: data)
-                        DispatchQueue.main.async {
-                            self?.imgView.image = image
-                            self?.imgView.contentMode = .scaleToFill
-                        }
-                    }
-                }
-                // Do any additional setup after loading the view.
-            }
-            
-            @objc func favoriteTapped(){
-                let context = appDelegate.persistentContainer.viewContext
-                let entity = NSEntityDescription.entity(forEntityName: "Favorite", in: context)
-                let newUser = NSManagedObject(entity: entity!, insertInto: context)
-                
-                // recupe : fichier constante
-                newUser.setValue(data.title, forKey: "title")
-                newUser.setValue(data.imageUrl, forKey: "imageUrl")
-                newUser.setValue(data.url, forKey: "url")
-                newUser.setValue(data.portions, forKey: "portions")
-                newUser.setValue(data.ingredients.joined(separator: ","), forKey: "ingredients")
-                newUser.setValue(data.totalTime, forKey: "totalTime")
-                
-                do {
-                    
-                    try context.save()
-                    
-                } catch {
-                    
-                    print("Failed saving")
-                }
-            }
-            
-            @IBAction func getDirection(sender: UIButton) {
-                guard let recipeURLString = recipe?.url,
-                    let recipeURL = URL(string: recipeURLString) else {
-                    return
-                }
-                let safariVC = SFSafariViewController(url: recipeURL)
-                present(safariVC, animated: true, completion: nil)
-            }
-        }
+        navigationItem.rightBarButtonItem  = button1
 
-        extension DetailViewController :UITableViewDelegate, UITableViewDataSource {
-            func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-                self.data.ingredients.count
-            }
-            
-            func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-                // identifnat unique
-        //        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Storyboard.cellID, for: indexPath) as! TitleCell
-        //        cell.textLabel?.text = "- \(self.data.ingredients[indexPath.row])"
-                //        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TitleCell
-                //        cell.titleLabel.text = "- \(self.data.ingredients[indexPath.row])"
-                //return cell
-                return UITableViewCell()
+        titleLabel.text = recipe?.title
+        recipeInfoView.duration = recipe?.totalTime
+        recipeInfoView.portions = recipe?.portions
+        setupImage()
+        tableView.reloadData()
+        
+        //tableView.register(RecipeCell.self, forCellReuseIdentifier: Constant.ingredientCellId)
+       // tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell2")
+        
+    }
+    
+    private func setupImage() {
+        guard let recipeImageURLString = recipe?.imageUrl,
+            let recipeImageURL = URL(string: recipeImageURLString)  else { return }
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: recipeImageURL) {
+                let image = UIImage.init(data: data)
+                DispatchQueue.main.async {
+                    self?.recipeImageView.image = image
+                    self?.recipeImageView.contentMode = .scaleToFill //TODO: a changer vers le storyboard
+                }
             }
         }
+    }
+    
+    @objc func favoriteTapped(){
+        // recupe : fichier constante
+        // CoreDataManager.saveRecipe(recipe)
+        // func saveRecipe(_ recipe: Recipe?)
+        // func loadRecipies() -> [Recipe]
+        // func deleteRecipe(_ recipe: Recipe?)
+        
+        /*let context = appDelegate.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "Favorite", in: context)
+        let newUser = NSManagedObject(entity: entity!, insertInto: context)
+        
+        
+//        newUser.setValue(data.title, forKey: "title")
+//        newUser.setValue(data.imageUrl, forKey: "imageUrl")
+//        newUser.setValue(data.url, forKey: "url")
+//        newUser.setValue(data.portions, forKey: "portions")
+//        newUser.setValue(data.ingredients.joined(separator: ","), forKey: "ingredients")
+//        newUser.setValue(data.totalTime, forKey: "totalTime")
+        
+        do {
+            
+            try context.save()
+            
+        } catch {
+            
+            print("Failed saving")
+        }
+ */
+    }
+    
+    @IBAction func getDirection(sender: UIButton) {
+        guard let recipeURLString = recipe?.url,
+            let recipeURL = URL(string: recipeURLString) else {
+                return
+        }
+        let safariVC = SFSafariViewController(url: recipeURL)
+        present(safariVC, animated: true, completion: nil)
+    }
+}
+
+extension DetailViewController :UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        recipe?.ingredients.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constant.ingredientCellId, for: indexPath)
+        cell.textLabel?.text = "- \(recipe?.ingredients[indexPath.row] ?? "")"
+        cell.textLabel?.numberOfLines = 0
+        return cell
+    }
+}

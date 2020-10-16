@@ -27,9 +27,7 @@ class HomeViewController: UIViewController {
    
         super.viewDidLoad()
         
-        clear.layer.cornerRadius = 10
-        add.layer.cornerRadius = 10
-        searchButton.layer.cornerRadius = 20
+        
         
         configureDelegate()
         setupView()
@@ -73,8 +71,10 @@ class HomeViewController: UIViewController {
     }
     
     private func setupView() {
+        clear.layer.cornerRadius = 10
+        add.layer.cornerRadius = 10
+        searchButton.layer.cornerRadius = 20
         searchButton.clipsToBounds = true
-        searchButton.layer.cornerRadius = 10
     }
 }
 
