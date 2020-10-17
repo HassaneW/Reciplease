@@ -26,6 +26,20 @@ final class RecipeInfoView: UIView {
                 return
             }
             durationLabel.text = "\(duration) m" //TODO: Confirmer que c'est en min timeFormatter
+            
+//            func calculConversionCfa() -> String {
+//                   guard let amount = moneyTextField.text
+//                       else { return ""}
+//                   guard let convertCfaAmount = Double(amount)
+//                       else { return ""}
+//                   guard let amountCfa = money?.monnaie.cfa else { return ""}
+//                   let convertCfa = amountCfa * convertCfaAmount
+//                   let formatter = NumberFormatter()
+//                   formatter.numberStyle = .currency
+//                   formatter.currencyCode = "CFA"
+//                   guard let convertCurrencyFormatCfa = formatter.string(for: convertCfa) else { return ""}
+//                   return String(convertCurrencyFormatCfa)
+//               }
         }
     }
     
@@ -61,7 +75,7 @@ final class RecipeInfoView: UIView {
         durationStackView.spacing = UIStackView.spacingUseDefault
         durationStackView.translatesAutoresizingMaskIntoConstraints = false
 
-        let portionImageView = UIImageView(image: UIImage(systemName: "chart.pie.fill")) //TODO: find a better image
+        let portionImageView = UIImageView(image: UIImage(systemName: "chart.pie.fill"))
         portionImageView.contentMode = .scaleAspectFit
         portionImageView.tintColor = UIColor.label
         portionImageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
@@ -106,6 +120,26 @@ final class RecipeCell: UITableViewCell {
         }
     }
     
+//    var mainView: UIView = {
+//                   let view = UIView()
+//                   view.backgroundColor = .orange
+//                   view.layer.shadowRadius = 8
+//                   view.layer.shadowOffset = CGSize(width: 3, height: 3)
+//                   view.layer.shadowOpacity = 0.5
+//                   view.layer.cornerRadius = 20
+//                   view.translatesAutoresizingMaskIntoConstraints = false
+//                   return view
+//               }()
+//
+//               var contentsLayer: UIView = {
+//                   let view = UIView()
+//                   view.backgroundColor = .orange
+//                   view.layer.cornerRadius = 20
+//                   view.layer.masksToBounds = true
+//                   view.translatesAutoresizingMaskIntoConstraints = false
+//                   return view
+//               }()
+    
     private let recipeName = UILabel()
     private let recipeIngredients = UILabel()
     private let recipeImage = UIImageView()
@@ -125,6 +159,9 @@ final class RecipeCell: UITableViewCell {
         backgroundColor = UIColor.systemBackground
         
         //TODO: UIView shadown (decoration et degradés)
+        
+//    view.addSubview(mainView)
+//    mainView.addSubview(contentsLayer)
         
         recipeImage.contentMode = .scaleAspectFill
         recipeImage.clipsToBounds = true
@@ -149,6 +186,21 @@ final class RecipeCell: UITableViewCell {
         contentView.addSubview(textStackView)
         
         NSLayoutConstraint.activate([
+            
+//             Constrains your mainView to the ViewController's view
+//                          mainView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+//                          mainView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//                          mainView.heightAnchor.constraint(equalToConstant: view.frame.height * 0.5),
+//                          mainView.widthAnchor.constraint(equalToConstant: view.frame.width * 0.7),
+                          
+                          // Constrains your contentsLayer to the mainView
+//                          contentsLayer.centerYAnchor.constraint(equalTo: mainView.centerYAnchor),
+//                          contentsLayer.centerXAnchor.constraint(equalTo: mainView.centerXAnchor),
+//                          contentsLayer.heightAnchor.constraint(equalTo: mainView.heightAnchor),
+//                          contentsLayer.widthAnchor.constraint(equalTo: mainView.widthAnchor),
+//                          ])
+            
+            
             recipeImage.heightAnchor.constraint(equalToConstant: 120.5),
             recipeImage.topAnchor.constraint(equalTo: contentView.topAnchor),
             recipeImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),

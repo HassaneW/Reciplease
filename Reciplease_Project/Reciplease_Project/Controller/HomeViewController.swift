@@ -24,11 +24,7 @@ class HomeViewController: UIViewController {
     
     // MARK: View lifecycle
     override func viewDidLoad() {
-   
         super.viewDidLoad()
-        
-        
-        
         configureDelegate()
         setupView()
     }
@@ -73,7 +69,7 @@ class HomeViewController: UIViewController {
     private func setupView() {
         clear.layer.cornerRadius = 10
         add.layer.cornerRadius = 10
-        searchButton.layer.cornerRadius = 20
+        searchButton.layer.cornerRadius = 10
         searchButton.clipsToBounds = true
     }
 }

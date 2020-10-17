@@ -14,7 +14,7 @@ struct Recipe {
     let title: String
     let imageUrl: String
     let url: String
-    let portions: Int // Nombre de portions
+    let portions: Int // Nombre de portions //TODO: Explorer conversion vers Float
     let ingredients: [String] // ingredients
     let totalTime: Int
 }

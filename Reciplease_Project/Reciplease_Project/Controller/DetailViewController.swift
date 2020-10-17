@@ -39,7 +39,7 @@ class DetailViewController: UIViewController {
     }
     
     private func setupView() {
-        getDirectonButton.layer.cornerRadius = 20
+        getDirectonButton.layer.cornerRadius = 10
         //getDirectonButton.backgroundColor = #colorLiteral(red: 0.3419374526, green: 0.5654733181, blue: 0.3804852366, alpha: 1)
         
         //TODO: A faire sur le storyboard
@@ -73,7 +73,17 @@ class DetailViewController: UIViewController {
         }
     }
     
-    @objc func favoriteTapped(){
+    @objc
+    private func favoriteTapped() {
+        // comment savoir si faut rajouter ou supprimer ?
+        
+        do {
+            try addToFavorites()
+        } catch let error {
+            print(error.localizedDescription)
+            //TODO: Afficher un UIAlertController
+        }
+        
         // recupe : fichier constante
         // CoreDataManager.saveRecipe(recipe)
         // func saveRecipe(_ recipe: Recipe?)
@@ -111,13 +121,22 @@ class DetailViewController: UIViewController {
         let safariVC = SFSafariViewController(url: recipeURL)
         present(safariVC, animated: true, completion: nil)
     }
+    
+    private func addToFavorites() throws {
+        guard let recipe = recipe else { return }
+        do { try DatabaseService.shared.save(recipe: recipe) }
+        catch let error { throw error }
+    }
+    
+    private func deleteFromFavorites() {
+        //TODO
+    }
 }
 
 extension DetailViewController :UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         recipe?.ingredients.count ?? 0
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constant.ingredientCellId, for: indexPath)
         cell.textLabel?.text = "- \(recipe?.ingredients[indexPath.row] ?? "")"

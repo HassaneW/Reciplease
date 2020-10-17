@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		500EFC70253B4A1900AE1DEB /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500EFC6F253B4A1900AE1DEB /* DatabaseService.swift */; };
 		5044D6ED25233A6300384B62 /* RecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5044D6EC25233A6300384B62 /* RecipeCell.swift */; };
 		5044D6F225233B9900384B62 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5044D6F125233B9900384B62 /* Constants.swift */; };
 		5044D6F525233BC700384B62 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5044D6F425233BC700384B62 /* StringExtension.swift */; };
@@ -41,6 +42,7 @@
 /* Begin PBXFileReference section */
 		24D1CB20AF9B119359EB00C9 /* Pods-Reciplease_Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reciplease_Project.release.xcconfig"; path = "Target Support Files/Pods-Reciplease_Project/Pods-Reciplease_Project.release.xcconfig"; sourceTree = "<group>"; };
 		277D450AFC6F6020E421150A /* Pods_Reciplease_Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reciplease_Project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		500EFC6F253B4A1900AE1DEB /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		5044D6EC25233A6300384B62 /* RecipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCell.swift; sourceTree = "<group>"; };
 		5044D6F125233B9900384B62 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5044D6F425233BC700384B62 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
@@ -85,6 +87,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		500EFC6E253B49EB00AE1DEB /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				500EFC6F253B4A1900AE1DEB /* DatabaseService.swift */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
 		5044D6E8252338D600384B62 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +154,7 @@
 		506A1AF12521EE4000CA8EDD /* Reciplease_Project */ = {
 			isa = PBXGroup;
 			children = (
+				500EFC6E253B49EB00AE1DEB /* Database */,
 				5044D6F325233BB700384B62 /* Extension */,
 				5044D6F025233B8800384B62 /* Utilities */,
 				5044D6EB25233A4200384B62 /* View */,
@@ -374,6 +385,7 @@
 				5044D6ED25233A6300384B62 /* RecipeCell.swift in Sources */,
 				5044D6F525233BC700384B62 /* StringExtension.swift in Sources */,
 				506A1AF32521EE4000CA8EDD /* AppDelegate.swift in Sources */,
+				500EFC70253B4A1900AE1DEB /* DatabaseService.swift in Sources */,
 				506602A125233FA0007759EC /* HomeViewController.swift in Sources */,
 				506602A72523477D007759EC /* FavoriteViewController.swift in Sources */,
 				506A1AFD2521EE4000CA8EDD /* Reciplease_Project.xcdatamodeld in Sources */,

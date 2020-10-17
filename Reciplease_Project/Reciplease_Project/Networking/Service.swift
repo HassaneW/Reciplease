@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 
+// renomer a networkservice
 class NetworkService {
     static let shared = NetworkService()
     private let session: Session
