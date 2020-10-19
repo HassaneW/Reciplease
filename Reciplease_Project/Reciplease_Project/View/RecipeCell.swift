@@ -208,7 +208,7 @@ final class RecipeCell: UITableViewCell {
 //                          ])
             
             
-            recipeImage.heightAnchor.constraint(equalToConstant: 120.5),
+            recipeImage.heightAnchor.constraint(equalToConstant: 121),
             recipeImage.topAnchor.constraint(equalTo: contentView.topAnchor),
             recipeImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             recipeImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
