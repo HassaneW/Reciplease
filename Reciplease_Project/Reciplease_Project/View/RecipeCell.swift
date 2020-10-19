@@ -11,14 +11,14 @@ import UIKit
 
 final class RecipeInfoView: UIView {
     
-    var portions: Int? {
+    var portions: Float? {
         didSet {
             guard let portions = portions else { return }
             portionLabel.text = "\(portions) p"
         }
     }
     
-    var duration: Int? {
+    var duration: Float? {
         didSet {
             guard let duration = duration, duration != 0 else {
                 durationLabel.isHidden = true
@@ -26,6 +26,8 @@ final class RecipeInfoView: UIView {
                 return
             }
             durationLabel.text = "\(duration) m" //TODO: Confirmer que c'est en min timeFormatter
+            
+            
             
 //            func calculConversionCfa() -> String {
 //                   guard let amount = moneyTextField.text
@@ -41,7 +43,12 @@ final class RecipeInfoView: UIView {
 //                   return String(convertCurrencyFormatCfa)
 //               }
         }
+
     }
+//    func convertDuration(recipe: Recipe) -> String {
+//    guard let time = durationLabel.text else { return ""}
+//        let formatter = Timeforma
+//    }
     
     private let portionLabel = UILabel()
     private let durationLabel = UILabel()

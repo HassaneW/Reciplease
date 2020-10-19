@@ -14,9 +14,9 @@ struct Recipe {
     let title: String
     let imageUrl: String
     let url: String
-    let portions: Int // Nombre de portions //TODO: Explorer conversion vers Float
+    let portions: Float // Nombre de portions //TODO: Explorer conversion vers Float
     let ingredients: [String] // ingredients
-    let totalTime: Int
+    let totalTime: Float
 }
 
 extension Recipe: Decodable {
@@ -38,9 +38,9 @@ extension Recipe: Decodable {
         title = try recipe.decode(String.self, forKey: .title)
         imageUrl = try recipe.decode(String.self, forKey: .imageUrl)
         url = try recipe.decode(String.self, forKey: .url)
-        portions = try recipe.decode(Int.self, forKey: .portions)
+        portions = try recipe.decode(Float.self, forKey: .portions)
         ingredients = try recipe.decode([String].self, forKey: .ingredients)
-        totalTime = try recipe.decode(Int.self, forKey: .totalTime)
+        totalTime = try recipe.decode(Float.self, forKey: .totalTime)
     }
 }
 
@@ -57,7 +57,6 @@ struct Reciplease: Decodable {
     enum CodingKeys: String, CodingKey {
         case recipes = "hits"
     }
-    
     init(recipe: Recipe) {
        recipes = [recipe]
     }

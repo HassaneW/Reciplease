@@ -26,7 +26,8 @@ class DatabaseService {
         recipeEntity.title = recipe.title
         recipeEntity.imageUrl = recipe.imageUrl
         recipeEntity.url = recipe.url
-        recipeEntity.portions = Float(recipe.portions)
+//        recipeEntity.portions = Float(recipe.portions)
+        recipeEntity.portions = recipe.portions
         //recipeEntity.totalTime = recipe.totalTime
         recipeEntity.ingredients = try? JSONEncoder().encode(recipe.ingredients)
         do {
@@ -40,10 +41,37 @@ class DatabaseService {
     
     func loadRecipes() -> [Recipe] {
         //TODO
+        
+        
+        
         return []
     }
     
-    func delete(recipe: Recipe) {
+    func delete(recipe: Recipe) throws {
         //TODO
+        let recipeEntity = RecipeEntity(context: viewContext)
+        recipeEntity.title = recipe.title
+        recipeEntity.imageUrl = recipe.imageUrl
+        recipeEntity.url = recipe.url
+        recipeEntity.portions = Float(recipe.portions)
+        recipeEntity.ingredients = try? JSONEncoder().encode(recipe.ingredients)
+        
+        do {
+            try? viewContext.delete(recipeEntity)
+        } catch let error {
+            throw error
+        }
+        /*
+         let context = appDelegate.persistentContainer.viewContext
+         do {
+         context.delete(dataArray[index])
+         try context.save()
+         self.getData()
+         
+         } catch {
+         print("fail delete")
+         }
+         */
+        
     }
 }

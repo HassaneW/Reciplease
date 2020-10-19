@@ -40,10 +40,7 @@ class DetailViewController: UIViewController {
     
     private func setupView() {
         getDirectonButton.layer.cornerRadius = 10
-        //getDirectonButton.backgroundColor = #colorLiteral(red: 0.3419374526, green: 0.5654733181, blue: 0.3804852366, alpha: 1)
-        
-        //TODO: A faire sur le storyboard
-        //titleLabel.backgroundColor = #colorLiteral(red: 0.3419374526, green: 0.5654733181, blue: 0.3804852366, alpha: 1)
+
         
         let button1 = UIBarButtonItem(image: UIImage(systemName: "star.fill"), style: .plain, target: self, action: #selector(favoriteTapped)) // action:#selector(Class.MethodName) for swift 3
         navigationItem.rightBarButtonItem  = button1
@@ -53,9 +50,6 @@ class DetailViewController: UIViewController {
         recipeInfoView.portions = recipe?.portions
         setupImage()
         tableView.reloadData()
-        
-        //tableView.register(RecipeCell.self, forCellReuseIdentifier: Constant.ingredientCellId)
-       // tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell2")
         
     }
     
@@ -67,7 +61,6 @@ class DetailViewController: UIViewController {
                 let image = UIImage.init(data: data)
                 DispatchQueue.main.async {
                     self?.recipeImageView.image = image
-                    self?.recipeImageView.contentMode = .scaleToFill //TODO: a changer vers le storyboard
                 }
             }
         }
