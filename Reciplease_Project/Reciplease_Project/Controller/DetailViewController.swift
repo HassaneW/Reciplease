@@ -41,16 +41,20 @@ class DetailViewController: UIViewController {
     private func setupView() {
         getDirectonButton.layer.cornerRadius = 10
 
-        
-        let button1 = UIBarButtonItem(image: UIImage(systemName: "star.fill"), style: .plain, target: self, action: #selector(favoriteTapped)) // action:#selector(Class.MethodName) for swift 3
-        navigationItem.rightBarButtonItem  = button1
-
         titleLabel.text = recipe?.title
         recipeInfoView.duration = recipe?.totalTime
         recipeInfoView.portions = recipe?.portions
+        setupFavoriteButton()
         setupImage()
         tableView.reloadData()
-        
+    }
+    
+    private func setupFavoriteButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: isFavorite ? "star.fill" : "star"),
+            style: .plain,
+            target: self,
+            action: #selector(favoriteTapped))
     }
     
     private func setupImage() {
@@ -66,16 +70,31 @@ class DetailViewController: UIViewController {
         }
     }
     
+    // For testing purposes
+    var isFavorite = false
+    
     @objc
     private func favoriteTapped() {
+        // checker si la recette est en favoris
         // comment savoir si faut rajouter ou supprimer ?
         
-        do {
-            try addToFavorites()
-        } catch let error {
-            print(error.localizedDescription)
-            //TODO: Afficher un UIAlertController
+        if isFavorite {
+            do {
+                try deleteFromFavorites()
+            } catch let error {
+                print(error.localizedDescription)
+                //TODO: Afficher un UIAlertController -> displayerroralert
+            }
+        } else {
+            do {
+                try addToFavorites()
+            } catch let error {
+                print(error.localizedDescription)
+                //TODO: Afficher un UIAlertController
+            }
         }
+        isFavorite.toggle()
+        setupFavoriteButton()
         
         // recupe : fichier constante
         // CoreDataManager.saveRecipe(recipe)
@@ -121,8 +140,14 @@ class DetailViewController: UIViewController {
         catch let error { throw error }
     }
     
-    private func deleteFromFavorites() {
-        //TODO
+    private func deleteFromFavorites() throws {
+        guard let recipe = recipe else { return  }
+        do { try DatabaseService.shared.delete(recipe: recipe) }
+        catch let error { throw error }
+    }
+    
+    private func displayErrorAlert(title: String) {
+        
     }
 }
 

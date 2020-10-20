@@ -14,7 +14,7 @@ struct Recipe {
     let title: String
     let imageUrl: String
     let url: String
-    let portions: Float // Nombre de portions //TODO: Explorer conversion vers Float
+    let portions: Float // Nombre de portions
     let ingredients: [String] // ingredients
     let totalTime: Float
 }
@@ -57,10 +57,10 @@ struct Reciplease: Decodable {
     enum CodingKeys: String, CodingKey {
         case recipes = "hits"
     }
-    init(recipe: Recipe) {
-       recipes = [recipe]
-    }
-    init(recipes: [Recipe]) {
-        self.recipes = recipes
-    }
+//init(recipe: Recipe) {
+    //   recipes = [recipe]
+    //}
+    //init(recipes: [Recipe]) {
+     //   self.recipes = recipes
+    //}
 }

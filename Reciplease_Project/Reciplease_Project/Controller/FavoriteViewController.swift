@@ -22,17 +22,19 @@ class FavoriteViewController: UIViewController {
         super.viewDidLoad()
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        
+        getDataFromDatabase()
     }
     
+    /*
     override func viewWillAppear(_ animated: Bool) {
         self.getData()
     }
     
     @IBAction func refreshData() {
         self.getData()
-    }
-    func getData() {
+    }*/
+    func getDataFromDatabase() {
+        DatabaseService.shared.loadRecipes()
         /*
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorite")

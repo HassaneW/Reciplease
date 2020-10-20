@@ -26,13 +26,11 @@ class DatabaseService {
         recipeEntity.title = recipe.title
         recipeEntity.imageUrl = recipe.imageUrl
         recipeEntity.url = recipe.url
-//        recipeEntity.portions = Float(recipe.portions)
         recipeEntity.portions = recipe.portions
-        //recipeEntity.totalTime = recipe.totalTime
+        recipeEntity.totalTime = recipe.totalTime
         recipeEntity.ingredients = try? JSONEncoder().encode(recipe.ingredients)
         do {
             try viewContext.save()
-            
             print("Recipe \(recipe.title) added to CoreData")
         } catch let error {
             throw error
@@ -41,37 +39,29 @@ class DatabaseService {
     
     func loadRecipes() -> [Recipe] {
         //TODO
-        
-        
-        
         return []
     }
     
     func delete(recipe: Recipe) throws {
-        //TODO
-        let recipeEntity = RecipeEntity(context: viewContext)
-        recipeEntity.title = recipe.title
-        recipeEntity.imageUrl = recipe.imageUrl
-        recipeEntity.url = recipe.url
-        recipeEntity.portions = Float(recipe.portions)
-        recipeEntity.ingredients = try? JSONEncoder().encode(recipe.ingredients)
+        let fetchRequest: NSFetchRequest<RecipeEntity> = RecipeEntity.fetchRequest()
+        let titlePredicate = NSPredicate(format: "title == %@", recipe.title)
+        let urlPredicate = NSPredicate(format: "url == %@", recipe.url)
+        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [titlePredicate, urlPredicate])
+        
+        let managedObject = try viewContext.fetch(fetchRequest)
+       // for entity in managedObject {
+       //     viewContext.delete(entity)
+       // }
+        managedObject.forEach { (entity) in
+            viewContext.delete(entity)
+        }
+        //managedObject.forEach { viewContext.delete($0)}
         
         do {
-            try? viewContext.delete(recipeEntity)
+            try viewContext.save()
+            print("Recipe \(recipe.title) deleted")
         } catch let error {
             throw error
         }
-        /*
-         let context = appDelegate.persistentContainer.viewContext
-         do {
-         context.delete(dataArray[index])
-         try context.save()
-         self.getData()
-         
-         } catch {
-         print("fail delete")
-         }
-         */
-        
     }
 }

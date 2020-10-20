@@ -15,17 +15,21 @@ class ListViewController: UIViewController{
     @IBOutlet weak var tableView: UITableView!
     
     var ingredients = "rice"
-    var arrayData = Reciplease(recipe: Recipe(title: "", imageUrl: "", url: "", portions: 0, ingredients: [""], totalTime: 0))
+    
+    //TODO
+    var recipes: [Recipe] = []
+    
+//    var arrayData = Reciplease(recipe: Recipe(title: "OK", imageUrl: "", url: "", portions: 0, ingredients: ["ATTENTION"], totalTime: 0))
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
-        self.getDataFromApi()
+        tableView.dataSource = self
+        tableView.delegate = self
+        getDataFromApi()
     }
     
-    @IBAction func refreshData() {
+    @IBAction func refreshData() { //TODO: a supprimer ?
         self.getDataFromApi()
     }
     
@@ -37,13 +41,9 @@ class ListViewController: UIViewController{
             case .success(let reciplease):
                 //print(reciplease)
                 print("count : \(reciplease.recipes.count)")
-                //                let firstRecipe = reciplease.recipes.first
-                //                let ingredients = firstRecipe?.ingredients
-                //                let title = firstRecipe?.title
-                
-                self?.arrayData = reciplease
+                self?.recipes = reciplease.recipes
+                //self?.arrayData = reciplease
                 self?.tableView.reloadData()
-                print(reciplease.recipes.first.debugDescription)
             case .failure(let error):
                 print("Error fetching recipes \(error.localizedDescription)")
             }
@@ -55,6 +55,7 @@ class ListViewController: UIViewController{
 extension ListViewController :UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         self.arrayData.recipes.count
+        //recipes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -71,7 +72,7 @@ extension ListViewController :UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: Constants.Storyboard.main, bundle: nil)
         guard let detailVC = storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.detailView) as? DetailViewController else { return }
-        detailVC.recipe = arrayData.recipes[indexPath.row]
+        detailVC.recipe = recipes[indexPath.row]
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
 }

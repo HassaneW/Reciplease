@@ -27,12 +27,13 @@ final class RecipeInfoView: UIView {
             }
             
             let newDuration =  stringFromTimeInterval(interval: TimeInterval(duration))
-            
-            durationLabel.text = "\(newDuration) m" //TODO: Confirmer que c'est en min timeFormatter
+            let dateformatter = ""
+            durationLabel.text = dateformatter
+            // "\(newDuration) m" //TODO: Confirmer que c'est en min timeFormatter
             
             // Convertir heure en min
             
-           
+            
             
             
             
@@ -53,15 +54,16 @@ final class RecipeInfoView: UIView {
         
     }
     func stringFromTimeInterval(interval: TimeInterval) -> NSString {
-
-            var ti = NSInteger(interval)
-            var ms = ti * 1000
-            var seconds = ti % 60
-            var minutes = (ti / 60) % 60
-            var hours = (ti / 3600)
-
-              return NSString(format: "%0.2d:%0.2d:%0.2d",hours,minutes,seconds,ms)
-        }
+        
+        var ti = NSInteger(interval)
+        var ms = ti * 1000
+        var seconds = ti % 60
+        var minutes = (ti / 60) % 60
+        var hours = (ti / 3600)
+        //DateFormatter
+        
+        return NSString(format: "%0.2d:%0.2d:%0.2d",hours,minutes,seconds,ms)
+    }
     
     private let portionLabel = UILabel()
     private let durationLabel = UILabel()
@@ -158,35 +160,35 @@ final class RecipeCell: UITableViewCell {
     private func setupView() {
         backgroundColor = UIColor.systemBackground
         
-        //TODO: UIView shadown (decoration et degradés)
-        
-        var mainView: UIView = {
-                     let view = UIView()
-                     view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-                     view.layer.shadowRadius = 8
-                     view.layer.shadowOffset = CGSize(width: 3, height: 3)
-                     view.layer.shadowOpacity = 0.5
-                     view.layer.cornerRadius = 20
-                     view.translatesAutoresizingMaskIntoConstraints = false
-                     return view
-                 }()
-                 
-                 var contentsLayer: UIView = {
-                     let view = UIView()
-                     view.backgroundColor = .orange
-                     view.layer.cornerRadius = 20
-                     view.layer.masksToBounds = true
-                     view.translatesAutoresizingMaskIntoConstraints = false
-                     return view
-                 }()
-        
-            contentView.addSubview(mainView)
-            mainView.addSubview(contentsLayer)
-        
         recipeImage.contentMode = .scaleAspectFill
         recipeImage.clipsToBounds = true
         recipeImage.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(recipeImage)
+        
+        //TODO: colorier une view avec un degrade UIView shadown (decoration et degradés)
+        //1: contrainte sont bien
+        let mainView = UIView()
+        mainView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        mainView.layer.shadowRadius = 8
+        mainView.layer.shadowOffset = CGSize(width: 3, height: 3)
+        mainView.layer.shadowOpacity = 0.5
+        mainView.layer.cornerRadius = 20
+        mainView.translatesAutoresizingMaskIntoConstraints = false
+               
+        
+        // pas besoin ?
+        var contentsLayer: UIView = {
+            let view = UIView()
+            view.backgroundColor = .orange
+            view.layer.cornerRadius = 20
+            view.layer.masksToBounds = true
+            view.translatesAutoresizingMaskIntoConstraints = false
+            return view
+        }()
+        
+        contentView.addSubview(mainView)
+        mainView.addSubview(contentsLayer)
+        
         
         recipeName.textColor = UIColor.label
         recipeName.translatesAutoresizingMaskIntoConstraints = false
@@ -220,17 +222,20 @@ final class RecipeCell: UITableViewCell {
             recipeInfoView.topAnchor.constraint(equalToSystemSpacingBelow: contentView.topAnchor, multiplier: 1.0),
             trailingAnchor.constraint(equalToSystemSpacingAfter: recipeInfoView.trailingAnchor, multiplier: 1.0),
             
-             // Constrains your mainView to the ViewController's view
-                          mainView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-                          mainView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-                          mainView.heightAnchor.constraint(equalToConstant: contentView.frame.height * 0.5),
-                          mainView.widthAnchor.constraint(equalToConstant: contentView.frame.width * 0.7),
-                          
-                          // Constrains your contentsLayer to the mainView
-                          contentsLayer.centerYAnchor.constraint(equalTo: mainView.centerYAnchor),
-                          contentsLayer.centerXAnchor.constraint(equalTo: mainView.centerXAnchor),
-                          contentsLayer.heightAnchor.constraint(equalTo: mainView.heightAnchor),
-                          contentsLayer.widthAnchor.constraint(equalTo: mainView.widthAnchor)
+            // Constrains your mainView to the ViewController's view
+            // shadowView doit prendre toute la largeur
+            // largeur leading trailing
+            // top bottom equal top bottom stack view ?
+            mainView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            mainView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            mainView.heightAnchor.constraint(equalToConstant: contentView.frame.height * 0.5),
+            //mainView.widthAnchor.constraint(equalToConstant: contentView.frame.width * 0.7),
+            
+            // Constrains your contentsLayer to the mainView
+            contentsLayer.centerYAnchor.constraint(equalTo: mainView.centerYAnchor),
+            contentsLayer.centerXAnchor.constraint(equalTo: mainView.centerXAnchor),
+            contentsLayer.heightAnchor.constraint(equalTo: mainView.heightAnchor),
+            contentsLayer.widthAnchor.constraint(equalTo: mainView.widthAnchor)
             
         ])
     }
