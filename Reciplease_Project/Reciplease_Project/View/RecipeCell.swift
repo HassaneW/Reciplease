@@ -25,46 +25,25 @@ final class RecipeInfoView: UIView {
                 clockImageView.isHidden = true
                 return
             }
+            //1 Récupérer valeur API
+            let convertedTime = "\(duration)"
             
-            let newDuration =  stringFromTimeInterval(interval: TimeInterval(duration))
-            let dateformatter = ""
-            durationLabel.text = dateformatter
-            // "\(newDuration) m" //TODO: Confirmer que c'est en min timeFormatter
+            // Créer format dateFormatter
+            let timeFormatter = DateFormatter()
+            timeFormatter.dateFormat = "HH-mm-ss"
+            timeFormatter.dateStyle = .medium
             
-            // Convertir heure en min
+            // Créer format Date
+            guard let time = timeFormatter.date(from: convertedTime) else { return }
+           
+            // Transformer la date en String afin que le label le récupére
+            durationLabel.text = timeFormatter.string(from: time)
             
-            
-            
-            
-            
-            //            func calculConversionCfa() -> String {
-            //                   guard let amount = moneyTextField.text
-            //                       else { return ""}
-            //                   guard let convertCfaAmount = Double(amount)
-            //                       else { return ""}
-            //                   guard let amountCfa = money?.monnaie.cfa else { return ""}
-            //                   let convertCfa = amountCfa * convertCfaAmount
-            //                   let formatter = NumberFormatter()
-            //                   formatter.numberStyle = .currency
-            //                   formatter.currencyCode = "CFA"
-            //                   guard let convertCurrencyFormatCfa = formatter.string(for: convertCfa) else { return ""}
-            //                   return String(convertCurrencyFormatCfa)
-            //               }
+          return
         }
         
     }
-    func stringFromTimeInterval(interval: TimeInterval) -> NSString {
-        
-        var ti = NSInteger(interval)
-        var ms = ti * 1000
-        var seconds = ti % 60
-        var minutes = (ti / 60) % 60
-        var hours = (ti / 3600)
-        //DateFormatter
-        
-        return NSString(format: "%0.2d:%0.2d:%0.2d",hours,minutes,seconds,ms)
-    }
-    
+
     private let portionLabel = UILabel()
     private let durationLabel = UILabel()
     private let clockImageView = UIImageView(image: UIImage(systemName: "stopwatch.fill"))
@@ -81,7 +60,6 @@ final class RecipeInfoView: UIView {
     
     private func setupView() {
         backgroundColor = UIColor.brown
-        
         
         clockImageView.contentMode = .scaleAspectFit
         clockImageView.tintColor = UIColor.label
@@ -168,7 +146,7 @@ final class RecipeCell: UITableViewCell {
         //TODO: colorier une view avec un degrade UIView shadown (decoration et degradés)
         //1: contrainte sont bien
         let mainView = UIView()
-        mainView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        mainView.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
         mainView.layer.shadowRadius = 8
         mainView.layer.shadowOffset = CGSize(width: 3, height: 3)
         mainView.layer.shadowOpacity = 0.5
@@ -181,6 +159,12 @@ final class RecipeCell: UITableViewCell {
             let view = UIView()
             view.backgroundColor = .orange
             view.layer.cornerRadius = 20
+            
+            view.layer.shadowRadius = 8
+            view.layer.shadowOffset = CGSize(width: 3, height: 3)
+            view.layer.shadowOpacity = 0.5
+      
+            
             view.layer.masksToBounds = true
             view.translatesAutoresizingMaskIntoConstraints = false
             return view
@@ -226,17 +210,25 @@ final class RecipeCell: UITableViewCell {
             // shadowView doit prendre toute la largeur
             // largeur leading trailing
             // top bottom equal top bottom stack view ?
-            mainView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            mainView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            mainView.heightAnchor.constraint(equalToConstant: contentView.frame.height * 0.5),
+//            mainView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+//            mainView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+//            mainView.heightAnchor.constraint(equalToConstant: contentView.frame.height * 0.5),
+//            mainView.widthAnchor.constraint(equalToConstant: contentView.frame.width),
+//            mainView.bottomAnchor.constraint(equalTo: bottomAnchor),
+//            mainView.topAnchor.constraint(equalTo: topAnchor),
+//
             //mainView.widthAnchor.constraint(equalToConstant: contentView.frame.width * 0.7),
             
             // Constrains your contentsLayer to the mainView
             contentsLayer.centerYAnchor.constraint(equalTo: mainView.centerYAnchor),
             contentsLayer.centerXAnchor.constraint(equalTo: mainView.centerXAnchor),
             contentsLayer.heightAnchor.constraint(equalTo: mainView.heightAnchor),
-            contentsLayer.widthAnchor.constraint(equalTo: mainView.widthAnchor)
-            
+//            contentsLayer.widthAnchor.constraint(equalTo: mainView.widthAnchor)
+            contentsLayer.widthAnchor.constraint(equalToConstant: contentView.frame.width),
+            contentsLayer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            contentsLayer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            contentsLayer.bottomAnchor.constraint(equalTo: bottomAnchor),
+            contentsLayer.topAnchor.constraint(equalTo: textStackView.topAnchor)
         ])
     }
     

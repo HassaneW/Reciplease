@@ -54,14 +54,14 @@ class ListViewController: UIViewController{
 
 extension ListViewController :UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.arrayData.recipes.count
-        //recipes.count
+//        self.arrayData.recipes.count
+        recipes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Storyboard.cellID, for: indexPath) as! RecipeCell
-        cell.recipe = arrayData.recipes[indexPath.row]
-        
+//        cell.recipe = arrayData.recipes[indexPath.row]
+         cell.recipe = recipes[indexPath.row]
         //cell.displayData(recipe: self.arrayData.recipes[indexPath.row])
         
         

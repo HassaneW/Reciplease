@@ -14,7 +14,9 @@ class FavoriteViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var dataArray = [NSManagedObject]()
     var ingredients = "rice"
-    var arrayRecipe = Reciplease(recipe: Recipe(title: "", imageUrl: "", url: "", portions: 0, ingredients: [""], totalTime: 0))
+//    var arrayRecipe = Reciplease(recipe: Recipe(title: "", imageUrl: "", url: "", portions: 0, ingredients: [""], totalTime: 0))
+    
+     var recipes: [Recipe] = []
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
@@ -85,12 +87,14 @@ class FavoriteViewController: UIViewController {
 
 extension FavoriteViewController :UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.arrayRecipe.recipes.count
+//        self.arrayRecipe.recipes.count
+        recipes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Storyboard.cellID, for: indexPath) as! RecipeCell
-        cell.recipe = arrayRecipe.recipes[indexPath.row]
+//        cell.recipe = arrayRecipe.recipes[indexPath.row]
+        cell.recipe = recipes[indexPath.row]
         return cell
     }
     
@@ -98,7 +102,8 @@ extension FavoriteViewController :UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: Constants.Storyboard.main, bundle: nil)
         guard let detailVC = storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.detailView) as? DetailViewController else { return }
-        detailVC.recipe = arrayRecipe.recipes[indexPath.row]
+//        detailVC.recipe = arrayRecipe.recipes[indexPath.row]
+        detailVC.recipe = recipes[indexPath.row]
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
     
