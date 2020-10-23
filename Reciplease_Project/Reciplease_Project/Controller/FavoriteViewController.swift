@@ -7,16 +7,15 @@
 //
 
 import UIKit
-import CoreData
+import CoreData// delete
 
 class FavoriteViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    
     var dataArray = [NSManagedObject]()
     var ingredients = "rice"
-//    var arrayRecipe = Reciplease(recipe: Recipe(title: "", imageUrl: "", url: "", portions: 0, ingredients: [""], totalTime: 0))
-    
-     var recipes: [Recipe] = []
+    var recipes: [Recipe] = []
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
@@ -36,7 +35,38 @@ class FavoriteViewController: UIViewController {
         self.getData()
     }*/
     func getDataFromDatabase() {
-        DatabaseService.shared.loadRecipes()
+        //TODO: do catch
+        
+        // Faire apparaître toutes les donnés d'un tableau dans un playground
+        
+//        guard let recipeAll = try? DatabaseService.shared.loadRecipes() else { return }
+//
+//        for recipe in recipeAll {
+//
+//            let recipeTitle = recipe.title
+//            let recipeUrl = recipe.url
+//        }
+        
+        
+        
+        /*
+         func getDataFromApi() {
+                 NetworkService.shared.getRecipes(ingredients: ingredients) { [weak self] result in
+                     switch result {
+                     case .success(let reciplease):
+                         //print(reciplease)
+                         print("count : \(reciplease.recipes.count)")
+                         self?.recipes = reciplease.recipes
+                         
+                         self?.tableView.reloadData()
+                     case .failure(let error):
+                         print("Error fetching recipes \(error.localizedDescription)")
+                     }
+                 }
+             }
+         }
+         */
+        
         /*
         let context = appDelegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorite")
@@ -68,7 +98,6 @@ class FavoriteViewController: UIViewController {
         }
  */
     }
-    
     func deleteData(index : Int){
         /*
         let context = appDelegate.persistentContainer.viewContext
@@ -83,22 +112,17 @@ class FavoriteViewController: UIViewController {
         */
     }
 }
-
-
 extension FavoriteViewController :UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        self.arrayRecipe.recipes.count
         recipes.count
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Storyboard.cellID, for: indexPath) as! RecipeCell
 //        cell.recipe = arrayRecipe.recipes[indexPath.row]
         cell.recipe = recipes[indexPath.row]
         return cell
     }
-    
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: Constants.Storyboard.main, bundle: nil)
         guard let detailVC = storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.detailView) as? DetailViewController else { return }
@@ -106,7 +130,6 @@ extension FavoriteViewController :UITableViewDelegate, UITableViewDataSource {
         detailVC.recipe = recipes[indexPath.row]
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
-    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             //    objects.remove(at: indexPath.row)

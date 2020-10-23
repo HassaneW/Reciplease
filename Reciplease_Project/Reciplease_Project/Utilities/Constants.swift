@@ -11,15 +11,11 @@ import Foundation
 // Toutes les constantes du projet
 
 enum Constants {
-    
     enum Storyboard {
         static let main = "Main"
         static let listViewController = "ListViewController"
         static let detailView = "DetailViewController"
         static let cellID = "cell"
         static let ingredientsCell = "ingredientsCell"
-        
     }
-    
-    
 }

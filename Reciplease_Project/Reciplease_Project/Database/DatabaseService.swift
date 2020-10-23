@@ -11,10 +11,10 @@ import CoreData
 
 class DatabaseService {
     static let shared = DatabaseService()
-    
+
     private let persistentContainer: NSPersistentContainer
     private let viewContext: NSManagedObjectContext
-
+    
     init(persistentContainer: NSPersistentContainer = AppDelegate.persistentContainer) {
         self.persistentContainer = persistentContainer
         self.persistentContainer.viewContext.automaticallyMergesChangesFromParent = true
@@ -37,9 +37,26 @@ class DatabaseService {
         }
     }
     
-    func loadRecipes() -> [Recipe] {
-        //TODO
-        return []
+    func loadRecipes() throws -> [Recipe] {
+        let fetchRequest: NSFetchRequest<RecipeEntity> = RecipeEntity.fetchRequest()
+        let recipeEntities: [RecipeEntity]
+        do {
+            recipeEntities = try viewContext.fetch(fetchRequest)
+        } catch let error {
+            throw error
+        }
+        /*
+        var recipes: [Recipe] = []
+        for recipeEntity in recipeEntities {
+            let recipe = Recipe(from: recipeEntity)
+            recipes.append(recipe)
+        }
+        let recipes = recipeEntities.map { recipeEntity -> Recipe in
+            return Recipe(from: recipeEntity)
+        }
+         */
+        // programmation fonctionnelle: map , compactMap, flatMap, reduce
+        return recipeEntities.map { Recipe(from: $0) }
     }
     
     func delete(recipe: Recipe) throws {
@@ -49,9 +66,9 @@ class DatabaseService {
         fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [titlePredicate, urlPredicate])
         
         let managedObject = try viewContext.fetch(fetchRequest)
-       // for entity in managedObject {
-       //     viewContext.delete(entity)
-       // }
+        // for entity in managedObject {
+        //     viewContext.delete(entity)
+        // }
         managedObject.forEach { (entity) in
             viewContext.delete(entity)
         }

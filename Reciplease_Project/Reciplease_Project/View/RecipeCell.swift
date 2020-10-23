@@ -10,14 +10,12 @@ import Foundation
 import UIKit
 
 final class RecipeInfoView: UIView {
-    
     var portions: Float? {
         didSet {
             guard let portions = portions else { return }
             portionLabel.text = "\(portions) p"
         }
     }
-    
     var duration: Float? {
         didSet {
             guard let duration = duration, duration != 0 else {
@@ -25,25 +23,19 @@ final class RecipeInfoView: UIView {
                 clockImageView.isHidden = true
                 return
             }
-            //1 Récupérer valeur API
+            // Convertir float en String
             let convertedTime = "\(duration)"
-            
             // Créer format dateFormatter
             let timeFormatter = DateFormatter()
             timeFormatter.dateFormat = "HH-mm-ss"
             timeFormatter.dateStyle = .medium
-            
             // Créer format Date
             guard let time = timeFormatter.date(from: convertedTime) else { return }
-           
             // Transformer la date en String afin que le label le récupére
             durationLabel.text = timeFormatter.string(from: time)
-            
           return
         }
-        
     }
-
     private let portionLabel = UILabel()
     private let durationLabel = UILabel()
     private let clockImageView = UIImageView(image: UIImage(systemName: "stopwatch.fill"))
@@ -52,12 +44,10 @@ final class RecipeInfoView: UIView {
         super.init(frame: frame)
         setupView()
     }
-    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupView()
     }
-    
     private func setupView() {
         backgroundColor = UIColor.brown
         
@@ -107,9 +97,7 @@ final class RecipeInfoView: UIView {
         ])
     }
 }
-
 final class RecipeCell: UITableViewCell {
-    
     var recipe: Recipe? {
         didSet {
             recipeName.text = recipe?.title
@@ -129,12 +117,10 @@ final class RecipeCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupView()
     }
-    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupView()
     }
-    
     private func setupView() {
         backgroundColor = UIColor.systemBackground
         
@@ -152,34 +138,25 @@ final class RecipeCell: UITableViewCell {
         mainView.layer.shadowOpacity = 0.5
         mainView.layer.cornerRadius = 20
         mainView.translatesAutoresizingMaskIntoConstraints = false
-               
         
         // pas besoin ?
-        var contentsLayer: UIView = {
+        let contentsLayer: UIView = {
             let view = UIView()
             view.backgroundColor = .orange
             view.layer.cornerRadius = 20
-            
             view.layer.shadowRadius = 8
             view.layer.shadowOffset = CGSize(width: 3, height: 3)
             view.layer.shadowOpacity = 0.5
-      
-            
             view.layer.masksToBounds = true
             view.translatesAutoresizingMaskIntoConstraints = false
             return view
         }()
-        
         contentView.addSubview(mainView)
         mainView.addSubview(contentsLayer)
-        
-        
         recipeName.textColor = UIColor.label
         recipeName.translatesAutoresizingMaskIntoConstraints = false
-        
         recipeIngredients.textColor = UIColor.secondaryLabel
         recipeIngredients.translatesAutoresizingMaskIntoConstraints = false
-        
         recipeInfoView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(recipeInfoView)
         
@@ -192,7 +169,6 @@ final class RecipeCell: UITableViewCell {
         contentView.addSubview(textStackView)
         
         NSLayoutConstraint.activate([
-            
             recipeImage.heightAnchor.constraint(equalToConstant: 121),
             recipeImage.topAnchor.constraint(equalTo: contentView.topAnchor),
             recipeImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -231,7 +207,6 @@ final class RecipeCell: UITableViewCell {
             contentsLayer.topAnchor.constraint(equalTo: textStackView.topAnchor)
         ])
     }
-    
     private func setupImage() {
         guard let recipeImageURLString = recipe?.imageUrl,
             let recipeImageURL = URL(string: recipeImageURLString)  else { return }
@@ -247,35 +222,26 @@ final class RecipeCell: UITableViewCell {
 }
 
 class TitleCell: UITableViewCell {
-    
     @IBOutlet weak var titleLabel : UILabel!
     @IBOutlet weak var imgView : UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var ingredientsLabel: UILabel!
-    
-    //    func setData(reciplease: Reciplease) {
-    //        titleLabel.text = reciplease.hits[0].recipe.title
-    //    }
-    //
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
     }
-    
     func displayData(recipe : Recipe) {
         titleLabel.text = recipe.title
         //descriptionLabel.text = recipe.url
         //timeLabel.text = "Time : \(recipe.totalTime)"
         ingredientsLabel.text = recipe.ingredients.first
-        
-        
         
         guard let urlIcon = URL(string: recipe.imageUrl)  else { return }
         DispatchQueue.global().async { [weak self] in

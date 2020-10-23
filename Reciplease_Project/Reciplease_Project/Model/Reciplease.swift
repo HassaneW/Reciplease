@@ -20,7 +20,6 @@ struct Recipe {
 }
 
 extension Recipe: Decodable {
-    
     enum CodingKeys: String, CodingKey {
         case recipe
         case title = "label"
@@ -46,9 +45,30 @@ extension Recipe: Decodable {
 
 extension Recipe : CustomStringConvertible {
     var description: String {
-        return "Title : \(title), Image recette \(imageUrl), descriptif recette \(url), Portions : \(portions), tableau d'ingrédients : \(ingredients), temps de preparation \(totalTime)"    }
- 
+        return "Title : \(title), Image recette \(imageUrl), descriptif recette \(url), Portions : \(portions), tableau d'ingrédients : \(ingredients), temps de preparation \(totalTime)"
+    }
 }
+
+// MARK: Core Data
+
+extension Recipe {
+    
+    init(from recipeEntity: RecipeEntity) {
+        title = recipeEntity.title ?? ""
+        imageUrl = recipeEntity.imageUrl ?? ""
+        url = recipeEntity.url ?? ""
+        portions = recipeEntity.portions
+        totalTime = recipeEntity.totalTime
+        
+        if let ingredientsData = recipeEntity.ingredients,
+            let unwrappedIngredients = try? JSONDecoder().decode([String].self, from: ingredientsData) {
+            ingredients = unwrappedIngredients
+        } else {
+            ingredients = []
+        }
+    }
+}
+
 
 // MARK: - Reciplease
 struct Reciplease: Decodable {
@@ -57,10 +77,4 @@ struct Reciplease: Decodable {
     enum CodingKeys: String, CodingKey {
         case recipes = "hits"
     }
-//init(recipe: Recipe) {
-    //   recipes = [recipe]
-    //}
-    //init(recipes: [Recipe]) {
-     //   self.recipes = recipes
-    //}
 }
