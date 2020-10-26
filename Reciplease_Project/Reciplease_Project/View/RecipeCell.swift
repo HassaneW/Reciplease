@@ -98,13 +98,18 @@ final class RecipeInfoView: UIView {
     }
 }
 final class RecipeCell: UITableViewCell {
+    
     var recipe: Recipe? {
         didSet {
+            
             recipeName.text = recipe?.title
             //TODO: comment convertir un tableau de string en une string separer par des virgules
-            recipeIngredients.text = recipe?.ingredients.first
+            recipeIngredients.text = recipe?.ingredients.joined(separator: ",")
+            recipeIngredients.numberOfLines = 2
             recipeInfoView.duration = recipe?.totalTime
             recipeInfoView.portions = recipe?.portions
+            
+            
             setupImage()
         }
     }
@@ -142,12 +147,12 @@ final class RecipeCell: UITableViewCell {
         // pas besoin ?
         let contentsLayer: UIView = {
             let view = UIView()
-            view.backgroundColor = .orange
+            view.backgroundColor = .white
             view.layer.cornerRadius = 20
             view.layer.shadowRadius = 8
             view.layer.shadowOffset = CGSize(width: 3, height: 3)
             view.layer.shadowOpacity = 0.5
-            view.layer.masksToBounds = true
+            view.layer.masksToBounds = false
             view.translatesAutoresizingMaskIntoConstraints = false
             return view
         }()

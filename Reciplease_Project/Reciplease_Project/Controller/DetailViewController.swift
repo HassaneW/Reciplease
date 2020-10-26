@@ -65,7 +65,7 @@ class DetailViewController: UIViewController {
     var isFavorite = false
     @objc
     private func favoriteTapped() {
-        // checker si la recette est en favorisget d
+        // checker si la recette est en favoris get d
         // comment savoir si faut rajouter ou supprimer ?
         if isFavorite {
             do {
@@ -73,6 +73,7 @@ class DetailViewController: UIViewController {
             } catch let error {
                 print(error.localizedDescription)
                 //TODO: Afficher un UIAlertController -> displayerroralert
+                factorisationErrorMessage(messageError: "Impossible d'effacer la recette")
             }
         } else {
             do {
@@ -80,6 +81,7 @@ class DetailViewController: UIViewController {
             } catch let error {
                 print(error.localizedDescription)
                 //TODO: Afficher un UIAlertController
+                factorisationErrorMessage(messageError: "Impossible d'ajouter la recette")
             }
         }
         isFavorite.toggle()
@@ -130,21 +132,11 @@ class DetailViewController: UIViewController {
         do { try DatabaseService.shared.delete(recipe: recipe) }
         catch let error { throw error }
     }
-    private func displayErrorAlert(title: String) {
-        // Delete -> Change title
-        
-        //        if title == "delete" {
-        let alertDelete = UIAlertController(title: "Delete recipe", message: "You cannot delete this recipe", preferredStyle: .alert)
-        alertDelete.addAction(UIAlertAction(title: "Yes", style: .default, handler: nil))
-        alertDelete.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
-        //        } else if title == "add" {
-        let alertAdd = UIAlertController(title: "Add recipe", message: "You just saved a recipe recipe", preferredStyle: .alert)
-        alertAdd.addAction(UIAlertAction(title: "Yes", style: .default, handler: nil))
-        alertAdd.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
-        //        }
-        // Add  -> Change title
-        self.present(alertAdd, animated: true, completion: nil)
-    }
+   private func factorisationErrorMessage(messageError: String) {
+          let alertVC = UIAlertController(title: "Recette local Database", message: messageError, preferredStyle: .alert)
+          alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+          self.present(alertVC, animated: true, completion: nil)
+      }
 }
 extension DetailViewController :UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
