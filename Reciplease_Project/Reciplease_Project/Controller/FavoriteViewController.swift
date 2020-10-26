@@ -18,12 +18,38 @@ class FavoriteViewController: UIViewController {
     var recipes: [Recipe] = []
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
+     var context : NSManagedObjectContext?
+    
+      private lazy var fetchedResultsController: NSFetchedResultsController<RecipeEntity> = {
+      let fetchRequest : NSFetchRequest<RecipeEntity> = RecipeEntity.fetchRequest()
+      fetchRequest.fetchLimit = 20
+      
+      let sortDescriptor = NSSortDescriptor(key: "title", ascending: false)
+      fetchRequest.sortDescriptors = [sortDescriptor]
+      
+      let frc = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                           managedObjectContext: self.context!,
+                                           sectionNameKeyPath: nil,
+                                           cacheName: nil)
+      return frc
+    }()
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.dataSource = self
         self.tableView.delegate = self
         getDataFromDatabase()
+        
+        do {
+            try fetchedResultsController.performFetch()
+            tableView.reloadData()
+          } catch  {
+            fatalError("Core Data fetch error")
+          }
+        }
     }
     
     /*
@@ -40,6 +66,8 @@ class FavoriteViewController: UIViewController {
         // Faire apparaître toutes les donnés d'un tableau dans un playground
         
 //        guard let recipeAll = try? DatabaseService.shared.loadRecipes() else { return }
+//        
+//        var recipeText = ""
 //
 //        for recipe in recipeAll {
 //
@@ -48,24 +76,6 @@ class FavoriteViewController: UIViewController {
 //        }
         
         
-        
-        /*
-         func getDataFromApi() {
-                 NetworkService.shared.getRecipes(ingredients: ingredients) { [weak self] result in
-                     switch result {
-                     case .success(let reciplease):
-                         //print(reciplease)
-                         print("count : \(reciplease.recipes.count)")
-                         self?.recipes = reciplease.recipes
-                         
-                         self?.tableView.reloadData()
-                     case .failure(let error):
-                         print("Error fetching recipes \(error.localizedDescription)")
-                     }
-                 }
-             }
-         }
-         */
         
         /*
         let context = appDelegate.persistentContainer.viewContext
@@ -110,33 +120,51 @@ class FavoriteViewController: UIViewController {
             print("fail delete")
         }
         */
-    }
 }
-extension FavoriteViewController :UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        self.arrayRecipe.recipes.count
-        recipes.count
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Storyboard.cellID, for: indexPath) as! RecipeCell
-//        cell.recipe = arrayRecipe.recipes[indexPath.row]
-        cell.recipe = recipes[indexPath.row]
-        return cell
-    }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: Constants.Storyboard.main, bundle: nil)
-        guard let detailVC = storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.detailView) as? DetailViewController else { return }
-//        detailVC.recipe = arrayRecipe.recipes[indexPath.row]
-        detailVC.recipe = recipes[indexPath.row]
-        self.navigationController?.pushViewController(detailVC, animated: true)
-    }
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            //    objects.remove(at: indexPath.row)
-            //  tableView.deleteRows(at: [indexPath], with: .fade)
-            self.deleteData(index: indexPath.row)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-        }
-    }
+//extension FavoriteViewController :UITableViewDelegate, UITableViewDataSource {
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+////        self.arrayRecipe.recipes.count
+//        recipes.count
+//    }
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Storyboard.cellID, for: indexPath) as! RecipeCell
+////        cell.recipe = arrayRecipe.recipes[indexPath.row]
+//        cell.recipe = recipes[indexPath.row]
+//        return cell
+//    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let storyboard = UIStoryboard(name: Constants.Storyboard.main, bundle: nil)
+//        guard let detailVC = storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.detailView) as? DetailViewController else { return }
+////        detailVC.recipe = arrayRecipe.recipes[indexPath.row]
+//        detailVC.recipe = recipes[indexPath.row]
+//        self.navigationController?.pushViewController(detailVC, animated: true)
+//    }
+////    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+////        if editingStyle == .delete {
+////            //    objects.remove(at: indexPath.row)
+////            //  tableView.deleteRows(at: [indexPath], with: .fade)
+////            self.deleteData(index: indexPath.row)
+////        } else if editingStyle == .insert {
+////            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+////        }
+////    }
+//}
+
+
+extension FavoriteViewController : UITableViewDelegate, UITableViewDataSource  {
+  func numberOfSections(in tableView: UITableView) -> Int {
+    return fetchedResultsController.sections?.count ?? 0
+  }
+  
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    guard let sectionInfo = fetchedResultsController.sections?[section] else { return 0 }
+    return sectionInfo.numberOfObjects
+  }
+  
+   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientsCell", for: indexPath)
+    let recipelist = fetchedResultsController.object(at: indexPath)
+    cell.textLabel?.text = recipelist.title
+    return cell
+  }
 }

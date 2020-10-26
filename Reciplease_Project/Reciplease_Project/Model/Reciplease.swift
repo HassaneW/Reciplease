@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import CoreData
 
 // MARK: - Recipe
 struct Recipe {

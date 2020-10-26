@@ -20,7 +20,7 @@ class DetailViewController: UIViewController {
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var recipe: Recipe?
     
-    //TODO: a bouger vers le constants global ?
+    //TODO: a bouger vers le constants global ? Pb de nom
     private enum Constant {
         static let ingredientCellId = "ingredientsCell"
     }

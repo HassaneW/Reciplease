@@ -12,7 +12,7 @@ import  Alamofire
 class ListViewController: UIViewController{
     @IBOutlet weak var tableView: UITableView!
     var ingredients = "rice"
-    //TODO
+   
     var recipes: [Recipe] = []
     
     override func viewDidLoad() {
