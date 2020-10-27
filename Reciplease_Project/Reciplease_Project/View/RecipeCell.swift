@@ -16,6 +16,7 @@ final class RecipeInfoView: UIView {
             portionLabel.text = "\(portions) p"
         }
     }
+    
     var duration: Float? {
         didSet {
             guard let duration = duration, duration != 0 else {
@@ -27,7 +28,8 @@ final class RecipeInfoView: UIView {
             let convertedTime = "\(duration)"
             // Créer format dateFormatter
             let timeFormatter = DateFormatter()
-            timeFormatter.dateFormat = "HH-mm-ss"
+//            timeFormatter.dateFormat = "HH-mm-ss"
+            timeFormatter.timeStyle = .medium
             timeFormatter.dateStyle = .medium
             // Créer format Date
             guard let time = timeFormatter.date(from: convertedTime) else { return }
@@ -36,9 +38,15 @@ final class RecipeInfoView: UIView {
           return
         }
     }
+    
     private let portionLabel = UILabel()
     private let durationLabel = UILabel()
     private let clockImageView = UIImageView(image: UIImage(systemName: "stopwatch.fill"))
+    
+    var dateFormatter: DateFormatter {
+        // Tester sur unplayground
+        return DateFormatter()
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -101,18 +109,14 @@ final class RecipeCell: UITableViewCell {
     
     var recipe: Recipe? {
         didSet {
-            
             recipeName.text = recipe?.title
-            //TODO: comment convertir un tableau de string en une string separer par des virgules
-            recipeIngredients.text = recipe?.ingredients.joined(separator: ",")
-            recipeIngredients.numberOfLines = 2
+            recipeIngredients.text = recipe?.ingredients.joined(separator: ", ")
             recipeInfoView.duration = recipe?.totalTime
             recipeInfoView.portions = recipe?.portions
-            
-            
             setupImage()
         }
     }
+    
     private let recipeName = UILabel()
     private let recipeIngredients = UILabel()
     private let recipeImage = UIImageView()
@@ -122,10 +126,12 @@ final class RecipeCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupView()
     }
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupView()
     }
+    
     private func setupView() {
         backgroundColor = UIColor.systemBackground
         
@@ -144,22 +150,23 @@ final class RecipeCell: UITableViewCell {
         mainView.layer.cornerRadius = 20
         mainView.translatesAutoresizingMaskIntoConstraints = false
         
-        // pas besoin ?
-        let contentsLayer: UIView = {
-            let view = UIView()
-            view.backgroundColor = .white
-            view.layer.cornerRadius = 20
-            view.layer.shadowRadius = 8
-            view.layer.shadowOffset = CGSize(width: 3, height: 3)
-            view.layer.shadowOpacity = 0.5
-            view.layer.masksToBounds = false
-            view.translatesAutoresizingMaskIntoConstraints = false
-            return view
-        }()
+        // TODO: la view devrait etre en degrade (noir -> Transparent (clear))
+        let gradientView = UIView()
+        gradientView.backgroundColor = .clear
+        gradientView.layer.cornerRadius = 20
+        gradientView.layer.shadowRadius = 8
+        gradientView.layer.shadowOffset = CGSize(width: 3, height: 3)
+        gradientView.layer.shadowOpacity = 0.5
+        gradientView.layer.masksToBounds = false
+        gradientView.translatesAutoresizingMaskIntoConstraints = false
+        
         contentView.addSubview(mainView)
-        mainView.addSubview(contentsLayer)
+        mainView.addSubview(gradientView)
+        
         recipeName.textColor = UIColor.label
         recipeName.translatesAutoresizingMaskIntoConstraints = false
+        
+        recipeIngredients.numberOfLines = 1
         recipeIngredients.textColor = UIColor.secondaryLabel
         recipeIngredients.translatesAutoresizingMaskIntoConstraints = false
         recipeInfoView.translatesAutoresizingMaskIntoConstraints = false
@@ -201,17 +208,18 @@ final class RecipeCell: UITableViewCell {
             //mainView.widthAnchor.constraint(equalToConstant: contentView.frame.width * 0.7),
             
             // Constrains your contentsLayer to the mainView
-            contentsLayer.centerYAnchor.constraint(equalTo: mainView.centerYAnchor),
-            contentsLayer.centerXAnchor.constraint(equalTo: mainView.centerXAnchor),
-            contentsLayer.heightAnchor.constraint(equalTo: mainView.heightAnchor),
+            gradientView.centerYAnchor.constraint(equalTo: mainView.centerYAnchor),
+            gradientView.centerXAnchor.constraint(equalTo: mainView.centerXAnchor),
+            gradientView.heightAnchor.constraint(equalTo: mainView.heightAnchor),
 //            contentsLayer.widthAnchor.constraint(equalTo: mainView.widthAnchor)
-            contentsLayer.widthAnchor.constraint(equalToConstant: contentView.frame.width),
-            contentsLayer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            contentsLayer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            contentsLayer.bottomAnchor.constraint(equalTo: bottomAnchor),
-            contentsLayer.topAnchor.constraint(equalTo: textStackView.topAnchor)
+            gradientView.widthAnchor.constraint(equalToConstant: contentView.frame.width),
+            gradientView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            gradientView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            gradientView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            gradientView.topAnchor.constraint(equalTo: textStackView.topAnchor)
         ])
     }
+    
     private func setupImage() {
         guard let recipeImageURLString = recipe?.imageUrl,
             let recipeImageURL = URL(string: recipeImageURLString)  else { return }

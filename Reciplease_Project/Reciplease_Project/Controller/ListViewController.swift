@@ -11,8 +11,9 @@ import  Alamofire
 
 class ListViewController: UIViewController{
     @IBOutlet weak var tableView: UITableView!
-    var ingredients = "rice"
-   
+    
+    // TODO: remove la valeur 
+    var ingredients: String! = ""
     var recipes: [Recipe] = []
     
     override func viewDidLoad() {
@@ -20,10 +21,16 @@ class ListViewController: UIViewController{
         tableView.dataSource = self
         tableView.delegate = self
         getDataFromApi()
+       // getDataFromDatabase()
     }
     
-    @IBAction func refreshData() { //TODO: a supprimer ?
-        self.getDataFromApi()
+    func getDataFromDatabase() {
+        do {
+            recipes = try DatabaseService.shared.loadRecipes()
+            tableView.reloadData()
+        } catch let error {
+            print(error.localizedDescription)
+        }
     }
     
     func getDataFromApi() {
@@ -41,15 +48,18 @@ class ListViewController: UIViewController{
         }
     }
 }
+
 extension ListViewController :UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         recipes.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Storyboard.cellID, for: indexPath) as! RecipeCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Storyboard.recipeCellId, for: indexPath) as! RecipeCell
         cell.recipe = recipes[indexPath.row]
         return cell
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: Constants.Storyboard.main, bundle: nil)
         guard let detailVC = storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.detailView) as? DetailViewController else { return }

@@ -19,11 +19,7 @@ class DetailViewController: UIViewController {
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var recipe: Recipe?
-    
-    //TODO: a bouger vers le constants global ? Pb de nom
-    private enum Constant {
-        static let ingredientCellId = "ingredientsCell"
-    }
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDelegates()
@@ -43,6 +39,7 @@ class DetailViewController: UIViewController {
         tableView.reloadData()
     }
     private func setupFavoriteButton() {
+        // TODO: check the state properly
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: isFavorite ? "star.fill" : "star"),
             style: .plain,
@@ -132,18 +129,19 @@ class DetailViewController: UIViewController {
         do { try DatabaseService.shared.delete(recipe: recipe) }
         catch let error { throw error }
     }
-   private func factorisationErrorMessage(messageError: String) {
-          let alertVC = UIAlertController(title: "Recette local Database", message: messageError, preferredStyle: .alert)
-          alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-          self.present(alertVC, animated: true, completion: nil)
-      }
+    // TODO: afficher une alert avec le message ... message params
+    private func factorisationErrorMessage(messageError: String) {
+        let alertVC = UIAlertController(title: "Recette local Database", message: messageError, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alertVC, animated: true, completion: nil)
+    }
 }
 extension DetailViewController :UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         recipe?.ingredients.count ?? 0
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constant.ingredientCellId, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Storyboard.ingredientsCellId, for: indexPath)
         cell.textLabel?.text = "- \(recipe?.ingredients[indexPath.row] ?? "")"
         cell.textLabel?.numberOfLines = 0
         return cell
