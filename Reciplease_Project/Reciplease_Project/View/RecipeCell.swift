@@ -116,6 +116,17 @@ final class RecipeCell: UITableViewCell {
             setupImage()
         }
     }
+    lazy var gradient : CAGradientLayer = {
+        let gradient = CAGradientLayer()
+        gradient.type = .axial
+        gradient.colors = [
+            UIColor.red.cgColor,
+            UIColor.purple.cgColor,
+            UIColor.cyan.cgColor
+        ]
+        gradient.locations = [0, 0.25, 1]
+        return gradient
+    }()
     
     private let recipeName = UILabel()
     private let recipeIngredients = UILabel()
@@ -140,19 +151,18 @@ final class RecipeCell: UITableViewCell {
         recipeImage.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(recipeImage)
         
-        //TODO: colorier une view avec un degrade UIView shadown (decoration et degradés)
-        //1: contrainte sont bien
-        let mainView = UIView()
-        mainView.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
-        mainView.layer.shadowRadius = 8
-        mainView.layer.shadowOffset = CGSize(width: 3, height: 3)
-        mainView.layer.shadowOpacity = 0.5
-        mainView.layer.cornerRadius = 20
-        mainView.translatesAutoresizingMaskIntoConstraints = false
+        
+        
         
         // TODO: la view devrait etre en degrade (noir -> Transparent (clear))
         let gradientView = UIView()
-        gradientView.backgroundColor = .clear
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = gradientView.bounds
+        gradientLayer.colors = [UIColor.black.cgColor, UIColor.gray.cgColor, UIColor.white.cgColor]
+        gradientLayer.locations = [1, 0.0]
+        gradientView.layer.addSublayer(gradientLayer)
+        
+//        gradientView.backgroundColor = .black
         gradientView.layer.cornerRadius = 20
         gradientView.layer.shadowRadius = 8
         gradientView.layer.shadowOffset = CGSize(width: 3, height: 3)
@@ -160,8 +170,7 @@ final class RecipeCell: UITableViewCell {
         gradientView.layer.masksToBounds = false
         gradientView.translatesAutoresizingMaskIntoConstraints = false
         
-        contentView.addSubview(mainView)
-        mainView.addSubview(gradientView)
+        contentView.addSubview(gradientView)
         
         recipeName.textColor = UIColor.label
         recipeName.translatesAutoresizingMaskIntoConstraints = false
@@ -194,24 +203,9 @@ final class RecipeCell: UITableViewCell {
             recipeInfoView.topAnchor.constraint(equalToSystemSpacingBelow: contentView.topAnchor, multiplier: 1.0),
             trailingAnchor.constraint(equalToSystemSpacingAfter: recipeInfoView.trailingAnchor, multiplier: 1.0),
             
-            // Constrains your mainView to the ViewController's view
-            // shadowView doit prendre toute la largeur
-            // largeur leading trailing
-            // top bottom equal top bottom stack view ?
-//            mainView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-//            mainView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-//            mainView.heightAnchor.constraint(equalToConstant: contentView.frame.height * 0.5),
-//            mainView.widthAnchor.constraint(equalToConstant: contentView.frame.width),
-//            mainView.bottomAnchor.constraint(equalTo: bottomAnchor),
-//            mainView.topAnchor.constraint(equalTo: topAnchor),
-//
-            //mainView.widthAnchor.constraint(equalToConstant: contentView.frame.width * 0.7),
-            
-            // Constrains your contentsLayer to the mainView
-            gradientView.centerYAnchor.constraint(equalTo: mainView.centerYAnchor),
-            gradientView.centerXAnchor.constraint(equalTo: mainView.centerXAnchor),
-            gradientView.heightAnchor.constraint(equalTo: mainView.heightAnchor),
-//            contentsLayer.widthAnchor.constraint(equalTo: mainView.widthAnchor)
+            gradientView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            gradientView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            gradientView.heightAnchor.constraint(equalTo: contentView.heightAnchor),
             gradientView.widthAnchor.constraint(equalToConstant: contentView.frame.width),
             gradientView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             gradientView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
@@ -219,7 +213,6 @@ final class RecipeCell: UITableViewCell {
             gradientView.topAnchor.constraint(equalTo: textStackView.topAnchor)
         ])
     }
-    
     private func setupImage() {
         guard let recipeImageURLString = recipe?.imageUrl,
             let recipeImageURL = URL(string: recipeImageURLString)  else { return }
