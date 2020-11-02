@@ -24,18 +24,8 @@ final class RecipeInfoView: UIView {
                 clockImageView.isHidden = true
                 return
             }
-            // Convertir float en String
-            let convertedTime = "\(duration)"
-            // Créer format dateFormatter
-            let timeFormatter = DateFormatter()
-//            timeFormatter.dateFormat = "HH-mm-ss"
-            timeFormatter.timeStyle = .medium
-            timeFormatter.dateStyle = .medium
-            // Créer format Date
-            guard let time = timeFormatter.date(from: convertedTime) else { return }
-            // Transformer la date en String afin que le label le récupére
-            durationLabel.text = timeFormatter.string(from: time)
-          return
+            
+            durationLabel.text = dateComponentsFormatter.string(from: Double(duration * 60))
         }
     }
     
@@ -43,11 +33,13 @@ final class RecipeInfoView: UIView {
     private let durationLabel = UILabel()
     private let clockImageView = UIImageView(image: UIImage(systemName: "stopwatch.fill"))
     
-    var dateFormatter: DateFormatter {
-        // Tester sur unplayground
-        return DateFormatter()
+    var dateComponentsFormatter: DateComponentsFormatter {
+        let dtc = DateComponentsFormatter()
+        dtc.unitsStyle = .brief
+        dtc.allowedUnits = [.hour, .minute]
+        return dtc
     }
-    
+   
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -159,15 +151,17 @@ final class RecipeCell: UITableViewCell {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = gradientView.bounds
         gradientLayer.colors = [UIColor.black.cgColor, UIColor.gray.cgColor, UIColor.white.cgColor]
-        gradientLayer.locations = [1, 0.0]
-        gradientView.layer.addSublayer(gradientLayer)
+        gradientView.layer.insertSublayer(gradientLayer, at: 0)
+       // gradientLayer.locations = [1, 0.0]
+       // gradientView.layer.addSublayer(gradientLayer)
         
 //        gradientView.backgroundColor = .black
-        gradientView.layer.cornerRadius = 20
-        gradientView.layer.shadowRadius = 8
-        gradientView.layer.shadowOffset = CGSize(width: 3, height: 3)
-        gradientView.layer.shadowOpacity = 0.5
-        gradientView.layer.masksToBounds = false
+//        gradientView.layer.cornerRadius = 20
+//        gradientView.layer.shadowRadius = 8
+//        gradientView.layer.shadowOffset = CGSize(width: 3, height: 3)
+//        gradientView.layer.shadowOpacity = 0.5
+//        gradientView.layer.masksToBounds = false
+        gradientView.backgroundColor = .red
         gradientView.translatesAutoresizingMaskIntoConstraints = false
         
         contentView.addSubview(gradientView)
@@ -203,6 +197,7 @@ final class RecipeCell: UITableViewCell {
             recipeInfoView.topAnchor.constraint(equalToSystemSpacingBelow: contentView.topAnchor, multiplier: 1.0),
             trailingAnchor.constraint(equalToSystemSpacingAfter: recipeInfoView.trailingAnchor, multiplier: 1.0),
             
+            // FIXME: view soit a 50% de la hauteur de la cell le bottom avec le bottom et leading/ trailing 
             gradientView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             gradientView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             gradientView.heightAnchor.constraint(equalTo: contentView.heightAnchor),

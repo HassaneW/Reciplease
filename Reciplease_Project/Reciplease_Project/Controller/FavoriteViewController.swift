@@ -7,10 +7,14 @@
 //
 
 import UIKit
-import CoreData// delete
 
-class FavoriteViewController: UIViewController, NSFetchedResultsControllerDelegate {
-    
+// favorritelistvc
+// listviewcontroller
+
+// listviewc
+//recipelist
+
+class FavoriteViewController: UIViewController  {
     @IBOutlet weak var tableView: UITableView!
     
     var recipes: [Recipe] = []
@@ -32,7 +36,8 @@ class FavoriteViewController: UIViewController, NSFetchedResultsControllerDelega
     }
 }
 
-extension FavoriteViewController :UITableViewDelegate, UITableViewDataSource {
+// MARK: - Table Vied viez delegqtes
+extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         recipes.count
     }

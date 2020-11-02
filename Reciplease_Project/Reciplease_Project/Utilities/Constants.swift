@@ -15,7 +15,7 @@ enum Constants {
         static let main = "Main"
         static let listViewController = "ListViewController"
         static let detailView = "DetailViewController"
-        static let recipeCellId = "cell" //TODO: changer dans les storyboards "recipe cell Id"
+        static let recipeCellId = "recipeCellId" 
         static let ingredientsCellId = "ingredientsCell"
     }
 }
