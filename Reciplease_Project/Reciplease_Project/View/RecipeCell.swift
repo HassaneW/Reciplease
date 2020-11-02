@@ -198,10 +198,7 @@ final class RecipeCell: UITableViewCell {
             trailingAnchor.constraint(equalToSystemSpacingAfter: recipeInfoView.trailingAnchor, multiplier: 1.0),
             
             // FIXME: view soit a 50% de la hauteur de la cell le bottom avec le bottom et leading/ trailing 
-            gradientView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            gradientView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            gradientView.heightAnchor.constraint(equalTo: contentView.heightAnchor),
-            gradientView.widthAnchor.constraint(equalToConstant: contentView.frame.width),
+
             gradientView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             gradientView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             gradientView.bottomAnchor.constraint(equalTo: bottomAnchor),

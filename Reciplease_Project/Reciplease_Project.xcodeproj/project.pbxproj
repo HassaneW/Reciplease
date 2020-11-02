@@ -27,6 +27,8 @@
 		506A1B1E2522043A00CA8EDD /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506A1B1D2522043A00CA8EDD /* Service.swift */; };
 		50A560DE252746C300FA8618 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50A560DD252746C300FA8618 /* Colors.xcassets */; };
 		C2D2C4B9B033AB777738BB21 /* Pods_Reciplease_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 277D450AFC6F6020E421150A /* Pods_Reciplease_Project.framework */; };
+		FB0201612550211900039B7A /* IngredientsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0201602550211900039B7A /* IngredientsListViewController.swift */; };
+		FB02016325502F9200039B7A /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB02016225502F9200039B7A /* HomeTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +68,8 @@
 		506A1B1D2522043A00CA8EDD /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		50A560DD252746C300FA8618 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		812A04AFE545C5E22198D427 /* Pods-Reciplease_Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reciplease_Project.debug.xcconfig"; path = "Target Support Files/Pods-Reciplease_Project/Pods-Reciplease_Project.debug.xcconfig"; sourceTree = "<group>"; };
+		FB0201602550211900039B7A /* IngredientsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsListViewController.swift; sourceTree = "<group>"; };
+		FB02016225502F9200039B7A /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +106,8 @@
 				506602A2252342D2007759EC /* ListViewController.swift */,
 				506602A4252344C9007759EC /* DetailViewController.swift */,
 				506602A62523477D007759EC /* FavoriteViewController.swift */,
+				FB02016225502F9200039B7A /* HomeTabBarController.swift */,
+				FB0201602550211900039B7A /* IngredientsListViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -377,6 +383,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB0201612550211900039B7A /* IngredientsListViewController.swift in Sources */,
 				506602A5252344C9007759EC /* DetailViewController.swift in Sources */,
 				5044D6F225233B9900384B62 /* Constants.swift in Sources */,
 				506602A3252342D2007759EC /* ListViewController.swift in Sources */,
@@ -390,6 +397,7 @@
 				506602A72523477D007759EC /* FavoriteViewController.swift in Sources */,
 				506A1AFD2521EE4000CA8EDD /* Reciplease_Project.xcdatamodeld in Sources */,
 				506A1AF52521EE4000CA8EDD /* SceneDelegate.swift in Sources */,
+				FB02016325502F9200039B7A /* HomeTabBarController.swift in Sources */,
 				506A1B1C2522042100CA8EDD /* Config.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
