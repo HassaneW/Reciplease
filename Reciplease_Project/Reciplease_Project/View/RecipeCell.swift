@@ -145,23 +145,14 @@ final class RecipeCell: UITableViewCell {
         
         
         
-        
         // TODO: la view devrait etre en degrade (noir -> Transparent (clear))
         let gradientView = UIView()
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = gradientView.bounds
         gradientLayer.colors = [UIColor.black.cgColor, UIColor.gray.cgColor, UIColor.white.cgColor]
-        gradientView.layer.insertSublayer(gradientLayer, at: 0)
+        //gradientView.layer.insertSublayer(gradientLayer, at: 1)
        // gradientLayer.locations = [1, 0.0]
-       // gradientView.layer.addSublayer(gradientLayer)
-        
-//        gradientView.backgroundColor = .black
-//        gradientView.layer.cornerRadius = 20
-//        gradientView.layer.shadowRadius = 8
-//        gradientView.layer.shadowOffset = CGSize(width: 3, height: 3)
-//        gradientView.layer.shadowOpacity = 0.5
-//        gradientView.layer.masksToBounds = false
-        gradientView.backgroundColor = .red
+        gradientView.layer.addSublayer(gradientLayer)
         gradientView.translatesAutoresizingMaskIntoConstraints = false
         
         contentView.addSubview(gradientView)

@@ -44,10 +44,12 @@ class HomeViewController: UIViewController {
         if ingredientData.count == 0 {
             return
         }
-        let storyboard = UIStoryboard(name: Constants.Storyboard.main, bundle: nil)
-        guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.listViewController) as? ListViewController else { return }
-        vc.ingredients = ingredientData.joined(separator: ",")
-        self.navigationController?.pushViewController(vc, animated: true)
+      //  let storyboard = UIStoryboard(name: Constants.Storyboard.main, bundle: nil)
+        //guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.listViewController) as? ListViewController else { return }
+        
+        let recipesListViewController = RecipesListViewController(recipeMode: .api)
+        recipesListViewController.ingredients = ingredientData.joined(separator: ",")
+        navigationController?.pushViewController(recipesListViewController, animated: true)
     }
     // MARK: Private Methods
     private func configureDelegate() {
