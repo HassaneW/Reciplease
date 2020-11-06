@@ -69,47 +69,19 @@ class DetailViewController: UIViewController {
                 try deleteFromFavorites()
             } catch let error {
                 print(error.localizedDescription)
-                //TODO: Afficher un UIAlertController -> displayerroralert
-                factorisationErrorMessage(messageError: "Impossible d'effacer la recette")
+                factorisationErrorMessage(messageError: "Cannot delete recipe")
             }
         } else {
             do {
                 try addToFavorites()
             } catch let error {
                 print(error.localizedDescription)
-                //TODO: Afficher un UIAlertController
-                factorisationErrorMessage(messageError: "Impossible d'ajouter la recette")
+                factorisationErrorMessage(messageError: "Unable to add recipe")
             }
         }
         isFavorite.toggle()
         setupFavoriteButton()
         
-        // recupe : fichier constante
-        // CoreDataManager.saveRecipe(recipe)
-        // func saveRecipe(_ recipe: Recipe?)
-        // func loadRecipies() -> [Recipe]
-        // func deleteRecipe(_ recipe: Recipe?)
-        
-        /*let context = appDelegate.persistentContainer.viewContext
-         let entity = NSEntityDescription.entity(forEntityName: "Favorite", in: context)
-         let newUser = NSManagedObject(entity: entity!, insertInto: context)
-         
-         //        newUser.setValue(data.title, forKey: "title")
-         //        newUser.setValue(data.imageUrl, forKey: "imageUrl")
-         //        newUser.setValue(data.url, forKey: "url")
-         //        newUser.setValue(data.portions, forKey: "portions")
-         //        newUser.setValue(data.ingredients.joined(separator: ","), forKey: "ingredients")
-         //        newUser.setValue(data.totalTime, forKey: "totalTime")
-         
-         do {
-         
-         try context.save()
-         
-         } catch {
-         
-         print("Failed saving")
-         }
-         */
     }
     @IBAction func getDirection(sender: UIButton) {
         guard let recipeURLString = recipe?.url,

@@ -12,9 +12,7 @@
 		5044D6F225233B9900384B62 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5044D6F125233B9900384B62 /* Constants.swift */; };
 		5044D6F525233BC700384B62 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5044D6F425233BC700384B62 /* StringExtension.swift */; };
 		506602A125233FA0007759EC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506602A025233FA0007759EC /* HomeViewController.swift */; };
-		506602A3252342D2007759EC /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506602A2252342D2007759EC /* ListViewController.swift */; };
 		506602A5252344C9007759EC /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506602A4252344C9007759EC /* DetailViewController.swift */; };
-		506602A72523477D007759EC /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506602A62523477D007759EC /* FavoriteViewController.swift */; };
 		506A1AF32521EE4000CA8EDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506A1AF22521EE4000CA8EDD /* AppDelegate.swift */; };
 		506A1AF52521EE4000CA8EDD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506A1AF42521EE4000CA8EDD /* SceneDelegate.swift */; };
 		506A1AFA2521EE4000CA8EDD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 506A1AF82521EE4000CA8EDD /* Main.storyboard */; };
@@ -49,9 +47,7 @@
 		5044D6F125233B9900384B62 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5044D6F425233BC700384B62 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		506602A025233FA0007759EC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		506602A2252342D2007759EC /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		506602A4252344C9007759EC /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		506602A62523477D007759EC /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		506A1AEF2521EE4000CA8EDD /* Reciplease_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reciplease_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		506A1AF22521EE4000CA8EDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		506A1AF42521EE4000CA8EDD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -103,10 +99,8 @@
 			isa = PBXGroup;
 			children = (
 				506602A4252344C9007759EC /* DetailViewController.swift */,
-				506602A62523477D007759EC /* FavoriteViewController.swift */,
 				FB02016225502F9200039B7A /* HomeTabBarController.swift */,
 				506602A025233FA0007759EC /* HomeViewController.swift */,
-				506602A2252342D2007759EC /* ListViewController.swift */,
 				FB0201602550211900039B7A /* RecipesListViewController.swift */,
 			);
 			path = Controller;
@@ -386,7 +380,6 @@
 				FB0201612550211900039B7A /* RecipesListViewController.swift in Sources */,
 				506602A5252344C9007759EC /* DetailViewController.swift in Sources */,
 				5044D6F225233B9900384B62 /* Constants.swift in Sources */,
-				506602A3252342D2007759EC /* ListViewController.swift in Sources */,
 				506A1B1E2522043A00CA8EDD /* Service.swift in Sources */,
 				506A1B19252201CF00CA8EDD /* Reciplease.swift in Sources */,
 				5044D6ED25233A6300384B62 /* RecipeCell.swift in Sources */,
@@ -394,7 +387,6 @@
 				506A1AF32521EE4000CA8EDD /* AppDelegate.swift in Sources */,
 				500EFC70253B4A1900AE1DEB /* DatabaseService.swift in Sources */,
 				506602A125233FA0007759EC /* HomeViewController.swift in Sources */,
-				506602A72523477D007759EC /* FavoriteViewController.swift in Sources */,
 				506A1AFD2521EE4000CA8EDD /* Reciplease_Project.xcdatamodeld in Sources */,
 				506A1AF52521EE4000CA8EDD /* SceneDelegate.swift in Sources */,
 				FB02016325502F9200039B7A /* HomeTabBarController.swift in Sources */,

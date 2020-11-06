@@ -8,13 +8,6 @@
 
 import UIKit
 
-
-
-
-//      let recipesListViewController = RecipesListViewController(recipeMode: .database)
-//      ////sListViewController.ingredients = ingredientData.joined(separator: ",")
-//      navigationController?.pushViewController(recipesListViewController, animated: true)
-
 enum RecipeListMode {
     case api
     case database
@@ -31,29 +24,36 @@ enum RecipeListMode {
 
 class RecipesListViewController: UIViewController {
     
-    var recipeMode: RecipeListMode // private let
-    var ingredients: String = "" // String?
+    // MARK: - variables
     
-    //@IBOutlet private weak var tableView: UITableView!
+    var recipeMode: RecipeListMode
+    var ingredients: String = ""
     private let tableView = UITableView()
     private var recipes: [Recipe] = []
+    
+    // MARK: - Init
     
     init(recipeMode: RecipeListMode) {
         self.recipeMode = recipeMode
         super.init(nibName: nil, bundle: nil)
     }
-    
     required init?(coder: NSCoder) {
         self.recipeMode = .database
         super.init(coder: coder)
     }
+    // MARK: - View
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         getRecipes()
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if recipeMode == .database {
+            getRecipesFromDatabase()
+        }
+    }
     // MARK: - Private methods
     
     private func setupView() {
@@ -65,7 +65,7 @@ class RecipesListViewController: UIViewController {
         tableView.register(RecipeCell.self, forCellReuseIdentifier: Constants.Storyboard.recipeCellId)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
-
+        
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -74,8 +74,9 @@ class RecipesListViewController: UIViewController {
         ])
     }
     
+    // MARK: - private function
+    
     private func getRecipes() {
-        // TODO: get from database should be called on appear
         switch recipeMode {
         case .api:
             getRecipesFromApi()
@@ -83,7 +84,6 @@ class RecipesListViewController: UIViewController {
             getRecipesFromDatabase()
         }
     }
-    
     private func getRecipesFromApi() {
         NetworkService.shared.getRecipes(ingredients: ingredients) { [weak self] result in
             switch result {
@@ -95,7 +95,6 @@ class RecipesListViewController: UIViewController {
             }
         }
     }
-    
     private func getRecipesFromDatabase() {
         do {
             recipes = try DatabaseService.shared.loadRecipes()

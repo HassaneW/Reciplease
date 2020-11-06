@@ -9,6 +9,7 @@
 import UIKit
 
 class HomeViewController: UIViewController {
+    
     @IBOutlet weak private var textIngredientField: UITextField!
     @IBOutlet weak private var ingredientsTableView: UITableView!
     @IBOutlet weak private var searchButton: UIButton!
@@ -16,16 +17,21 @@ class HomeViewController: UIViewController {
     @IBOutlet weak private var clear : UIButton!
     
     private var ingredientData: [String] = []
+    
     private enum Constant {
         static let ingredientCellId = "ingredientsCell"
     }
+    
     // MARK: View lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureDelegate()
         setupView()
     }
+    
     // MARK: Action Methods
+    
     @IBAction func addIngredient(_ sender: UIButton) {
         guard let textIngredient = textIngredientField.text, !textIngredient.isEmptyOrWhitespace else {
             print("invalid textfield value")

@@ -9,42 +9,17 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Favorite View Controller-->
+        <!--Recipes List View Controller-->
         <scene sceneID="gyQ-vK-dP3">
             <objects>
-                <viewController id="9IT-vl-T8m" customClass="FavoriteViewController" customModule="Reciplease_Project" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9IT-vl-T8m" customClass="RecipesListViewController" customModule="Reciplease_Project" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eOP-Z1-JAD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0rq-4X-9EO">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="recipeCellId" id="8Lz-Lm-Fid">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8Lz-Lm-Fid" id="H0u-Kp-OP8" customClass="RecipeCell" customModule="Reciplease_Project" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="0rq-4X-9EO" firstAttribute="leading" secondItem="cvh-cH-2dJ" secondAttribute="leading" id="0kc-gH-uWn"/>
-                            <constraint firstItem="cvh-cH-2dJ" firstAttribute="bottom" secondItem="0rq-4X-9EO" secondAttribute="bottom" id="JRL-WC-r2P"/>
-                            <constraint firstItem="0rq-4X-9EO" firstAttribute="top" secondItem="cvh-cH-2dJ" secondAttribute="top" id="SBz-LO-cfP"/>
-                            <constraint firstItem="cvh-cH-2dJ" firstAttribute="trailing" secondItem="0rq-4X-9EO" secondAttribute="trailing" id="tUu-mr-6Y0"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="cvh-cH-2dJ"/>
                     </view>
                     <navigationItem key="navigationItem" id="7hT-qU-efm"/>
-                    <connections>
-                        <outlet property="tableView" destination="0rq-4X-9EO" id="CB1-En-w9f"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aYa-MM-vsg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -208,50 +183,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="55n-8n-5tf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1271.0144927536232" y="-368.30357142857139"/>
-        </scene>
-        <!--List View Controller-->
-        <scene sceneID="jt8-14-9od">
-            <objects>
-                <viewController storyboardIdentifier="ListViewController" id="Ufq-ri-5Hv" customClass="ListViewController" customModule="Reciplease_Project" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Wjo-dv-aRl">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wjW-UF-01S">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="recipeCellId" id="24h-We-ec2" customClass="RecipeCell" customModule="Reciplease_Project" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="24h-We-ec2" id="9mg-kJ-5uM">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="Ufq-ri-5Hv" id="O78-fj-hDt"/>
-                                    <outlet property="delegate" destination="Ufq-ri-5Hv" id="FlZ-L9-gQc"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="wjW-UF-01S" firstAttribute="leading" secondItem="nbc-Yi-ZXt" secondAttribute="leading" id="9QI-fn-Z7N"/>
-                            <constraint firstItem="wjW-UF-01S" firstAttribute="top" secondItem="nbc-Yi-ZXt" secondAttribute="top" id="Cgd-11-50Z"/>
-                            <constraint firstItem="nbc-Yi-ZXt" firstAttribute="trailing" secondItem="wjW-UF-01S" secondAttribute="trailing" id="qBB-K9-h0s"/>
-                            <constraint firstItem="nbc-Yi-ZXt" firstAttribute="bottom" secondItem="wjW-UF-01S" secondAttribute="bottom" id="wvQ-QH-RhP"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="nbc-Yi-ZXt"/>
-                    </view>
-                    <connections>
-                        <outlet property="tableView" destination="wjW-UF-01S" id="x3X-eJ-5ZW"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WPA-4M-hYI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2053.6231884057975" y="-368.30357142857139"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="aLR-cI-fuT">
