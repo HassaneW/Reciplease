@@ -9,21 +9,25 @@
 import Foundation
 import Alamofire
 
-// renomer a networkservice
+
 class NetworkService {
+    
     static let shared = NetworkService()
     private let session: Session
+    
     init(session: Session = .default) {
         self.session = session
     }
+    
     let baseURL = ConfigNetworkingService.edelman.baseUrl
+    
     func getRecipes(ingredients: String, offset: Int = 0, callback: @escaping (Result<Reciplease, AFError>) -> Void) {
         let parameters: [String: Any] = [
             "app_id": ConfigNetworkingService.edelman.app_id,
             "app_key": ConfigNetworkingService.edelman.app_key,
             "q": "\(ingredients)",
             "from": offset,
-            "to": offset + 10 // Config.API.max
+            "to": offset + 10
         ]
         session.request(baseURL, parameters: parameters)
             .validate()

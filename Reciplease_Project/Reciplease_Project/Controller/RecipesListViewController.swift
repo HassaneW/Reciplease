@@ -8,6 +8,8 @@
 
 import UIKit
 
+// MARK: - Enum RecipeListeMode
+
 enum RecipeListMode {
     case api
     case database

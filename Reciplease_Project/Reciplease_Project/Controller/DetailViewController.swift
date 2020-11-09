@@ -7,10 +7,14 @@
 //
 
 import UIKit
-import CoreData //delete
+import CoreData
 import SafariServices
 
+
 class DetailViewController: UIViewController {
+    
+    // MARK: - Variables
+    
     @IBOutlet weak var recipeImageView : UIImageView!
     @IBOutlet weak var titleLabel : UILabel!
     @IBOutlet weak var tableView: UITableView!
@@ -19,16 +23,22 @@ class DetailViewController: UIViewController {
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var recipe: Recipe?
-   
+    
+    // MARK: - init DetailViewController
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDelegates()
         setupView()
     }
+    
+    // MARK: - private function
+    
     private func setupDelegates() {
         tableView.dataSource = self
         tableView.delegate = self
     }
+    
     private func setupView() {
         getDirectonButton.layer.cornerRadius = 10
         titleLabel.text = recipe?.title
@@ -38,32 +48,18 @@ class DetailViewController: UIViewController {
         setupImage()
         tableView.reloadData()
     }
+    
     private func setupFavoriteButton() {
-        // TODO: check the state properly
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: isFavorite ? "star.fill" : "star"),
             style: .plain,
             target: self,
             action: #selector(favoriteTapped))
     }
-    private func setupImage() {
-        guard let recipeImageURLString = recipe?.imageUrl,
-            let recipeImageURL = URL(string: recipeImageURLString)  else { return }
-        DispatchQueue.global().async { [weak self] in
-            if let data = try? Data(contentsOf: recipeImageURL) {
-                let image = UIImage.init(data: data)
-                DispatchQueue.main.async {
-                    self?.recipeImageView.image = image
-                }
-            }
-        }
-    }
-    // For testing purposes
+    
     var isFavorite = false
     @objc
     private func favoriteTapped() {
-        // checker si la recette est en favoris get d
-        // comment savoir si faut rajouter ou supprimer ?
         if isFavorite {
             do {
                 try deleteFromFavorites()
@@ -81,8 +77,23 @@ class DetailViewController: UIViewController {
         }
         isFavorite.toggle()
         setupFavoriteButton()
-        
     }
+    
+    // MARK: - setupImage
+    
+    private func setupImage() {
+        guard let recipeImageURLString = recipe?.imageUrl,
+            let recipeImageURL = URL(string: recipeImageURLString)  else { return }
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: recipeImageURL) {
+                let image = UIImage.init(data: data)
+                DispatchQueue.main.async {
+                    self?.recipeImageView.image = image
+                }
+            }
+        }
+    }
+    
     @IBAction func getDirection(sender: UIButton) {
         guard let recipeURLString = recipe?.url,
             let recipeURL = URL(string: recipeURLString) else {
@@ -91,23 +102,28 @@ class DetailViewController: UIViewController {
         let safariVC = SFSafariViewController(url: recipeURL)
         present(safariVC, animated: true, completion: nil)
     }
+    
     private func addToFavorites() throws {
         guard let recipe = recipe else { return }
         do { try DatabaseService.shared.save(recipe: recipe) }
         catch let error { throw error }
     }
+    
     private func deleteFromFavorites() throws {
         guard let recipe = recipe else { return  }
         do { try DatabaseService.shared.delete(recipe: recipe) }
         catch let error { throw error }
     }
-    // TODO: afficher une alert avec le message ... message params
+    
     private func factorisationErrorMessage(messageError: String) {
         let alertVC = UIAlertController(title: "Recette local Database", message: messageError, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         self.present(alertVC, animated: true, completion: nil)
     }
 }
+
+// MARK: - Extension TableViewController
+
 extension DetailViewController :UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         recipe?.ingredients.count ?? 0

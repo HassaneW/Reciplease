@@ -10,14 +10,17 @@ import Foundation
 import CoreData
 
 // MARK: - Recipe
+
 struct Recipe {
     let title: String
     let imageUrl: String
     let url: String
-    let portions: Float // Nombre de portions
-    let ingredients: [String] // ingredients
+    let portions: Float
+    let ingredients: [String]
     let totalTime: Float
 }
+
+ // MARK: - extension Recipe
 
 extension Recipe: Decodable {
     enum CodingKeys: String, CodingKey {
@@ -30,9 +33,13 @@ extension Recipe: Decodable {
         case totalTime
     }
     
+     // MARK: - init
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let recipe = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .recipe)
+        
+         // MARK: - decode Recipe
         
         title = try recipe.decode(String.self, forKey: .title)
         imageUrl = try recipe.decode(String.self, forKey: .imageUrl)
@@ -43,13 +50,15 @@ extension Recipe: Decodable {
     }
 }
 
+// MARK: - CustomStringConvertible
+
 extension Recipe : CustomStringConvertible {
     var description: String {
         return "Title : \(title), Image recette \(imageUrl), descriptif recette \(url), Portions : \(portions), tableau d'ingrédients : \(ingredients), temps de preparation \(totalTime)"
     }
 }
 
-// MARK: Core Data
+// MARK: - Convert Recipe Model
 
 extension Recipe {
     
@@ -71,6 +80,7 @@ extension Recipe {
 
 
 // MARK: - Reciplease
+
 struct Reciplease: Decodable {
     
     let recipes: [Recipe]

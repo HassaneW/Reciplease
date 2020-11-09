@@ -8,7 +8,7 @@
 
 import Foundation
 
-// Toutes les constantes du projet
+// MARK: - Constants project
 
 enum Constants {
     enum Storyboard {

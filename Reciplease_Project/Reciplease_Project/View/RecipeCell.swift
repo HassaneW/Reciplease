@@ -9,7 +9,11 @@
 import Foundation
 import UIKit
 
+
+
 final class RecipeInfoView: UIView {
+    
+    // MARK: -  variables RecipeInfoView
     var portions: Float? {
         didSet {
             guard let portions = portions else { return }
@@ -40,6 +44,7 @@ final class RecipeInfoView: UIView {
         return dtc
     }
    
+    // MARK: - init RecipeInfoView
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -48,6 +53,8 @@ final class RecipeInfoView: UIView {
         super.init(coder: coder)
         setupView()
     }
+    
+    // MARK: - SetupView RecipeInfoView
     private func setupView() {
         backgroundColor = UIColor.brown
         
@@ -97,8 +104,12 @@ final class RecipeInfoView: UIView {
         ])
     }
 }
+
+
+
 final class RecipeCell: UITableViewCell {
     
+    // MARK: - variables RecipeCell
     var recipe: Recipe? {
         didSet {
             recipeName.text = recipe?.title
@@ -125,6 +136,8 @@ final class RecipeCell: UITableViewCell {
     private let recipeImage = UIImageView()
     private let recipeInfoView = RecipeInfoView()
     
+    
+    // MARK: - init RecipeCell
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupView()
@@ -135,6 +148,8 @@ final class RecipeCell: UITableViewCell {
         setupView()
     }
     
+    // MARK: - SetupView RecipeCell
+    
     private func setupView() {
         backgroundColor = UIColor.systemBackground
         
@@ -143,15 +158,10 @@ final class RecipeCell: UITableViewCell {
         recipeImage.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(recipeImage)
         
-        
-        
-        // TODO: la view devrait etre en degrade (noir -> Transparent (clear))
         let gradientView = UIView()
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = gradientView.bounds
         gradientLayer.colors = [UIColor.black.cgColor, UIColor.gray.cgColor, UIColor.white.cgColor]
-        //gradientView.layer.insertSublayer(gradientLayer, at: 1)
-       // gradientLayer.locations = [1, 0.0]
         gradientView.layer.addSublayer(gradientLayer)
         gradientView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -188,14 +198,14 @@ final class RecipeCell: UITableViewCell {
             recipeInfoView.topAnchor.constraint(equalToSystemSpacingBelow: contentView.topAnchor, multiplier: 1.0),
             trailingAnchor.constraint(equalToSystemSpacingAfter: recipeInfoView.trailingAnchor, multiplier: 1.0),
             
-            // FIXME: view soit a 50% de la hauteur de la cell le bottom avec le bottom et leading/ trailing 
-
             gradientView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             gradientView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             gradientView.bottomAnchor.constraint(equalTo: bottomAnchor),
             gradientView.topAnchor.constraint(equalTo: textStackView.topAnchor)
         ])
     }
+    
+    // MARK: - setupImage
     private func setupImage() {
         guard let recipeImageURLString = recipe?.imageUrl,
             let recipeImageURL = URL(string: recipeImageURLString)  else { return }
@@ -210,6 +220,7 @@ final class RecipeCell: UITableViewCell {
     }
 }
 
+// MARK: - UITableViewCell
 class TitleCell: UITableViewCell {
     @IBOutlet weak var titleLabel : UILabel!
     @IBOutlet weak var imgView : UIImageView!
@@ -219,17 +230,16 @@ class TitleCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
     }
-    func displayData(recipe : Recipe) {
+    
+    // MARK: - displayData
+    func
+        displayData(recipe : Recipe) {
         titleLabel.text = recipe.title
-        //descriptionLabel.text = recipe.url
-        //timeLabel.text = "Time : \(recipe.totalTime)"
         ingredientsLabel.text = recipe.ingredients.first
         
         guard let urlIcon = URL(string: recipe.imageUrl)  else { return }

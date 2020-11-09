@@ -10,6 +10,8 @@ import UIKit
 
 class HomeTabBarController: UITabBarController {
 
+     // MARK: - init
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         hidesBottomBarWhenPushed = true

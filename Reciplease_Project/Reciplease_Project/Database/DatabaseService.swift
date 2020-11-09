@@ -10,8 +10,11 @@ import Foundation
 import CoreData
 
 class DatabaseService {
+    
+    // MARK: - Singleton
     static let shared = DatabaseService()
 
+    // MARK: - Context Core Data
     private let persistentContainer: NSPersistentContainer
     private let viewContext: NSManagedObjectContext
     
@@ -21,6 +24,7 @@ class DatabaseService {
         self.viewContext = persistentContainer.viewContext
     }
     
+    // MARK: - private function Core Data
     func save(recipe: Recipe) throws {
         let recipeEntity = RecipeEntity(context: viewContext)
         recipeEntity.title = recipe.title

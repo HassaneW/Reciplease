@@ -10,6 +10,8 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    // MARK: - Variables
+    
     @IBOutlet weak private var textIngredientField: UITextField!
     @IBOutlet weak private var ingredientsTableView: UITableView!
     @IBOutlet weak private var searchButton: UIButton!
@@ -22,15 +24,13 @@ class HomeViewController: UIViewController {
         static let ingredientCellId = "ingredientsCell"
     }
     
-    // MARK: View lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureDelegate()
         setupView()
     }
     
-    // MARK: Action Methods
+// MARK: - Actions Methods
     
     @IBAction func addIngredient(_ sender: UIButton) {
         guard let textIngredient = textIngredientField.text, !textIngredient.isEmptyOrWhitespace else {
@@ -41,23 +41,24 @@ class HomeViewController: UIViewController {
         textIngredientField.text = ""
         ingredientsTableView.reloadData()
     }
+    
     @IBAction func clear(_ sender: Any) {
         ingredientData.removeAll()
         ingredientsTableView.reloadData()
     }
+    
     @IBAction func searchRecipies(){
         // Tout réunir dans le guard let
         if ingredientData.count == 0 {
             return
         }
-      //  let storyboard = UIStoryboard(name: Constants.Storyboard.main, bundle: nil)
-        //guard let vc = storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.listViewController) as? ListViewController else { return }
-        
+    
         let recipesListViewController = RecipesListViewController(recipeMode: .api)
         recipesListViewController.ingredients = ingredientData.joined(separator: ",")
         navigationController?.pushViewController(recipesListViewController, animated: true)
     }
-    // MARK: Private Methods
+    
+// MARK: - Private Methods
     private func configureDelegate() {
         ingredientsTableView.delegate = self
         ingredientsTableView.dataSource = self
@@ -70,6 +71,7 @@ class HomeViewController: UIViewController {
         searchButton.clipsToBounds = true
     }
 }
+
 // MARK: - UITableView datasource
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -81,6 +83,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
 }
+
 // MARK: - UITextField delegate
 extension HomeViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
