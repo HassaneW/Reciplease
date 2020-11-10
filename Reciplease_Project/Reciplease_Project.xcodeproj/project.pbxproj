@@ -27,6 +27,10 @@
 		C2D2C4B9B033AB777738BB21 /* Pods_Reciplease_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 277D450AFC6F6020E421150A /* Pods_Reciplease_Project.framework */; };
 		FB0201612550211900039B7A /* RecipesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0201602550211900039B7A /* RecipesListViewController.swift */; };
 		FB02016325502F9200039B7A /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB02016225502F9200039B7A /* HomeTabBarController.swift */; };
+		FB63FF3B255A80CD0087F1A8 /* FakeResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB63FF3A255A80CD0087F1A8 /* FakeResponseData.swift */; };
+		FB63FF3D255A80DD0087F1A8 /* URLSessionFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB63FF3C255A80DD0087F1A8 /* URLSessionFake.swift */; };
+		FB63FF3F255A82090087F1A8 /* recipe.json in Resources */ = {isa = PBXBuildFile; fileRef = FB63FF3E255A82090087F1A8 /* recipe.json */; };
+		FB63FF44255A83E70087F1A8 /* RecipeServiceTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB63FF43255A83E70087F1A8 /* RecipeServiceTestCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +70,10 @@
 		812A04AFE545C5E22198D427 /* Pods-Reciplease_Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reciplease_Project.debug.xcconfig"; path = "Target Support Files/Pods-Reciplease_Project/Pods-Reciplease_Project.debug.xcconfig"; sourceTree = "<group>"; };
 		FB0201602550211900039B7A /* RecipesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesListViewController.swift; sourceTree = "<group>"; };
 		FB02016225502F9200039B7A /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
+		FB63FF3A255A80CD0087F1A8 /* FakeResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeResponseData.swift; sourceTree = "<group>"; };
+		FB63FF3C255A80DD0087F1A8 /* URLSessionFake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionFake.swift; sourceTree = "<group>"; };
+		FB63FF3E255A82090087F1A8 /* recipe.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = recipe.json; sourceTree = "<group>"; };
+		FB63FF43255A83E70087F1A8 /* RecipeServiceTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeServiceTestCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +179,8 @@
 		506A1B0B2521EE4500CA8EDD /* Reciplease_ProjectTests */ = {
 			isa = PBXGroup;
 			children = (
+				FB63FF40255A834B0087F1A8 /* Recipe_Test */,
+				FB63FF39255A80A20087F1A8 /* Session_Response_Fake */,
 				506A1B0C2521EE4500CA8EDD /* Reciplease_ProjectTests.swift */,
 				506A1B0E2521EE4500CA8EDD /* Info.plist */,
 			);
@@ -229,6 +239,24 @@
 				24D1CB20AF9B119359EB00C9 /* Pods-Reciplease_Project.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		FB63FF39255A80A20087F1A8 /* Session_Response_Fake */ = {
+			isa = PBXGroup;
+			children = (
+				FB63FF3A255A80CD0087F1A8 /* FakeResponseData.swift */,
+				FB63FF3C255A80DD0087F1A8 /* URLSessionFake.swift */,
+			);
+			path = Session_Response_Fake;
+			sourceTree = "<group>";
+		};
+		FB63FF40255A834B0087F1A8 /* Recipe_Test */ = {
+			isa = PBXGroup;
+			children = (
+				FB63FF3E255A82090087F1A8 /* recipe.json */,
+				FB63FF43255A83E70087F1A8 /* RecipeServiceTestCase.swift */,
+			);
+			path = Recipe_Test;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -325,6 +353,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB63FF3F255A82090087F1A8 /* recipe.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,6 +428,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				506A1B0D2521EE4500CA8EDD /* Reciplease_ProjectTests.swift in Sources */,
+				FB63FF3D255A80DD0087F1A8 /* URLSessionFake.swift in Sources */,
+				FB63FF3B255A80CD0087F1A8 /* FakeResponseData.swift in Sources */,
+				FB63FF44255A83E70087F1A8 /* RecipeServiceTestCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

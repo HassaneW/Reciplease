@@ -7,9 +7,7 @@
 //
 
 import UIKit
-import CoreData
 import SafariServices
-
 
 class DetailViewController: UIViewController {
     
@@ -21,18 +19,20 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var getDirectonButton: UIButton!
     @IBOutlet weak var recipeInfoView: RecipeInfoView!
     
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var recipe: Recipe?
     
-    // MARK: - init DetailViewController
+    private var isFavorite = false
+    
+    // MARK: - View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        isFavorite = recipeIsInFavorites()
         setupDelegates()
         setupView()
     }
     
-    // MARK: - private function
+    // MARK: - Private methods
     
     private func setupDelegates() {
         tableView.dataSource = self
@@ -49,35 +49,7 @@ class DetailViewController: UIViewController {
         tableView.reloadData()
     }
     
-    private func setupFavoriteButton() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: isFavorite ? "star.fill" : "star"),
-            style: .plain,
-            target: self,
-            action: #selector(favoriteTapped))
-    }
-    
-    var isFavorite = false
-    @objc
-    private func favoriteTapped() {
-        if isFavorite {
-            do {
-                try deleteFromFavorites()
-            } catch let error {
-                print(error.localizedDescription)
-                factorisationErrorMessage(messageError: "Cannot delete recipe")
-            }
-        } else {
-            do {
-                try addToFavorites()
-            } catch let error {
-                print(error.localizedDescription)
-                factorisationErrorMessage(messageError: "Unable to add recipe")
-            }
-        }
-        isFavorite.toggle()
-        setupFavoriteButton()
-    }
+   
     
     // MARK: - setupImage
     
@@ -94,13 +66,21 @@ class DetailViewController: UIViewController {
         }
     }
     
-    @IBAction func getDirection(sender: UIButton) {
-        guard let recipeURLString = recipe?.url,
-            let recipeURL = URL(string: recipeURLString) else {
-                return
-        }
-        let safariVC = SFSafariViewController(url: recipeURL)
-        present(safariVC, animated: true, completion: nil)
+    // MARK: Favorite methods
+    
+    private func setupFavoriteButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: isFavorite ? "star.fill" : "star"),
+            style: .plain,
+            target: self,
+            action: #selector(favoriteTapped))
+    }
+    
+    private func recipeIsInFavorites() -> Bool {
+        guard let recipes = try? DatabaseService.shared.loadRecipes(),
+            let recipe = recipe else { return false }
+        
+        return recipes.contains(recipe)
     }
     
     private func addToFavorites() throws {
@@ -115,19 +95,52 @@ class DetailViewController: UIViewController {
         catch let error { throw error }
     }
     
-    private func factorisationErrorMessage(messageError: String) {
-        let alertVC = UIAlertController(title: "Recette local Database", message: messageError, preferredStyle: .alert)
+    // MARK: Action methods
+    
+    @objc
+    private func favoriteTapped() {
+        if isFavorite {
+            do {
+                try deleteFromFavorites()
+            } catch let error {
+                print(error.localizedDescription)
+                displayAlert(title: "Database error", message: "Cannot delete recipe")
+            }
+        } else {
+            do {
+                try addToFavorites()
+            } catch let error {
+                print(error.localizedDescription)
+                displayAlert(title: "Database error", message: "Unable to add recipe")
+            }
+        }
+        isFavorite.toggle()
+        setupFavoriteButton()
+    }
+    
+    @IBAction func getDirection(sender: UIButton) {
+        guard let recipeURLString = recipe?.url,
+            let recipeURL = URL(string: recipeURLString) else {
+                return
+        }
+        let safariVC = SFSafariViewController(url: recipeURL)
+        present(safariVC, animated: true, completion: nil)
+    }
+    
+    private func displayAlert(title: String, message: String? = nil) {
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        self.present(alertVC, animated: true, completion: nil)
+        present(alertVC, animated: true, completion: nil)
     }
 }
 
-// MARK: - Extension TableViewController
+// MARK: - Table view data source
 
-extension DetailViewController :UITableViewDelegate, UITableViewDataSource {
+extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         recipe?.ingredients.count ?? 0
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Storyboard.ingredientsCellId, for: indexPath)
         cell.textLabel?.text = "- \(recipe?.ingredients[indexPath.row] ?? "")"

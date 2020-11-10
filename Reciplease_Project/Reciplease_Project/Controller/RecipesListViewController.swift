@@ -26,10 +26,11 @@ enum RecipeListMode {
 
 class RecipesListViewController: UIViewController {
     
-    // MARK: - variables
+    // MARK: - Properties
     
     var recipeMode: RecipeListMode
     var ingredients: String = ""
+    
     private let tableView = UITableView()
     private var recipes: [Recipe] = []
     
@@ -43,7 +44,8 @@ class RecipesListViewController: UIViewController {
         self.recipeMode = .database
         super.init(coder: coder)
     }
-    // MARK: - View
+        
+    // MARK: - View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,6 +105,7 @@ class RecipesListViewController: UIViewController {
             tableView.reloadData()
         } catch let error {
             print(error.localizedDescription)
+            //TODO: display error alert
         }
     }
 }
@@ -115,6 +118,28 @@ extension RecipesListViewController: UITableViewDelegate {
         guard let detailVC = storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.detailView) as? DetailViewController else { return }
         detailVC.recipe = recipes[indexPath.row]
         navigationController?.pushViewController(detailVC, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        guard recipeMode == .database else { return nil }
+    
+        let deleteAction = UIContextualAction(
+            style: .destructive,
+            title: "Delete") { (action, view, completionHandler) in
+                let recipeToDelete = self.recipes[indexPath.row]
+                do {
+                    try DatabaseService.shared.delete(recipe: recipeToDelete)
+                    self.tableView.reloadData()
+                    completionHandler(true)
+                } catch let error {
+                    print("Error deleting recipe: \(error.localizedDescription)")
+                    //TODO: Display alert
+                    completionHandler(false)
+                }
+        }
+
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
 }
 

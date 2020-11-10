@@ -11,7 +11,7 @@ import CoreData
 
 // MARK: - Recipe
 
-struct Recipe {
+struct Recipe : Equatable {
     let title: String
     let imageUrl: String
     let url: String
@@ -58,7 +58,7 @@ extension Recipe : CustomStringConvertible {
     }
 }
 
-// MARK: - Convert Recipe Model
+// MARK: - Convert RecipeEntity Model
 
 extension Recipe {
     
@@ -77,7 +77,6 @@ extension Recipe {
         }
     }
 }
-
 
 // MARK: - Reciplease
 

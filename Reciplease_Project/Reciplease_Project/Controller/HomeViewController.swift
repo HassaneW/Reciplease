@@ -48,7 +48,6 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func searchRecipies(){
-        // Tout réunir dans le guard let
         if ingredientData.count == 0 {
             return
         }
