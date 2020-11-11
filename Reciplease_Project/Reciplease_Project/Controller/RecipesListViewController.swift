@@ -30,6 +30,7 @@ class RecipesListViewController: UIViewController {
     
     var recipeMode: RecipeListMode
     var ingredients: String = ""
+     var recipe: Recipe?
     
     private let tableView = UITableView()
     private var recipes: [Recipe] = []
@@ -88,6 +89,37 @@ class RecipesListViewController: UIViewController {
             getRecipesFromDatabase()
         }
     }
+    private func deleteRecipe() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "trash"),
+            style: .plain,
+            target: self,
+            action: #selector(deleteFavori))
+    }
+//
+    @objc
+    private func deleteFavori() {
+        
+         let index = 0
+        recipes.remove(at: index)
+        
+         let indexPath = IndexPath(row: index, section: 0)
+        
+//        guard let recipe = recipe else { return  }
+        
+        tableView.deleteRows(at: [indexPath], with: .left)
+//
+//      do {
+//           try DatabaseService.shared.delete(recipe: recipe)
+//           self.tableView.reloadData()
+//
+//       } catch let error {
+//           print("Error deleting recipe: \(error.localizedDescription)")
+//
+//       }
+    }
+    
+
     private func getRecipesFromApi() {
         NetworkService.shared.getRecipes(ingredients: ingredients) { [weak self] result in
             switch result {
@@ -102,6 +134,7 @@ class RecipesListViewController: UIViewController {
     private func getRecipesFromDatabase() {
         do {
             recipes = try DatabaseService.shared.loadRecipes()
+            deleteRecipe()
             tableView.reloadData()
         } catch let error {
             print(error.localizedDescription)
