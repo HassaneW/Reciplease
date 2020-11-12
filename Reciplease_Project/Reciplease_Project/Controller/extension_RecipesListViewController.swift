@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import UIKit
 
     extension RecipesListViewController {
         func add(_ child: RecipesListViewController) {
@@ -28,6 +28,16 @@ import Foundation
             removeFromParent()
         }
     }
+
+
+extension UIViewController {
+    
+   func displayAlert(title: String, message: String? = nil) {
+          let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+          alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+          present(alertVC, animated: true, completion: nil)
+      }
+}
 
 //Utilisation d'un contrôleur de vue enfant
 

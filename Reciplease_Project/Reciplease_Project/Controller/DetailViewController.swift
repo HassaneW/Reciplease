@@ -127,11 +127,11 @@ class DetailViewController: UIViewController {
         present(safariVC, animated: true, completion: nil)
     }
     
-    private func displayAlert(title: String, message: String? = nil) {
-        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        present(alertVC, animated: true, completion: nil)
-    }
+//    private func displayAlert(title: String, message: String? = nil) {
+//        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+//        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+//        present(alertVC, animated: true, completion: nil)
+//    }
 }
 
 // MARK: - Table view data source

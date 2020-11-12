@@ -105,18 +105,7 @@ class RecipesListViewController: UIViewController {
         
          let indexPath = IndexPath(row: index, section: 0)
         
-//        guard let recipe = recipe else { return  }
-        
         tableView.deleteRows(at: [indexPath], with: .left)
-//
-//      do {
-//           try DatabaseService.shared.delete(recipe: recipe)
-//           self.tableView.reloadData()
-//
-//       } catch let error {
-//           print("Error deleting recipe: \(error.localizedDescription)")
-//
-//       }
     }
     
 
@@ -139,6 +128,7 @@ class RecipesListViewController: UIViewController {
         } catch let error {
             print(error.localizedDescription)
             //TODO: display error alert
+            displayAlert(title: "Database Core Data error", message: "Cannot be download recipe")
         }
     }
 }
@@ -169,6 +159,7 @@ extension RecipesListViewController: UITableViewDelegate {
                     print("Error deleting recipe: \(error.localizedDescription)")
                     //TODO: Display alert
                     completionHandler(false)
+                    self.displayAlert(title: "Database Core Data error", message: "Cannot be download favorite recipe")
                 }
         }
 
