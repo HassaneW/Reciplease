@@ -27,7 +27,7 @@
 		C2D2C4B9B033AB777738BB21 /* Pods_Reciplease_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 277D450AFC6F6020E421150A /* Pods_Reciplease_Project.framework */; };
 		FB0201612550211900039B7A /* RecipesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0201602550211900039B7A /* RecipesListViewController.swift */; };
 		FB02016325502F9200039B7A /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB02016225502F9200039B7A /* HomeTabBarController.swift */; };
-		FB1384DA255BDB900092B2EE /* extension_RecipesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1384D9255BDB900092B2EE /* extension_RecipesListViewController.swift */; };
+		FB1384DA255BDB900092B2EE /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1384D9255BDB900092B2EE /* UIViewControllerExtension.swift */; };
 		FB63FF3B255A80CD0087F1A8 /* FakeResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB63FF3A255A80CD0087F1A8 /* FakeResponseData.swift */; };
 		FB63FF3D255A80DD0087F1A8 /* URLSessionFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB63FF3C255A80DD0087F1A8 /* URLSessionFake.swift */; };
 		FB63FF3F255A82090087F1A8 /* recipe.json in Resources */ = {isa = PBXBuildFile; fileRef = FB63FF3E255A82090087F1A8 /* recipe.json */; };
@@ -71,7 +71,7 @@
 		812A04AFE545C5E22198D427 /* Pods-Reciplease_Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reciplease_Project.debug.xcconfig"; path = "Target Support Files/Pods-Reciplease_Project/Pods-Reciplease_Project.debug.xcconfig"; sourceTree = "<group>"; };
 		FB0201602550211900039B7A /* RecipesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesListViewController.swift; sourceTree = "<group>"; };
 		FB02016225502F9200039B7A /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
-		FB1384D9255BDB900092B2EE /* extension_RecipesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extension_RecipesListViewController.swift; sourceTree = "<group>"; };
+		FB1384D9255BDB900092B2EE /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		FB63FF3A255A80CD0087F1A8 /* FakeResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeResponseData.swift; sourceTree = "<group>"; };
 		FB63FF3C255A80DD0087F1A8 /* URLSessionFake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionFake.swift; sourceTree = "<group>"; };
 		FB63FF3E255A82090087F1A8 /* recipe.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = recipe.json; sourceTree = "<group>"; };
@@ -112,7 +112,6 @@
 				FB02016225502F9200039B7A /* HomeTabBarController.swift */,
 				506602A025233FA0007759EC /* HomeViewController.swift */,
 				FB0201602550211900039B7A /* RecipesListViewController.swift */,
-				FB1384D9255BDB900092B2EE /* extension_RecipesListViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -137,6 +136,7 @@
 		5044D6F325233BB700384B62 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				FB1384D9255BDB900092B2EE /* UIViewControllerExtension.swift */,
 				5044D6F425233BC700384B62 /* StringExtension.swift */,
 			);
 			path = Extension;
@@ -414,7 +414,7 @@
 				5044D6F225233B9900384B62 /* Constants.swift in Sources */,
 				506A1B1E2522043A00CA8EDD /* Service.swift in Sources */,
 				506A1B19252201CF00CA8EDD /* Reciplease.swift in Sources */,
-				FB1384DA255BDB900092B2EE /* extension_RecipesListViewController.swift in Sources */,
+				FB1384DA255BDB900092B2EE /* UIViewControllerExtension.swift in Sources */,
 				5044D6ED25233A6300384B62 /* RecipeCell.swift in Sources */,
 				5044D6F525233BC700384B62 /* StringExtension.swift in Sources */,
 				506A1AF32521EE4000CA8EDD /* AppDelegate.swift in Sources */,

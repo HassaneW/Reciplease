@@ -14,6 +14,8 @@ class HomeTabBarController: UITabBarController {
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
+        // Changer de vue et cacher le tabBar
         hidesBottomBarWhenPushed = true
     }
     

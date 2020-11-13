@@ -12,6 +12,7 @@ import Alamofire
 
 class NetworkService {
     
+    // MARK: - Variables
     static let shared = NetworkService()
     private let session: Session
     
@@ -21,6 +22,7 @@ class NetworkService {
     
     let baseURL = ConfigNetworkingService.edelman.baseUrl
     
+    // MARK: - Session
     func getRecipes(ingredients: String, offset: Int = 0, callback: @escaping (Result<Reciplease, AFError>) -> Void) {
         let parameters: [String: Any] = [
             "app_id": ConfigNetworkingService.edelman.app_id,

@@ -9,35 +9,68 @@
 import Foundation
 import UIKit
 
-    extension RecipesListViewController {
-        func add(_ child: RecipesListViewController) {
-            addChild(child)
-            view.addSubview(child.view)
-            child.didMove(toParent: self)
-        }
-
-        func remove() {
-            // Just to be safe, we check that this view controller
-            // is actually added to a parent before removing it.
-            guard parent != nil else {
-                return
-            }
-
-            willMove(toParent: nil)
-            view.removeFromSuperview()
-            removeFromParent()
-        }
+extension UIViewController {
+    
+    func displayAlert(title: String, message: String? = nil) {
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        present(alertVC, animated: true, completion: nil)
     }
-
+}
 
 extension UIViewController {
     
-   func displayAlert(title: String, message: String? = nil) {
-          let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
-          alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-          present(alertVC, animated: true, completion: nil)
-      }
+    func add(_ child: UIViewController) {
+        addChild(child)
+        view.addSubview(child.view)
+        child.didMove(toParent: self)
+    }
+    
+    func remove() {
+        // Just to be safe, we check that this view controller
+        // is actually added to a parent before removing it.
+        guard parent != nil else {
+            return
+        }
+        willMove(toParent: nil)
+        view.removeFromSuperview()
+        removeFromParent()
+    }
 }
+
+
+class LoadingViewController: UIViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let spinner = UIActivityIndicatorView(style: .gray)
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        spinner.startAnimating()
+        view.addSubview(spinner)
+        
+        // Center our spinner both horizontally & vertically
+        NSLayoutConstraint.activate([
+            spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+    }
+}
+
+class ContentViewController: UIViewController {
+    //    private let loader = ContentLoader()
+    
+    func loadContent() {
+        let loadingVC = LoadingViewController()
+        //        add(loadingVC)
+        
+        //        loader.load { [weak self] content in
+        //            loadingVC.remove()
+        //            self?.render(content)
+        //        }
+    }
+}
+
+
 
 //Utilisation d'un contrôleur de vue enfant
 
@@ -65,13 +98,13 @@ extension UIViewController {
  
  let parent = UIViewController()
  let child = UIViewController()
-
+ 
  // First, add the view of the child to the view of the parent
  parent.view.addSubview(child.view)
-
+ 
  // Then, add the child to the parent
  parent.addChild(child)
-
+ 
  // Finally, notify the child that it was moved to a parent
  child.didMove(toParent: parent)
  
@@ -79,33 +112,33 @@ extension UIViewController {
  
  // First, notify the child that it’s about to be removed
  child.willMove(toParent: nil)
-
+ 
  // Then, remove the child from its parent
  child.removeFromParent()
-
+ 
  // Finally, remove the child’s view from the parent’s
  child.view.removeFromSuperview()
  
  3) Une solution à ce problème consiste à ajouter une extension UIViewControllerqui regroupe toutes les étapes nécessaires pour ajouter ou supprimer un contrôleur de vue enfant en deux méthodes faciles à utiliser, comme celle-ci:
  
  extension UIViewController {
-     func add(_ child: UIViewController) {
-         addChild(child)
-         view.addSubview(child.view)
-         child.didMove(toParent: self)
-     }
-
-     func remove() {
-         // Just to be safe, we check that this view controller
-         // is actually added to a parent before removing it.
-         guard parent != nil else {
-             return
-         }
-
-         willMove(toParent: nil)
-         view.removeFromSuperview()
-         removeFromParent()
-     }
+ func add(_ child: UIViewController) {
+ addChild(child)
+ view.addSubview(child.view)
+ child.didMove(toParent: self)
+ }
+ 
+ func remove() {
+ // Just to be safe, we check that this view controller
+ // is actually added to a parent before removing it.
+ guard parent != nil else {
+ return
+ }
+ 
+ willMove(toParent: nil)
+ view.removeFromSuperview()
+ removeFromParent()
+ }
  }
  
  
@@ -115,44 +148,44 @@ extension UIViewController {
 /*
  
  Les contrôleurs de vue enfants sont particulièrement utiles pour les fonctionnalités de l'interface utilisateur que nous souhaitons réutiliser dans un projet. Par exemple, nous pourrions vouloir afficher une vue de chargement lorsque nous chargeons le contenu de chaque écran - et cela peut être facilement implémenté à l'aide d'un contrôleur de vue enfant, qui peut ensuite être simplement ajouté si nécessaire.
-
+ 
  Pour ce faire, créons d'abord un LoadingViewControllerqui affiche une flèche de chargement au centre de sa vue, comme ceci:
  
  class LoadingViewController: UIViewController {
-     override func viewDidLoad() {
-         super.viewDidLoad()
-
-         let spinner = UIActivityIndicatorView(style: .gray)
-         spinner.translatesAutoresizingMaskIntoConstraints = false
-         spinner.startAnimating()
-         view.addSubview(spinner)
-
-         // Center our spinner both horizontally & vertically
-         NSLayoutConstraint.activate([
-             spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-             spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-         ])
-     }
+ override func viewDidLoad() {
+ super.viewDidLoad()
+ 
+ let spinner = UIActivityIndicatorView(style: .gray)
+ spinner.translatesAutoresizingMaskIntoConstraints = false
+ spinner.startAnimating()
+ view.addSubview(spinner)
+ 
+ // Center our spinner both horizontally & vertically
+ NSLayoutConstraint.activate([
+ spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+ spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+ ])
+ }
  }
  
  Ensuite, lorsque nous - dans l'un de nos contrôleurs de vue de contenu - commençons à charger du contenu, nous pouvons maintenant simplement ajouter notre nouveau en LoadingViewControllertant qu'enfant pour afficher un spinner de chargement, puis le supprimer une fois que nous avons terminé:
  
  class ContentViewController: UIViewController {
-     private let loader = ContentLoader()
-
-     func loadContent() {
-         let loadingVC = LoadingViewController()
-         add(loadingVC)
-
-         loader.load { [weak self] content in
-             loadingVC.remove()
-             self?.render(content)
-         }
-     }
+ private let loader = ContentLoader()
+ 
+ func loadContent() {
+ let loadingVC = LoadingViewController()
+ add(loadingVC)
+ 
+ loader.load { [weak self] content in
+ loadingVC.remove()
+ self?.render(content)
+ }
+ }
  }
  
  Plutôt cool! 👍 Mais la question est la suivante: pourquoi se donner la peine d'implémenter un contrôleur de vue pour quelque chose comme un spinner de chargement, au lieu d'utiliser simplement un simple UIView? Voici quelques raisons courantes:
-
+ 
  Un contrôleur de vue a accès à des événements tels que viewDidLoadet viewWillAppear, même lorsqu'il est utilisé en tant qu'enfant, ce qui peut être vraiment utile pour de nombreux types de code d'interface utilisateur.
  Un contrôleur de vue est plus autonome et peut à la fois inclure la logique requise pour piloter son interface utilisateur, ainsi que l'interface utilisateur elle-même.
  Lorsqu'il est ajouté en tant qu'enfant, un contrôleur de vue remplit automatiquement l'écran, réduisant ainsi le besoin de code de disposition supplémentaire pour les interfaces utilisateur plein écran.

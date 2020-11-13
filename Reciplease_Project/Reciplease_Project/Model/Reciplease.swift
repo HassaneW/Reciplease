@@ -20,8 +20,6 @@ struct Recipe : Equatable {
     let totalTime: Float
 }
 
- // MARK: - extension Recipe
-
 extension Recipe: Decodable {
     enum CodingKeys: String, CodingKey {
         case recipe
@@ -38,8 +36,6 @@ extension Recipe: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let recipe = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .recipe)
-        
-         // MARK: - decode Recipe
         
         title = try recipe.decode(String.self, forKey: .title)
         imageUrl = try recipe.decode(String.self, forKey: .imageUrl)
@@ -58,7 +54,7 @@ extension Recipe : CustomStringConvertible {
     }
 }
 
-// MARK: - Convert RecipeEntity Model
+// MARK: - Decode RecipeEntity Model
 
 extension Recipe {
     

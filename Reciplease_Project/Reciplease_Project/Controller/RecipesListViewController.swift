@@ -30,8 +30,11 @@ class RecipesListViewController: UIViewController {
     
     var recipeMode: RecipeListMode
     var ingredients: String = ""
-     var recipe: Recipe?
+    var recipe: Recipe?
     
+    private let loadingView = UIView()
+    private let emptyView = UIView()
+    private let errorView = UIView()
     private let tableView = UITableView()
     private var recipes: [Recipe] = []
     
@@ -59,17 +62,26 @@ class RecipesListViewController: UIViewController {
             getRecipesFromDatabase()
         }
     }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        tableView.setEditing(editing, animated: animated)
+    }
+    
     // MARK: - Private methods
     
     private func setupView() {
         title = recipeMode.title
-        
+        navigationItem.rightBarButtonItem = (recipeMode == .database) ? editButtonItem : nil
+
         tableView.delegate = self
         tableView.dataSource = self
         tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.register(RecipeCell.self, forCellReuseIdentifier: Constants.Storyboard.recipeCellId)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
+        
+        // Configure views and add constraints loadingViewm emptyView et errorView
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -89,29 +101,15 @@ class RecipesListViewController: UIViewController {
             getRecipesFromDatabase()
         }
     }
-    private func deleteRecipe() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "trash"),
-            style: .plain,
-            target: self,
-            action: #selector(deleteFavori))
-    }
-//
-    @objc
-    private func deleteFavori() {
-        
-         let index = 0
-        recipes.remove(at: index)
-        
-         let indexPath = IndexPath(row: index, section: 0)
-        
-        tableView.deleteRows(at: [indexPath], with: .left)
-    }
     
-
     private func getRecipesFromApi() {
+        //TODO: ajouter un loading LoadingView
         NetworkService.shared.getRecipes(ingredients: ingredients) { [weak self] result in
+            //TODO: arreter le loading
             switch result {
+            case .success(let reciplease) where reciplease.recipes.isEmpty:
+                //TODO: afficher empty view (image et text) (pas de resultats)
+                print("no recipes found")
             case .success(let reciplease):
                 self?.recipes = reciplease.recipes
                 self?.tableView.reloadData()
@@ -120,11 +118,39 @@ class RecipesListViewController: UIViewController {
             }
         }
     }
+    /*
+     Loading View (uiview subclass)
+     
+     Sprinner (UIactivityIndicator)
+     
+     Loading    (UILabel))
+     
+     
+     */
+    
+    /*
+    State View (a googler)
+    
+    --------
+    |      |
+    |      |    (UIImageView)
+    |      |
+    --------
+    
+    Title label (UILabel)
+    
+    
+    */
+    
     private func getRecipesFromDatabase() {
         do {
             recipes = try DatabaseService.shared.loadRecipes()
-            deleteRecipe()
-            tableView.reloadData()
+            if recipes.isEmpty {
+                //TODO: afficher empty view favorites (pas de favoris)
+                print("no favorites recipes found")
+            } else {
+                tableView.reloadData()
+            }
         } catch let error {
             print(error.localizedDescription)
             //TODO: display error alert
@@ -154,6 +180,7 @@ extension RecipesListViewController: UITableViewDelegate {
                 do {
                     try DatabaseService.shared.delete(recipe: recipeToDelete)
                     self.tableView.reloadData()
+                    //TODO: refresh not working on Edit nav bar
                     completionHandler(true)
                 } catch let error {
                     print("Error deleting recipe: \(error.localizedDescription)")
@@ -179,7 +206,6 @@ extension RecipesListViewController: UITableViewDataSource {
         cell.recipe = recipes[indexPath.row]
         return cell
     }
-    
 }
 
 
