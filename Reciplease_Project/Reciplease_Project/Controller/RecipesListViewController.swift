@@ -29,7 +29,7 @@ class EmptyView: UIView  {
     private let imageView = UIImageView()
     private let titleLabel = UILabel()
     private let subtitleLabel = UILabel()
-        
+   
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -65,17 +65,73 @@ class EmptyView: UIView  {
         let contentStackView = UIStackView(arrangedSubviews: [imageView, titleLabel, subtitleLabel])
         contentStackView.axis = .vertical
         contentStackView.spacing = UIStackView.spacingUseSystem
+        contentStackView.alignment = .top
+        contentStackView.distribution = .fill
+        contentStackView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(contentStackView)
+        
+        NSLayoutConstraint.activate([
+                        contentStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
+                        contentStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
+                        contentStackView.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1.0),
+                        trailingAnchor.constraint(equalToSystemSpacingAfter: contentStackView.trailingAnchor, multiplier: 1.0),
+        ])
+    }
+}
+
+class ErrorView: UIView {
+    
+    private let imageView = UIImageView()
+    private let titleLabel = UILabel()
+    private let subtitleLabel = UILabel()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupView()
+    }
+    
+    private func setupView() {
+        
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = #imageLiteral(resourceName: "kitchenOne")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        titleLabel.numberOfLines = 0
+        titleLabel.textAlignment = .center
+        titleLabel.textColor = UIColor.label
+        titleLabel.text = "Sorry no recipes were found"
+        titleLabel.adjustsFontForContentSizeCategory = true
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        
+        subtitleLabel.numberOfLines = 0
+        subtitleLabel.textAlignment = .center
+        subtitleLabel.textColor = UIColor.secondaryLabel
+        subtitleLabel.adjustsFontForContentSizeCategory = true
+        subtitleLabel.text = "Please try with different ingredients"
+        subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        subtitleLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        
+        let contentStackView = UIStackView(arrangedSubviews: [imageView, titleLabel, subtitleLabel])
+        contentStackView.axis = .vertical
+        contentStackView.spacing = UIStackView.spacingUseSystem
         contentStackView.alignment = .center
         contentStackView.distribution = .fill
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(contentStackView)
-
+        
         NSLayoutConstraint.activate([
             //contentStackView.topAnchor.constraint(equalToSystemSpacingBelow: topAnchor, multiplier: 1.0),
             //contentStackView.topAnchor.constraint(equalTo: topAnchor, constant: -20),
             //topAnchor.constraint(equalTo: contentStackView.topAnchor),
             //contentStackView.topAnchor.constraint(equalTo: topAnchor),
             //imageView.heightAnchor.constraint(equalToConstant: 100),
+              contentStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             contentStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             contentStackView.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1.0),
             trailingAnchor.constraint(equalToSystemSpacingAfter: contentStackView.trailingAnchor, multiplier: 1.0),
@@ -93,10 +149,10 @@ class RecipesListViewController: UIViewController {
     
     private let loadingIndicator = UIActivityIndicatorView(style: .large)
     private let emptyView = EmptyView()
-    private let errorView = UIView() // TODO
+    private let errorView = ErrorView() // TODO
     private let tableView = UITableView()
     private var recipes: [Recipe] = []
- 
+    
     // MARK: - Init
     
     init(recipeMode: RecipeListMode) {
@@ -135,7 +191,7 @@ class RecipesListViewController: UIViewController {
         navigationItem.rightBarButtonItem = (recipeMode == .database) ? editButtonItem : nil
         
         view.backgroundColor = UIColor(named: "brown")
-
+        
         tableView.isHidden = true
         tableView.delegate = self
         tableView.dataSource = self
@@ -152,14 +208,9 @@ class RecipesListViewController: UIViewController {
         emptyView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(emptyView)
         
-        //Configure errorView
-        
-//        errorView.isHidden = true
-//        errorView = UIView(frame: self.view.bounds)
-//        errorView.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
-//        errorView.translatesAutoresizingMaskIntoConstraints = false
-//        errorView.addSubview(labelCuistotText)
-//        view.addSubview(errorView)
+        errorView.isHidden = true
+        errorView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(errorView)
         
         NSLayoutConstraint.activate([
             loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -168,11 +219,8 @@ class RecipesListViewController: UIViewController {
             emptyView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             emptyView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             
-            // emptyView
-//            emptyView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-//            emptyView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            emptyView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            emptyView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            errorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            errorView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -200,28 +248,32 @@ class RecipesListViewController: UIViewController {
             case .success(let reciplease) where reciplease.recipes.isEmpty:
                 print("no recipes found")
                 self?.emptyView.isHidden = false
+                
             case .success(let reciplease):
                 self?.tableView.isHidden = false
                 self?.recipes = reciplease.recipes
                 self?.tableView.reloadData()
             case .failure(let error):
                 //TODO
+                self?.errorView.isHidden = false
                 print("Error fetching recipes \(error.localizedDescription)")
             }
         }
     }
-  
+    
     private func getRecipesFromDatabase() {
         do {
             recipes = try DatabaseService.shared.loadRecipes()
             if recipes.isEmpty {
                 print("no favorites recipes found")
                 emptyView.isHidden = false
+                
             } else {
                 tableView.isHidden = false
                 tableView.reloadData()
             }
         } catch let error {
+            errorView.isHidden = false
             print(error.localizedDescription)
             displayAlert(title: "Database Core Data error", message: "Cannot be download recipe")
         }
@@ -276,97 +328,4 @@ extension RecipesListViewController: UITableViewDataSource {
     }
 }
 
-
-
-
-/*
- 
- Error View and EmptyView
- //
- //  ViewController.swift
- //  ViewProgrammatically
- //
- //  Created by Wandianga hassane on 16/11/2020.
- //  Copyright © 2020 Wandianga hassane. All rights reserved.
- //
- 
- import UIKit
- 
- class ViewController: UIViewController {
- 
- private let myView : UIView = {
- let myView = UIView()
- myView.translatesAutoresizingMaskIntoConstraints = false
- myView.backgroundColor = .link
- return myView
- }()
- 
- let imageCuistotView : UIImageView = {
- var imageCuistotView = UIImageView()
- imageCuistotView.translatesAutoresizingMaskIntoConstraints = false
- imageCuistotView.contentMode = .scaleAspectFit
- imageCuistotView = UIImageView(image: UIImage(named: "imageCuistot"))
- 
- return imageCuistotView
- }()
- 
- 
- let labelCuistotText : UILabel = {
- var labelCuistotText = UILabel()
- 
- labelCuistotText.translatesAutoresizingMaskIntoConstraints = false
- //        imageCuistotView.contentMode = .scaleAspectFit
- //        imageCuistotView = UIImageView(image: UIImage(named: "imageCuistot"))
- labelCuistotText.backgroundColor = UIColor.black
- labelCuistotText.adjustsFontSizeToFitWidth = true
- labelCuistotText.contentMode = .center
- labelCuistotText.numberOfLines = 0
- labelCuistotText.text = "Hello Les Cuistots"
- labelCuistotText.textColor = UIColor.red
- labelCuistotText.font.withSize(15)
- 
- return labelCuistotText
- }()
- 
- override func viewDidLoad() {
- super.viewDidLoad()
- view.addSubview(myView)
- //        myView.addSubview(imageCuistotView)
- myView.addSubview(labelCuistotText)
- addConstraints()
- 
- }
- 
- func addConstraints() {
- 
- var constraints = [NSLayoutConstraint]()
- // Add myView
- constraints.append(myView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor))
- constraints.append(myView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor))
- constraints.append(myView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor))
- constraints.append(myView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor))
- 
- // Add imageCuistotView
- 
- //        constraints.append(imageCuistotView.leadingAnchor.constraint(equalTo: myView.leadingAnchor))
- //        constraints.append(imageCuistotView.trailingAnchor.constraint(equalTo: myView.trailingAnchor))
- //         constraints.append(imageCuistotView.topAnchor.constraint(equalTo: myView.topAnchor))
- //        constraints.append(imageCuistotView.bottomAnchor.constraint(equalTo: myView.bottomAnchor))
- 
- // Add imageCuistotView
- 
- constraints.append(labelCuistotText.leadingAnchor.constraint(equalTo: myView.leadingAnchor))
- constraints.append(labelCuistotText.trailingAnchor.constraint(equalTo: myView.trailingAnchor))
- constraints.append(labelCuistotText.topAnchor.constraint(equalTo: myView.topAnchor))
- constraints.append(labelCuistotText.bottomAnchor.constraint(equalTo: myView.bottomAnchor))
- 
- // Activate
- NSLayoutConstraint.activate(constraints)
- 
- 
- }
- }
- 
- 
- */
 
