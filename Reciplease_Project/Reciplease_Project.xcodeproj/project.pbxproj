@@ -28,6 +28,7 @@
 		FB0201612550211900039B7A /* RecipesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0201602550211900039B7A /* RecipesListViewController.swift */; };
 		FB02016325502F9200039B7A /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB02016225502F9200039B7A /* HomeTabBarController.swift */; };
 		FB1384DA255BDB900092B2EE /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1384D9255BDB900092B2EE /* UIViewControllerExtension.swift */; };
+		FB3F0AA42567F54A0096CFEC /* DatabaseServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3F0AA32567F54A0096CFEC /* DatabaseServiceTests.swift */; };
 		FB63FF3B255A80CD0087F1A8 /* FakeResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB63FF3A255A80CD0087F1A8 /* FakeResponseData.swift */; };
 		FB63FF3D255A80DD0087F1A8 /* URLSessionFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB63FF3C255A80DD0087F1A8 /* URLSessionFake.swift */; };
 		FB63FF3F255A82090087F1A8 /* recipe.json in Resources */ = {isa = PBXBuildFile; fileRef = FB63FF3E255A82090087F1A8 /* recipe.json */; };
@@ -72,6 +73,7 @@
 		FB0201602550211900039B7A /* RecipesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesListViewController.swift; sourceTree = "<group>"; };
 		FB02016225502F9200039B7A /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
 		FB1384D9255BDB900092B2EE /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		FB3F0AA32567F54A0096CFEC /* DatabaseServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseServiceTests.swift; sourceTree = "<group>"; };
 		FB63FF3A255A80CD0087F1A8 /* FakeResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeResponseData.swift; sourceTree = "<group>"; };
 		FB63FF3C255A80DD0087F1A8 /* URLSessionFake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionFake.swift; sourceTree = "<group>"; };
 		FB63FF3E255A82090087F1A8 /* recipe.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = recipe.json; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 				FB63FF39255A80A20087F1A8 /* Session_Response_Fake */,
 				506A1B0C2521EE4500CA8EDD /* Reciplease_ProjectTests.swift */,
 				506A1B0E2521EE4500CA8EDD /* Info.plist */,
+				FB3F0AA32567F54A0096CFEC /* DatabaseServiceTests.swift */,
 			);
 			path = Reciplease_ProjectTests;
 			sourceTree = "<group>";
@@ -431,6 +434,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB3F0AA42567F54A0096CFEC /* DatabaseServiceTests.swift in Sources */,
 				506A1B0D2521EE4500CA8EDD /* Reciplease_ProjectTests.swift in Sources */,
 				FB63FF3D255A80DD0087F1A8 /* URLSessionFake.swift in Sources */,
 				FB63FF3B255A80CD0087F1A8 /* FakeResponseData.swift in Sources */,

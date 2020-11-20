@@ -33,11 +33,17 @@ final class RecipeInfoView: UIView {
         }
     }
     
+    
+    private enum Constant {
+        static let padding: CGFloat = 5
+        static let cornerRadius: CGFloat = 8
+    }
+    
     private let portionLabel = UILabel()
     private let durationLabel = UILabel()
     private let clockImageView = UIImageView(image: UIImage(systemName: "stopwatch.fill"))
     
-    var dateComponentsFormatter: DateComponentsFormatter {
+    private var dateComponentsFormatter: DateComponentsFormatter {
         let dtc = DateComponentsFormatter()
         dtc.unitsStyle = .brief
         dtc.allowedUnits = [.hour, .minute]
@@ -56,43 +62,47 @@ final class RecipeInfoView: UIView {
     
     // MARK: - SetupView RecipeInfoView
     private func setupView() {
-        backgroundColor = UIColor.brown
+        backgroundColor = UIColor(named: "brown")
+        
+        layer.cornerRadius = Constant.cornerRadius
+        layer.borderColor = UIColor.white.cgColor
+        layer.borderWidth = 1
         
         clockImageView.contentMode = .scaleAspectFit
-        clockImageView.tintColor = UIColor.label
+        clockImageView.tintColor = UIColor.white
         clockImageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         clockImageView.translatesAutoresizingMaskIntoConstraints = false
         
-        durationLabel.textColor = UIColor.label
+        durationLabel.textColor = .white
         durationLabel.translatesAutoresizingMaskIntoConstraints = false
         
         let durationStackView = UIStackView(arrangedSubviews: [durationLabel, clockImageView])
         durationStackView.axis = .horizontal
         durationStackView.alignment = .fill
         durationStackView.distribution = .fill
-        durationStackView.spacing = UIStackView.spacingUseDefault
+        durationStackView.spacing = Constant.padding
         durationStackView.translatesAutoresizingMaskIntoConstraints = false
         
         let portionImageView = UIImageView(image: UIImage(systemName: "chart.pie.fill"))
         portionImageView.contentMode = .scaleAspectFit
-        portionImageView.tintColor = UIColor.label
+        portionImageView.tintColor = UIColor.white
         portionImageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
-        portionLabel.textColor = UIColor.label
+        portionLabel.textColor = UIColor.white
         portionLabel.translatesAutoresizingMaskIntoConstraints = false
         
         let portionStackView = UIStackView(arrangedSubviews: [portionLabel, portionImageView])
         portionStackView.axis = .horizontal
         portionStackView.alignment = .fill
         portionStackView.distribution = .fill
-        portionStackView.spacing = UIStackView.spacingUseDefault
+        portionStackView.spacing = Constant.padding
         portionStackView.translatesAutoresizingMaskIntoConstraints = false
         
         let contentStackView = UIStackView(arrangedSubviews: [durationStackView, portionStackView])
         contentStackView.axis = .vertical
         contentStackView.alignment = .fill
         contentStackView.distribution = .fill
-        contentStackView.spacing = UIStackView.spacingUseDefault
+        contentStackView.spacing = Constant.padding
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(contentStackView)
         

@@ -17,6 +17,9 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var titleLabel : UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var getDirectonButton: UIButton!
+   
+    //TODO: remove storyborad
+    //
     @IBOutlet weak var recipeInfoView: RecipeInfoView!
     
     var recipe: Recipe?
@@ -42,14 +45,19 @@ class DetailViewController: UIViewController {
     private func setupView() {
         getDirectonButton.layer.cornerRadius = 10
         titleLabel.text = recipe?.title
-        recipeInfoView.duration = recipe?.totalTime
-        recipeInfoView.portions = recipe?.portions
+        setupRecipeInfoView()
         setupFavoriteButton()
         setupImage()
         tableView.reloadData()
     }
-    
-   
+
+    private func setupRecipeInfoView() {
+        
+        recipeInfoView.duration = recipe?.totalTime
+        recipeInfoView.portions = recipe?.portions
+        
+        //TODO layout trailing + top
+    }
     
     // MARK: - setupImage
     

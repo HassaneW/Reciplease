@@ -198,12 +198,9 @@
                                     <constraint firstAttribute="width" secondItem="eDT-hu-ege" secondAttribute="height" multiplier="15:8" id="z6N-Bp-3j0"/>
                                 </constraints>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NUs-0i-sNY" customClass="RecipeInfoView" customModule="Reciplease_Project" customModuleProvider="target">
-                                <rect key="frame" x="260" y="44" width="154" height="60"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NUs-0i-sNY" customClass="RecipeInfoView" customModule="Reciplease_Project" customModuleProvider="target">
+                                <rect key="frame" x="20" y="44" width="382" height="60"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="bER-TS-kZy"/>
-                                </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wHB-cK-Pbu">
                                 <rect key="frame" x="0.0" y="265" width="414" height="36"/>
@@ -256,12 +253,11 @@
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="NUs-0i-sNY" firstAttribute="trailing" secondItem="DMA-gu-Llc" secondAttribute="trailing" id="1mD-hW-qcO"/>
-                            <constraint firstItem="NUs-0i-sNY" firstAttribute="top" secondItem="g6G-S0-fvT" secondAttribute="top" id="3Cn-rq-nnh"/>
+                            <constraint firstItem="NUs-0i-sNY" firstAttribute="trailing" secondItem="DMA-gu-Llc" secondAttribute="trailing" constant="-12" id="1mD-hW-qcO"/>
+                            <constraint firstItem="NUs-0i-sNY" firstAttribute="top" secondItem="g6G-S0-fvT" secondAttribute="top" constant="12" id="3Cn-rq-nnh"/>
                             <constraint firstItem="g6G-S0-fvT" firstAttribute="trailing" secondItem="n24-U7-eKC" secondAttribute="trailing" constant="20" id="8CS-jb-dY7"/>
                             <constraint firstItem="wHB-cK-Pbu" firstAttribute="top" secondItem="eDT-hu-ege" secondAttribute="bottom" id="A8r-yE-u5S"/>
                             <constraint firstItem="Qne-86-Nfr" firstAttribute="leading" secondItem="g6G-S0-fvT" secondAttribute="leading" constant="20" id="LyK-SY-6h0"/>
-                            <constraint firstItem="NUs-0i-sNY" firstAttribute="leading" secondItem="DMA-gu-Llc" secondAttribute="leading" constant="260" id="TUI-Is-agA"/>
                             <constraint firstItem="g6G-S0-fvT" firstAttribute="trailing" secondItem="eDT-hu-ege" secondAttribute="trailing" id="Uak-kj-ujj"/>
                             <constraint firstItem="g6G-S0-fvT" firstAttribute="bottom" secondItem="n24-U7-eKC" secondAttribute="bottom" constant="20" id="Wmy-vV-tmE"/>
                             <constraint firstItem="n24-U7-eKC" firstAttribute="top" secondItem="Qne-86-Nfr" secondAttribute="bottom" constant="8" symbolic="YES" id="afC-kz-oAj"/>

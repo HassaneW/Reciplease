@@ -24,66 +24,25 @@ enum RecipeListMode {
     }
 }
 
+//TODO: ajuster les couleurs : nav bar et tab bar et le projet
+//TODO: nav bar title + tab
+//TODO: move empty view and error view dans leur propre fichier
+// Utilities> EmptyView.swift ErrorView.swift
+//TODO: Trouver 2 images error / empty sans background
+// StateView
 class EmptyView: UIView  {
     
     private let imageView = UIImageView()
     private let titleLabel = UILabel()
     private let subtitleLabel = UILabel()
    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupView()
+    init(image: UIImage?, title: String?, subtitle: String?) {
+        super.init(frame: .zero)
+        //TODO
+        
+        
+       // subtitleLabel.text = subtitle
     }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setupView()
-    }
-    
-    private func setupView() {
-        
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = #imageLiteral(resourceName: "imageCuistot")
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        titleLabel.numberOfLines = 0
-        titleLabel.textAlignment = .center
-        titleLabel.textColor = UIColor.label
-        titleLabel.text = "Sorry no recipes were found"
-        titleLabel.adjustsFontForContentSizeCategory = true
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        
-        subtitleLabel.numberOfLines = 0
-        subtitleLabel.textAlignment = .center
-        subtitleLabel.textColor = UIColor.secondaryLabel
-        subtitleLabel.adjustsFontForContentSizeCategory = true
-        subtitleLabel.text = "Please try with different ingredients"
-        subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        subtitleLabel.font = UIFont.preferredFont(forTextStyle: .body)
-        
-        let contentStackView = UIStackView(arrangedSubviews: [imageView, titleLabel, subtitleLabel])
-        contentStackView.axis = .vertical
-        contentStackView.spacing = UIStackView.spacingUseSystem
-        contentStackView.alignment = .top
-        contentStackView.distribution = .fill
-        contentStackView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(contentStackView)
-        
-        NSLayoutConstraint.activate([
-                        contentStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
-                        contentStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
-                        contentStackView.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1.0),
-                        trailingAnchor.constraint(equalToSystemSpacingAfter: contentStackView.trailingAnchor, multiplier: 1.0),
-        ])
-    }
-}
-
-class ErrorView: UIView {
-    
-    private let imageView = UIImageView()
-    private let titleLabel = UILabel()
-    private let subtitleLabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -126,12 +85,62 @@ class ErrorView: UIView {
         addSubview(contentStackView)
         
         NSLayoutConstraint.activate([
-            //contentStackView.topAnchor.constraint(equalToSystemSpacingBelow: topAnchor, multiplier: 1.0),
-            //contentStackView.topAnchor.constraint(equalTo: topAnchor, constant: -20),
-            //topAnchor.constraint(equalTo: contentStackView.topAnchor),
-            //contentStackView.topAnchor.constraint(equalTo: topAnchor),
-            //imageView.heightAnchor.constraint(equalToConstant: 100),
-              contentStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            contentStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            contentStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            contentStackView.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1.0),
+            trailingAnchor.constraint(equalToSystemSpacingAfter: contentStackView.trailingAnchor, multiplier: 1.0),
+        ])
+    }
+}
+
+class ErrorView: UIView {
+    
+    private let imageView = UIImageView()
+    private let titleLabel = UILabel()
+    private let subtitleLabel = UILabel()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupView()
+    }
+    
+    private func setupView() {
+        
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = #imageLiteral(resourceName: "kitchenOne")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        titleLabel.numberOfLines = 0
+        titleLabel.textAlignment = .center
+        titleLabel.textColor = UIColor.label
+        titleLabel.text = "Something went wrong"
+        titleLabel.adjustsFontForContentSizeCategory = true
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        
+        subtitleLabel.numberOfLines = 0
+        subtitleLabel.textAlignment = .center
+        subtitleLabel.textColor = UIColor.secondaryLabel
+        subtitleLabel.adjustsFontForContentSizeCategory = true
+        subtitleLabel.text = "We're sorry, please try again"
+        subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        subtitleLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        
+        let contentStackView = UIStackView(arrangedSubviews: [imageView, titleLabel, subtitleLabel])
+        contentStackView.axis = .vertical
+        contentStackView.spacing = UIStackView.spacingUseSystem
+        contentStackView.alignment = .center
+        contentStackView.distribution = .fill
+        contentStackView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(contentStackView)
+        
+        NSLayoutConstraint.activate([
+            contentStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             contentStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             contentStackView.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1.0),
             trailingAnchor.constraint(equalToSystemSpacingAfter: contentStackView.trailingAnchor, multiplier: 1.0),
@@ -147,9 +156,11 @@ class RecipesListViewController: UIViewController {
     var ingredients: String = ""
     var recipe: Recipe?
     
+    // emptyViewSearch
+    // emptyViewFavorites
     private let loadingIndicator = UIActivityIndicatorView(style: .large)
     private let emptyView = EmptyView()
-    private let errorView = ErrorView() // TODO
+    private let errorView = ErrorView()
     private let tableView = UITableView()
     private var recipes: [Recipe] = []
     
@@ -254,9 +265,8 @@ class RecipesListViewController: UIViewController {
                 self?.recipes = reciplease.recipes
                 self?.tableView.reloadData()
             case .failure(let error):
-                //TODO
                 self?.errorView.isHidden = false
-                print("Error fetching recipes \(error.localizedDescription)")
+                print("Error fetching recipes from api: \(error.localizedDescription)")
             }
         }
     }
@@ -273,9 +283,8 @@ class RecipesListViewController: UIViewController {
                 tableView.reloadData()
             }
         } catch let error {
-            errorView.isHidden = false
-            print(error.localizedDescription)
-            displayAlert(title: "Database Core Data error", message: "Cannot be download recipe")
+            print("Error fetching recipes from database: \(error.localizedDescription)")
+            displayAlert(title: "Database error", message: "Cannot be load favorite recipes")
         }
     }
 }
