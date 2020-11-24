@@ -33,6 +33,7 @@
 		FB63FF3D255A80DD0087F1A8 /* URLSessionFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB63FF3C255A80DD0087F1A8 /* URLSessionFake.swift */; };
 		FB63FF3F255A82090087F1A8 /* recipe.json in Resources */ = {isa = PBXBuildFile; fileRef = FB63FF3E255A82090087F1A8 /* recipe.json */; };
 		FB63FF44255A83E70087F1A8 /* RecipeServiceTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB63FF43255A83E70087F1A8 /* RecipeServiceTestCase.swift */; };
+		FBFF0373256BB8D9001CB933 /* StateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFF0372256BB8D9001CB933 /* StateView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,7 @@
 		FB63FF3C255A80DD0087F1A8 /* URLSessionFake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionFake.swift; sourceTree = "<group>"; };
 		FB63FF3E255A82090087F1A8 /* recipe.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = recipe.json; sourceTree = "<group>"; };
 		FB63FF43255A83E70087F1A8 /* RecipeServiceTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeServiceTestCase.swift; sourceTree = "<group>"; };
+		FBFF0372256BB8D9001CB933 /* StateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,8 +123,9 @@
 		5044D6EB25233A4200384B62 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				506A1AF82521EE4000CA8EDD /* Main.storyboard */,
 				5044D6EC25233A6300384B62 /* RecipeCell.swift */,
+				FBFF0372256BB8D9001CB933 /* StateView.swift */,
+				506A1AF82521EE4000CA8EDD /* Main.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -416,6 +419,7 @@
 				506602A5252344C9007759EC /* DetailViewController.swift in Sources */,
 				5044D6F225233B9900384B62 /* Constants.swift in Sources */,
 				506A1B1E2522043A00CA8EDD /* Service.swift in Sources */,
+				FBFF0373256BB8D9001CB933 /* StateView.swift in Sources */,
 				506A1B19252201CF00CA8EDD /* Reciplease.swift in Sources */,
 				FB1384DA255BDB900092B2EE /* UIViewControllerExtension.swift in Sources */,
 				5044D6ED25233A6300384B62 /* RecipeCell.swift in Sources */,

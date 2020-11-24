@@ -13,16 +13,14 @@ class DetailViewController: UIViewController {
     
     // MARK: - Variables
     
+    var recipe: Recipe?
+
     @IBOutlet weak var recipeImageView : UIImageView!
     @IBOutlet weak var titleLabel : UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var getDirectonButton: UIButton!
    
-    //TODO: remove storyborad
-    //
-    @IBOutlet weak var recipeInfoView: RecipeInfoView!
-    
-    var recipe: Recipe?
+    private let recipeInfoView = RecipeInfoView()
     
     private var isFavorite = false
     
@@ -43,6 +41,7 @@ class DetailViewController: UIViewController {
     }
     
     private func setupView() {
+        //TODO: color the navigation bar
         getDirectonButton.layer.cornerRadius = 10
         titleLabel.text = recipe?.title
         setupRecipeInfoView()
@@ -52,11 +51,15 @@ class DetailViewController: UIViewController {
     }
 
     private func setupRecipeInfoView() {
-        
         recipeInfoView.duration = recipe?.totalTime
         recipeInfoView.portions = recipe?.portions
+        recipeInfoView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(recipeInfoView)
         
-        //TODO layout trailing + top
+        NSLayoutConstraint.activate([
+            recipeInfoView.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 1.5),
+            view.trailingAnchor.constraint(equalToSystemSpacingAfter: recipeInfoView.trailingAnchor, multiplier: 1.0)
+        ])
     }
     
     // MARK: - setupImage
@@ -77,11 +80,18 @@ class DetailViewController: UIViewController {
     // MARK: Favorite methods
     
     private func setupFavoriteButton() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
+        //TODO restore
+        var uiBarButton = navigationItem.rightBarButtonItem
+        uiBarButton = UIBarButtonItem(
             image: UIImage(systemName: isFavorite ? "star.fill" : "star"),
             style: .plain,
             target: self,
             action: #selector(favoriteTapped))
+        
+        uiBarButton?.tintColor = .white
+        
+
+        
     }
     
     private func recipeIsInFavorites() -> Bool {

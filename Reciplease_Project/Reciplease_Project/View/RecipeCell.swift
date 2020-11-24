@@ -9,8 +9,7 @@
 import Foundation
 import UIKit
 
-
-
+// TODO: deplacer dans sa propre classe
 final class RecipeInfoView: UIView {
     
     // MARK: -  variables RecipeInfoView
@@ -168,6 +167,7 @@ final class RecipeCell: UITableViewCell {
         recipeImage.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(recipeImage)
         
+        //TODO:
         let gradientView = UIView()
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = gradientView.bounds
@@ -183,6 +183,7 @@ final class RecipeCell: UITableViewCell {
         recipeIngredients.numberOfLines = 1
         recipeIngredients.textColor = UIColor.secondaryLabel
         recipeIngredients.translatesAutoresizingMaskIntoConstraints = false
+        
         recipeInfoView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(recipeInfoView)
         
@@ -194,8 +195,9 @@ final class RecipeCell: UITableViewCell {
         textStackView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(textStackView)
         
+        //TODO: remove storyborad (Pb Constraints 121.5)
         NSLayoutConstraint.activate([
-            recipeImage.heightAnchor.constraint(equalToConstant: 121),
+            recipeImage.heightAnchor.constraint(equalToConstant: 120),
             recipeImage.topAnchor.constraint(equalTo: contentView.topAnchor),
             recipeImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             recipeImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),

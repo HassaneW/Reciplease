@@ -22,131 +22,31 @@ enum RecipeListMode {
             return "Favorites"
         }
     }
+    
+    var emptyViewTitle: String {
+        switch self {
+        case .api:
+            return "Sorry no recipes were found"
+        case .database:
+            return "You have no favorites"
+        }
+    }
+
+    var emptyViewSubtitle: String {
+        switch self {
+        case .api:
+            return "Please try with different ingredients"
+        case .database:
+            return "Use the search feature to add favorites"
+        }
+    }
 }
 
 //TODO: ajuster les couleurs : nav bar et tab bar et le projet
 //TODO: nav bar title + tab
-//TODO: move empty view and error view dans leur propre fichier
-// Utilities> EmptyView.swift ErrorView.swift
-//TODO: Trouver 2 images error / empty sans background
-// StateView
-class EmptyView: UIView  {
-    
-    private let imageView = UIImageView()
-    private let titleLabel = UILabel()
-    private let subtitleLabel = UILabel()
-   
-    init(image: UIImage?, title: String?, subtitle: String?) {
-        super.init(frame: .zero)
-        //TODO
-        
-        
-       // subtitleLabel.text = subtitle
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupView()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setupView()
-    }
-    
-    private func setupView() {
-        
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = #imageLiteral(resourceName: "kitchenOne")
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        titleLabel.numberOfLines = 0
-        titleLabel.textAlignment = .center
-        titleLabel.textColor = UIColor.label
-        titleLabel.text = "Sorry no recipes were found"
-        titleLabel.adjustsFontForContentSizeCategory = true
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        
-        subtitleLabel.numberOfLines = 0
-        subtitleLabel.textAlignment = .center
-        subtitleLabel.textColor = UIColor.secondaryLabel
-        subtitleLabel.adjustsFontForContentSizeCategory = true
-        subtitleLabel.text = "Please try with different ingredients"
-        subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        subtitleLabel.font = UIFont.preferredFont(forTextStyle: .body)
-        
-        let contentStackView = UIStackView(arrangedSubviews: [imageView, titleLabel, subtitleLabel])
-        contentStackView.axis = .vertical
-        contentStackView.spacing = UIStackView.spacingUseSystem
-        contentStackView.alignment = .center
-        contentStackView.distribution = .fill
-        contentStackView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(contentStackView)
-        
-        NSLayoutConstraint.activate([
-            contentStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            contentStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            contentStackView.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1.0),
-            trailingAnchor.constraint(equalToSystemSpacingAfter: contentStackView.trailingAnchor, multiplier: 1.0),
-        ])
-    }
-}
-
-class ErrorView: UIView {
-    
-    private let imageView = UIImageView()
-    private let titleLabel = UILabel()
-    private let subtitleLabel = UILabel()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupView()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setupView()
-    }
-    
-    private func setupView() {
-        
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = #imageLiteral(resourceName: "kitchenOne")
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        titleLabel.numberOfLines = 0
-        titleLabel.textAlignment = .center
-        titleLabel.textColor = UIColor.label
-        titleLabel.text = "Something went wrong"
-        titleLabel.adjustsFontForContentSizeCategory = true
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        
-        subtitleLabel.numberOfLines = 0
-        subtitleLabel.textAlignment = .center
-        subtitleLabel.textColor = UIColor.secondaryLabel
-        subtitleLabel.adjustsFontForContentSizeCategory = true
-        subtitleLabel.text = "We're sorry, please try again"
-        subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        subtitleLabel.font = UIFont.preferredFont(forTextStyle: .body)
-        
-        let contentStackView = UIStackView(arrangedSubviews: [imageView, titleLabel, subtitleLabel])
-        contentStackView.axis = .vertical
-        contentStackView.spacing = UIStackView.spacingUseSystem
-        contentStackView.alignment = .center
-        contentStackView.distribution = .fill
-        contentStackView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(contentStackView)
-        
-        NSLayoutConstraint.activate([
-            contentStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            contentStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            contentStackView.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1.0),
-            trailingAnchor.constraint(equalToSystemSpacingAfter: contentStackView.trailingAnchor, multiplier: 1.0),
-        ])
-    }
-}
+//TODO: navigation bar color brown
+//TODO: tests !
+//TODO: hidden state
 
 class RecipesListViewController: UIViewController {
     
@@ -155,12 +55,10 @@ class RecipesListViewController: UIViewController {
     var recipeMode: RecipeListMode
     var ingredients: String = ""
     var recipe: Recipe?
-    
-    // emptyViewSearch
-    // emptyViewFavorites
+
     private let loadingIndicator = UIActivityIndicatorView(style: .large)
-    private let emptyView = EmptyView()
-    private let errorView = ErrorView()
+    private let errorView = StateView()
+    private let emptyView = StateView()
     private let tableView = UITableView()
     private var recipes: [Recipe] = []
     
@@ -170,6 +68,7 @@ class RecipesListViewController: UIViewController {
         self.recipeMode = recipeMode
         super.init(nibName: nil, bundle: nil)
     }
+
     required init?(coder: NSCoder) {
         self.recipeMode = .database
         super.init(coder: coder)
@@ -214,11 +113,17 @@ class RecipesListViewController: UIViewController {
         loadingIndicator.hidesWhenStopped = true
         loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(loadingIndicator)
-        
+
+        emptyView.image = #imageLiteral(resourceName: "kitchenOne")
+        emptyView.title = recipeMode.emptyViewTitle
+        emptyView.subtitle = recipeMode.emptyViewSubtitle
         emptyView.isHidden = true
         emptyView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(emptyView)
-        
+ 
+        errorView.image = #imageLiteral(resourceName: "kitchenOne")
+        errorView.title = "Something went wrong"
+        errorView.subtitle = "We're sorry, please try again"
         errorView.isHidden = true
         errorView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(errorView)
