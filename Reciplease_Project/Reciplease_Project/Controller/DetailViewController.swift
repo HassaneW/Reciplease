@@ -41,13 +41,30 @@ class DetailViewController: UIViewController {
     }
     
     private func setupView() {
-        //TODO: color the navigation bar
+        title = "Reciplease"
         getDirectonButton.layer.cornerRadius = 10
         titleLabel.text = recipe?.title
         setupRecipeInfoView()
         setupFavoriteButton()
         setupImage()
         tableView.reloadData()
+        
+
+        
+        //         override func viewWillAppear(_ animated: Bool) {
+        //                super.viewWillAppear(animated)
+        //                navigationController?.navigationBar.prefersLargeTitles = true
+        //
+        //                let appearance = UINavigationBarAppearance()
+        //                appearance.backgroundColor = .purple
+        //                appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        //                appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        //
+        //                navigationController?.navigationBar.tintColor = .white
+        //                navigationController?.navigationBar.standardAppearance = appearance
+        //                navigationController?.navigationBar.compactAppearance = appearance
+        //                navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        //        }
     }
 
     private func setupRecipeInfoView() {
@@ -80,18 +97,11 @@ class DetailViewController: UIViewController {
     // MARK: Favorite methods
     
     private func setupFavoriteButton() {
-        //TODO restore
-        var uiBarButton = navigationItem.rightBarButtonItem
-        uiBarButton = UIBarButtonItem(
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: isFavorite ? "star.fill" : "star"),
             style: .plain,
             target: self,
             action: #selector(favoriteTapped))
-        
-        uiBarButton?.tintColor = .white
-        
-
-        
     }
     
     private func recipeIsInFavorites() -> Bool {

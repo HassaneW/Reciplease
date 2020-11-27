@@ -42,9 +42,6 @@ enum RecipeListMode {
     }
 }
 
-//TODO: ajuster les couleurs : nav bar et tab bar et le projet
-//TODO: nav bar title + tab
-//TODO: navigation bar color brown
 //TODO: tests !
 //TODO: hidden state
 
@@ -215,7 +212,7 @@ extension RecipesListViewController: UITableViewDelegate {
                 do {
                     try DatabaseService.shared.delete(recipe: recipeToDelete)
                     self.tableView.reloadData()
-                    //TODO: refresh not working on Edit nav bar
+                    //TODO: refresh not working on Edit nav bar (rafraichir tableView delete)
                     completionHandler(true)
                 } catch let error {
                     print("Error deleting recipe: \(error.localizedDescription)")

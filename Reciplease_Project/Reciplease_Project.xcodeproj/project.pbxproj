@@ -28,9 +28,12 @@
 		FB0201612550211900039B7A /* RecipesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0201602550211900039B7A /* RecipesListViewController.swift */; };
 		FB02016325502F9200039B7A /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB02016225502F9200039B7A /* HomeTabBarController.swift */; };
 		FB1384DA255BDB900092B2EE /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1384D9255BDB900092B2EE /* UIViewControllerExtension.swift */; };
+		FB352530256FEE8800129B92 /* RecipeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB35252F256FEE8800129B92 /* RecipeInfoView.swift */; };
+		FB352532256FF04F00129B92 /* ColorNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB352531256FF04F00129B92 /* ColorNavigationBar.swift */; };
+		FB35253425712F3400129B92 /* NetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB35253325712F3400129B92 /* NetworkServiceTests.swift */; };
 		FB3F0AA42567F54A0096CFEC /* DatabaseServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3F0AA32567F54A0096CFEC /* DatabaseServiceTests.swift */; };
 		FB63FF3B255A80CD0087F1A8 /* FakeResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB63FF3A255A80CD0087F1A8 /* FakeResponseData.swift */; };
-		FB63FF3D255A80DD0087F1A8 /* URLSessionFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB63FF3C255A80DD0087F1A8 /* URLSessionFake.swift */; };
+		FB63FF3D255A80DD0087F1A8 /* URLProtocolMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB63FF3C255A80DD0087F1A8 /* URLProtocolMock.swift */; };
 		FB63FF3F255A82090087F1A8 /* recipe.json in Resources */ = {isa = PBXBuildFile; fileRef = FB63FF3E255A82090087F1A8 /* recipe.json */; };
 		FB63FF44255A83E70087F1A8 /* RecipeServiceTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB63FF43255A83E70087F1A8 /* RecipeServiceTestCase.swift */; };
 		FBFF0373256BB8D9001CB933 /* StateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFF0372256BB8D9001CB933 /* StateView.swift */; };
@@ -74,9 +77,12 @@
 		FB0201602550211900039B7A /* RecipesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesListViewController.swift; sourceTree = "<group>"; };
 		FB02016225502F9200039B7A /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
 		FB1384D9255BDB900092B2EE /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		FB35252F256FEE8800129B92 /* RecipeInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeInfoView.swift; sourceTree = "<group>"; };
+		FB352531256FF04F00129B92 /* ColorNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorNavigationBar.swift; sourceTree = "<group>"; };
+		FB35253325712F3400129B92 /* NetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTests.swift; sourceTree = "<group>"; };
 		FB3F0AA32567F54A0096CFEC /* DatabaseServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseServiceTests.swift; sourceTree = "<group>"; };
 		FB63FF3A255A80CD0087F1A8 /* FakeResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeResponseData.swift; sourceTree = "<group>"; };
-		FB63FF3C255A80DD0087F1A8 /* URLSessionFake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionFake.swift; sourceTree = "<group>"; };
+		FB63FF3C255A80DD0087F1A8 /* URLProtocolMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolMock.swift; sourceTree = "<group>"; };
 		FB63FF3E255A82090087F1A8 /* recipe.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = recipe.json; sourceTree = "<group>"; };
 		FB63FF43255A83E70087F1A8 /* RecipeServiceTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeServiceTestCase.swift; sourceTree = "<group>"; };
 		FBFF0372256BB8D9001CB933 /* StateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateView.swift; sourceTree = "<group>"; };
@@ -124,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				5044D6EC25233A6300384B62 /* RecipeCell.swift */,
+				FB35252F256FEE8800129B92 /* RecipeInfoView.swift */,
 				FBFF0372256BB8D9001CB933 /* StateView.swift */,
 				506A1AF82521EE4000CA8EDD /* Main.storyboard */,
 			);
@@ -134,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				5044D6F125233B9900384B62 /* Constants.swift */,
+				FB352531256FF04F00129B92 /* ColorNavigationBar.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -192,6 +200,7 @@
 				506A1B0C2521EE4500CA8EDD /* Reciplease_ProjectTests.swift */,
 				506A1B0E2521EE4500CA8EDD /* Info.plist */,
 				FB3F0AA32567F54A0096CFEC /* DatabaseServiceTests.swift */,
+				FB35253325712F3400129B92 /* NetworkServiceTests.swift */,
 			);
 			path = Reciplease_ProjectTests;
 			sourceTree = "<group>";
@@ -254,7 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				FB63FF3A255A80CD0087F1A8 /* FakeResponseData.swift */,
-				FB63FF3C255A80DD0087F1A8 /* URLSessionFake.swift */,
+				FB63FF3C255A80DD0087F1A8 /* URLProtocolMock.swift */,
 			);
 			path = Session_Response_Fake;
 			sourceTree = "<group>";
@@ -418,6 +427,7 @@
 				FB0201612550211900039B7A /* RecipesListViewController.swift in Sources */,
 				506602A5252344C9007759EC /* DetailViewController.swift in Sources */,
 				5044D6F225233B9900384B62 /* Constants.swift in Sources */,
+				FB352532256FF04F00129B92 /* ColorNavigationBar.swift in Sources */,
 				506A1B1E2522043A00CA8EDD /* Service.swift in Sources */,
 				FBFF0373256BB8D9001CB933 /* StateView.swift in Sources */,
 				506A1B19252201CF00CA8EDD /* Reciplease.swift in Sources */,
@@ -425,6 +435,7 @@
 				5044D6ED25233A6300384B62 /* RecipeCell.swift in Sources */,
 				5044D6F525233BC700384B62 /* StringExtension.swift in Sources */,
 				506A1AF32521EE4000CA8EDD /* AppDelegate.swift in Sources */,
+				FB352530256FEE8800129B92 /* RecipeInfoView.swift in Sources */,
 				500EFC70253B4A1900AE1DEB /* DatabaseService.swift in Sources */,
 				506602A125233FA0007759EC /* HomeViewController.swift in Sources */,
 				506A1AFD2521EE4000CA8EDD /* Reciplease_Project.xcdatamodeld in Sources */,
@@ -440,8 +451,9 @@
 			files = (
 				FB3F0AA42567F54A0096CFEC /* DatabaseServiceTests.swift in Sources */,
 				506A1B0D2521EE4500CA8EDD /* Reciplease_ProjectTests.swift in Sources */,
-				FB63FF3D255A80DD0087F1A8 /* URLSessionFake.swift in Sources */,
+				FB63FF3D255A80DD0087F1A8 /* URLProtocolMock.swift in Sources */,
 				FB63FF3B255A80CD0087F1A8 /* FakeResponseData.swift in Sources */,
+				FB35253425712F3400129B92 /* NetworkServiceTests.swift in Sources */,
 				FB63FF44255A83E70087F1A8 /* RecipeServiceTestCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

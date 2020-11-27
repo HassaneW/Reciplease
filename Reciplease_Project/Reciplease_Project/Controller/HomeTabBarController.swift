@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+//TODO: delete
 class HomeTabBarController: UITabBarController {
 
      // MARK: - init
@@ -15,8 +15,15 @@ class HomeTabBarController: UITabBarController {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         
-        // Changer de vue et cacher le tabBar
+        UITabBarItem.appearance()
+        
+        let appearanceTabBar = UIBarAppearance()
+        appearanceTabBar.backgroundColor = UIColor(named: "brown")
+        
+        
         hidesBottomBarWhenPushed = true
+        
+        
     }
     
     required init?(coder: NSCoder) {

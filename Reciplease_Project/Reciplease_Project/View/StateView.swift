@@ -45,6 +45,11 @@ final class StateView: UIView  {
     
     private func setupView() {
         
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = UIColor(named: "brown")
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         

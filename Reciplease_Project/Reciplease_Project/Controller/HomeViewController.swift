@@ -64,6 +64,10 @@ class HomeViewController: UIViewController {
         textIngredientField.delegate = self
     }
     private func setupView() {
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = UIColor(named: "brown")
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
         clear.layer.cornerRadius = 10
         add.layer.cornerRadius = 10
         searchButton.layer.cornerRadius = 10

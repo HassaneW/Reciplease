@@ -33,7 +33,7 @@ class DatabaseServiceTests: XCTestCase {
     }()
     
     
-    func testRecipeSaveAndLoad() { // On prend les rectettes, on sauvegarde puis on load pour vérifier
+    func testRecipeSaveAndLoad() { // On prend les recettes, on sauvegarde puis on load pour vérifier
 //        let recipes = FAke.recipes
 //
 //        recipes.forEach {

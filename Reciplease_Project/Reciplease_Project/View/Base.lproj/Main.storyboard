@@ -25,7 +25,7 @@
             </objects>
             <point key="canvasLocation" x="1362.3188405797102" y="442.63392857142856"/>
         </scene>
-        <!--Home View Controller-->
+        <!--Reciplease-->
         <scene sceneID="GQo-mm-51M">
             <objects>
                 <viewController storyboardIdentifier="HomeViewController" id="KKd-bf-NGD" customClass="HomeViewController" customModule="Reciplease_Project" customModuleProvider="target" sceneMemberID="viewController">
@@ -171,7 +171,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="KhX-Ky-F1R"/>
                     </view>
-                    <navigationItem key="navigationItem" id="h1D-uz-LNY"/>
+                    <navigationItem key="navigationItem" title="Reciplease" id="h1D-uz-LNY"/>
                     <connections>
                         <outlet property="add" destination="4VU-Zc-2Rk" id="9wp-QR-e6c"/>
                         <outlet property="clear" destination="3uU-0F-tOD" id="Psf-2h-Cor"/>
@@ -187,7 +187,7 @@
         <!--Detail View Controller-->
         <scene sceneID="aLR-cI-fuT">
             <objects>
-                <viewController storyboardIdentifier="DetailViewController" id="VXY-CW-ZrC" customClass="DetailViewController" customModule="Reciplease_Project" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailViewController" hidesBottomBarWhenPushed="YES" id="VXY-CW-ZrC" customClass="DetailViewController" customModule="Reciplease_Project" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DMA-gu-Llc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -276,7 +276,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qzT-nd-9EQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2757.971014492754" y="-368.30357142857139"/>
+            <point key="canvasLocation" x="2358" y="36"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="j0y-FS-wiy">
@@ -286,6 +286,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" name="brown"/>
+                        <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="9fJ-jE-Nu5" kind="relationship" relationship="viewControllers" id="ysH-im-apE"/>
@@ -305,6 +307,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bu3-26-nZw">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" name="brown"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -324,6 +330,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dMm-yB-qNX">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" name="brown"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
