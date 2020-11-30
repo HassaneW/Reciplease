@@ -11,14 +11,14 @@ import Foundation
 
 class FakeResponseData {
     
-    static var recipes: [Recipe] {
-        return reciplease.recipes
-    }
+//    static var recipes: [Recipe] {
+//        return reciplease.recipes
+//    }
     
-    static var reciplease: Reciplease {
-        //TODO: get the json and decode it 
-        return Reciplease()
-    }
+//    static var reciplease: Reciplease {
+        //TODO: get the json and decode it
+//        return Reciplease()
+//    }
     
 //    static let responseOK = HTTPURLResponse(url: URL(string: "https://apple.com")!, statusCode: 200, httpVersion: nil, headerFields: nil)!
 //    static let responseKO = HTTPURLResponse(url: URL(string: "https://google.com")!, statusCode: 500, httpVersion: nil, headerFields: nil)
