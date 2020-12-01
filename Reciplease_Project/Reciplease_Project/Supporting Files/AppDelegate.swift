@@ -31,25 +31,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func setupAppearance() {
-        //TODO:
-        //TODO: nav bar title + tab
-        //TODO: navigation bar color brown
-        //TODO: ajuster les couleurs : nav bar et tab bar et le projet
-        //TODO: bar button color white / tab bvar /nav bar title
-        
-        //        let appearance = UINavigationBarAppearance()
-        //        appearance.backgroundColor = UIColor(named: "brown")
-        
-        //        let appearanceTabBar = UIBarAppearance()
-        //        appearanceTabBar.backgroundColor = UIColor(named: "brown")
-        
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 26)], for: .normal)
         UITabBar.appearance().tintColor = .white
         UITabBar.appearance().barTintColor = UIColor(named: "brown")
         
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
+        UINavigationBar.appearance().tintColor = .white
         UINavigationBar().tintColor = UIColor(named: "brown")
-
         
     }
     

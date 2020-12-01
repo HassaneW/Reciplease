@@ -79,6 +79,7 @@ extension Recipe {
 struct Reciplease: Decodable {
     
     let recipes: [Recipe]
+    
     enum CodingKeys: String, CodingKey {
         case recipes = "hits"
     }

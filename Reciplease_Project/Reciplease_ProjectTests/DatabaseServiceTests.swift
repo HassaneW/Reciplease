@@ -10,13 +10,9 @@
 import XCTest
 import CoreData
 
-//TODO: creeer fake let recipes = FakeData.recipes
-
 class DatabaseServiceTests: XCTestCase {
 
-    
-    //static let managedObjectModel = NSManagedObjectModel
-    
+    var loadedRecipes: [Recipe] = []
     
     let databaseService: DatabaseService = {
         let persistentStoreDescription = NSPersistentStoreDescription()
@@ -32,26 +28,36 @@ class DatabaseServiceTests: XCTestCase {
         return DatabaseService(persistentContainer: container)
     }()
     
-    
-    func testRecipeSaveAndLoad() { // On prend les recettes, on sauvegarde puis on load pour vérifier
-//        let recipes = FAke.recipes
-//
-//        recipes.forEach {
-//
-//        }
-//        let recipe = recipes.first
-//
-//         do catch
-//        databaseService.save(recipe: recipe)
-        
-        // do catch
-//        loadedReciipes = databaseService.loadRecipes()
-//
-//        XCTAssertEqual(loadedrecipes, [recipe])
-//        XCTAssertEqual(loadedrecipes, recipes)
-        
+    override func tearDownWithError() throws {
+        loadedRecipes = []
     }
     
+    func testRecipeSaveAndLoad() {
+        XCTAssertEqual(loadedRecipes.count, 0)
+        
+        let recipes = FakeData.recipes
+        
+        recipes.forEach { recipe in
+            do {
+                try databaseService.save(recipe: recipe)
+            } catch {
+                XCTFail("error saving recipe \(error.localizedDescription)")
+            }
+        }
+        
+        do {
+            loadedRecipes = try databaseService.loadRecipes()
+        } catch {
+            XCTFail("error loading recipes \(error.localizedDescription)")
+        }
+        
+        XCTAssertEqual(loadedRecipes.count, 10)
+        //XCTAssertEqual(loadedRecipes, recipes) // pk c'est pas ordonner
+    }
+    
+    func testRecipeDeleted() {
+        
+    }
     //Test Delete
 //    save recipes
 //    recipes.count == 10

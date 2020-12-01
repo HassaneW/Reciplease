@@ -8,6 +8,14 @@
 
 import UIKit
 
+//todo: move to a file
+enum State {
+    case loading
+    case error
+    case empty
+    case showingData
+}
+
 // MARK: - Enum RecipeListeMode
 
 enum RecipeListMode {
@@ -42,9 +50,6 @@ enum RecipeListMode {
     }
 }
 
-//TODO: tests !
-//TODO: hidden state
-
 class RecipesListViewController: UIViewController {
     
     // MARK: - Properties
@@ -52,6 +57,24 @@ class RecipesListViewController: UIViewController {
     var recipeMode: RecipeListMode
     var ingredients: String = ""
     var recipe: Recipe?
+
+    var viewState: State = .loading {
+        didSet {
+            resetViewState()
+            
+            switch viewState {
+            case .loading:
+                loadingIndicator.startAnimating()
+            case .error:
+                errorView.isHidden = false
+            case .empty:
+                emptyView.isHidden = false
+            case .showingData:
+                tableView.isHidden = false
+                tableView.reloadData()
+            }
+        }
+    }
 
     private let loadingIndicator = UIActivityIndicatorView(style: .large)
     private let errorView = StateView()
@@ -154,21 +177,18 @@ class RecipesListViewController: UIViewController {
     }
     
     private func getRecipesFromApi() {
-        loadingIndicator.startAnimating()
+        viewState = .loading
         NetworkService.shared.getRecipes(ingredients: ingredients) { [weak self] result in
-            self?.loadingIndicator.stopAnimating()
             switch result {
             case .success(let reciplease) where reciplease.recipes.isEmpty:
                 print("no recipes found")
-                self?.emptyView.isHidden = false
-                
+                self?.viewState = .empty
             case .success(let reciplease):
-                self?.tableView.isHidden = false
                 self?.recipes = reciplease.recipes
-                self?.tableView.reloadData()
+                self?.viewState = .showingData
             case .failure(let error):
-                self?.errorView.isHidden = false
                 print("Error fetching recipes from api: \(error.localizedDescription)")
+                self?.viewState = .error
             }
         }
     }
@@ -178,16 +198,21 @@ class RecipesListViewController: UIViewController {
             recipes = try DatabaseService.shared.loadRecipes()
             if recipes.isEmpty {
                 print("no favorites recipes found")
-                emptyView.isHidden = false
-                
+                viewState = .empty
             } else {
-                tableView.isHidden = false
-                tableView.reloadData()
+                viewState = .showingData
             }
         } catch let error {
             print("Error fetching recipes from database: \(error.localizedDescription)")
-            displayAlert(title: "Database error", message: "Cannot be load favorite recipes")
+            viewState = .error
         }
+    }
+    
+    private func resetViewState() {
+        errorView.isHidden = true
+        emptyView.isHidden = true
+        tableView.isHidden = true
+        loadingIndicator.stopAnimating()
     }
 }
 
@@ -211,8 +236,9 @@ extension RecipesListViewController: UITableViewDelegate {
                 let recipeToDelete = self.recipes[indexPath.row]
                 do {
                     try DatabaseService.shared.delete(recipe: recipeToDelete)
-                    self.tableView.reloadData()
-                    //TODO: refresh not working on Edit nav bar (rafraichir tableView delete)
+                    DispatchQueue.main.async {
+                        self.getRecipesFromDatabase()
+                    }
                     completionHandler(true)
                 } catch let error {
                     print("Error deleting recipe: \(error.localizedDescription)")
