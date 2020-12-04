@@ -9,11 +9,11 @@
 import Foundation
 import Alamofire
 
-
-class NetworkService {
+class NetworkServiceRecipe {
     
     // MARK: - Variables
-    static let shared = NetworkService()
+    static let shared = NetworkServiceRecipe()
+    
     private let session: Session
     
     init(session: Session = .default) {

@@ -12,25 +12,51 @@ import XCTest
 
 class NetworkServiceTests: XCTestCase {
     
-    var networkService: NetworkService!
-    var session: Session!
+    private var networkService: NetworkServiceRecipe!
+    private var session: Session!
     
     override func setUpWithError() throws {
         let configuration = URLSessionConfiguration.default
         configuration.protocolClasses = [URLProtocolMock.self]
         session = Session(configuration: configuration)
-        networkService = NetworkService(session: session)
+        networkService = NetworkServiceRecipe(session: session)
     }
-
+    
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
+    
     func testFetchRecipesSuccess() {
-        //TODO
+        URLProtocolMock.mockError = .success(FakeData.incorrectData)
+        
+        let expectation = XCTestExpectation(description: "load request")
+        networkService.getRecipes(ingredients: "chicken") { (result)  in
+            
+            switch result {
+            case .success(let recipes):
+                XCTAssertEqual(recipes.recipes, FakeData.recipes)
+            case .failure:
+                XCTFail()
+            }
+            expectation.fulfill()
+        }
+        wait(for : [expectation], timeout: 1)
     }
-
+    
     func testFetchRecipesFailure() {
-        //TODO
+        
+        let expectation = XCTestExpectation(description: "load request")
+        networkService.getRecipes(ingredients: "invalid") { (result)  in
+            
+            switch result {
+            case .success:
+                XCTFail()
+            case .failure(let error):
+                XCTAssertTrue(((error.errorDescription?.contains("test me")) != nil))
+                //XCTAssertEqual(error.errorDescription, requestError.errorDescription)
+            }
+            expectation.fulfill()
+        }
+        wait(for : [expectation], timeout: 1)
     }
 }

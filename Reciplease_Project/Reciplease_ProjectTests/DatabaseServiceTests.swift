@@ -57,13 +57,38 @@ class DatabaseServiceTests: XCTestCase {
     
     func testRecipeDeleted() {
         
+        XCTAssertEqual(loadedRecipes.count, 0)
+        
+        let recipes = FakeData.recipes
+        
+        recipes.forEach { recipe in
+            do {
+                try databaseService.save(recipe: recipe)
+            } catch {
+                XCTFail("error saving recipe \(error.localizedDescription)")
+            }
+        }
+        
+        let randomIndex = Int.random(in:0..<recipes.count)
+        let recipeToDelete = recipes[randomIndex]
+        
+        do {
+            try databaseService.delete(recipe: recipeToDelete)
+        } catch {
+            XCTFail("error deleting recipe \(error.localizedDescription)")
+        }
+        
+        
+        do {
+            loadedRecipes = try databaseService.loadRecipes()
+        } catch {
+            XCTFail("error loading recipes \(error.localizedDescription)")
+        }
+        
+        XCTAssertEqual(loadedRecipes.count, 9)
+        
+        let deletedRecipes = recipes.filter { !loadedRecipes.contains($0) }
+        XCTAssertEqual(deletedRecipes.count, 1)
+        XCTAssertEqual(deletedRecipes[0], recipeToDelete)
     }
-    //Test Delete
-//    save recipes
-//    recipes.count == 10
-//    select one recipe random ou first last
-//    call recipe delete
-//    call load : loadedREcipes Aray
-//    dans cet arrray ont doit pas trouver la recepte surppimer
-//    count 9
 }

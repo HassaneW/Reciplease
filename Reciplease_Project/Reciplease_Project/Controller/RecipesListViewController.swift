@@ -178,7 +178,7 @@ class RecipesListViewController: UIViewController {
     
     private func getRecipesFromApi() {
         viewState = .loading
-        NetworkService.shared.getRecipes(ingredients: ingredients) { [weak self] result in
+        NetworkServiceRecipe.shared.getRecipes(ingredients: ingredients) { [weak self] result in
             switch result {
             case .success(let reciplease) where reciplease.recipes.isEmpty:
                 print("no recipes found")

@@ -11,7 +11,7 @@ import Foundation
 
 class FakeData {
     
-    private static var recipeData: Data {
+    static var recipeData: Data {
         let bundle = Bundle(for: self)
         let url = bundle.url(forResource: "Recipes", withExtension: "json")
         return try! Data(contentsOf: url!)
@@ -26,4 +26,9 @@ class FakeData {
     }
     
     static let incorrectData = "incorrect data".data(using: .utf8)!
+    
+    enum FakeError: Error, Equatable {
+        case apiError
+    }
 }
+
