@@ -8,7 +8,7 @@
 
 import UIKit
 
-//todo: move to a file
+
 enum State {
     case loading
     case error

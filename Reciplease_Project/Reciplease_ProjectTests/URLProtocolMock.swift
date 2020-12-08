@@ -6,33 +6,14 @@
 //  Copyright © 2020 Wandianga. All rights reserved.
 //
 
-@testable import Reciplease_Project
 import Foundation
 import XCTest
-@testable import Alamofire
 
 class URLProtocolMock: URLProtocol {
     
-//    static var responseError: [URL: Result<Data, Error>] = [generateURL() : .success(FakeData.incorrectData)]
-//    static var responseSuccess: [URL: Result<Data, Error>] = [generateURL() : .success(FakeData.recipeData)]
-    static var mockError?
-    static var mockSuccess?
+    static var error: Error?
+    static var successData: Data?
     
-    private static var mockURLs: [URL: Result<Data, Error>] = [
-        generateURLFor(ingredient: "invalid") : .success(FakeData.incorrectData),
-        generateURLFor(ingredient: "chicken") : .success(FakeData.recipeData)
-    ]
-  
-    private static func generateURLFor(ingredient: String) -> URL {
-        var url = ConfigNetworkingService.edelman.baseUrl
-        url += "&app_id=\(ConfigNetworkingService.edelman.app_id)"
-        url += "&app_key=\(ConfigNetworkingService.edelman.app_key)"
-        url += "&from=0"
-        url += "&q=\(ingredient)"
-        url += "&to=10"
-        return URL(string: url)!
-    }
-
     override class func canInit(with request: URLRequest) -> Bool {
         return true
     }
@@ -42,39 +23,20 @@ class URLProtocolMock: URLProtocol {
     }
     
     override func startLoading() {
-        if let mockError {
-
+        if let error = URLProtocolMock.error {
             client?.urlProtocol(self, didFailWithError: error)
-        }
-        
-        
-        let url = request.url!
-        guard let response = URLProtocolMock.mockURLs[url] else {
-            client?.urlProtocol(self, didFailWithError: AFError.invalidURL(url: url))
+            client?.urlProtocolDidFinishLoading(self)
             return
         }
         
-        switch response {
-        case .failure(let error):
-             client?.urlProtocol(self, didFailWithError: error)
-        case .success(let data):
-            client?.urlProtocol(self, didLoad: data)
-            client?.urlProtocolDidFinishLoading(self)
+        guard let successData = URLProtocolMock.successData else {
+            XCTFail("Invalid success data received")
+            return
         }
+        
+        client?.urlProtocol(self, didLoad: successData)
+        client?.urlProtocolDidFinishLoading(self)
     }
     
     override func stopLoading() { }
-}
-
-
-class URLSessionDataTaskFake : URLSessionDataTask {
-    var completionHandler: ((Data?, URLResponse?, Error?) -> Void)?
-    var data : Data?
-    var urlResponse : URLResponse?
-    var responseError: Error?
-    override func resume() {
-        completionHandler?(data, urlResponse, responseError)
-    }
-    override func cancel() {
-    }
 }

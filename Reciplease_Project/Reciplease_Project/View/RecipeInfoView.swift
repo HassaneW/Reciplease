@@ -30,8 +30,7 @@ final class RecipeInfoView: UIView {
             durationLabel.text = dateComponentsFormatter.string(from: Double(duration * 60))
         }
     }
-    
-    
+
     private enum Constant {
         static let padding: CGFloat = 5
         static let cornerRadius: CGFloat = 8

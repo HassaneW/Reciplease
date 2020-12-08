@@ -49,17 +49,6 @@ class DatabaseService {
         } catch let error {
             throw error
         }
-        /*
-        var recipes: [Recipe] = []
-        for recipeEntity in recipeEntities {
-            let recipe = Recipe(from: recipeEntity)
-            recipes.append(recipe)
-        }
-        let recipes = recipeEntities.map { recipeEntity -> Recipe in
-            return Recipe(from: recipeEntity)
-        }
-         */
-        // programmation fonctionnelle: map , compactMap, flatMap, reduce
         return recipeEntities.map { Recipe(from: $0) }
     }
     

@@ -48,23 +48,6 @@ class DetailViewController: UIViewController {
         setupFavoriteButton()
         setupImage()
         tableView.reloadData()
-        
-
-        
-        //         override func viewWillAppear(_ animated: Bool) {
-        //                super.viewWillAppear(animated)
-        //                navigationController?.navigationBar.prefersLargeTitles = true
-        //
-        //                let appearance = UINavigationBarAppearance()
-        //                appearance.backgroundColor = .purple
-        //                appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        //                appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        //
-        //                navigationController?.navigationBar.tintColor = .white
-        //                navigationController?.navigationBar.standardAppearance = appearance
-        //                navigationController?.navigationBar.compactAppearance = appearance
-        //                navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        //        }
     }
 
     private func setupRecipeInfoView() {

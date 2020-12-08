@@ -28,7 +28,6 @@
 		FB0201612550211900039B7A /* RecipesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0201602550211900039B7A /* RecipesListViewController.swift */; };
 		FB1384DA255BDB900092B2EE /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1384D9255BDB900092B2EE /* UIViewControllerExtension.swift */; };
 		FB352530256FEE8800129B92 /* RecipeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB35252F256FEE8800129B92 /* RecipeInfoView.swift */; };
-		FB352532256FF04F00129B92 /* ColorNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB352531256FF04F00129B92 /* ColorNavigationBar.swift */; };
 		FB35253425712F3400129B92 /* NetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB35253325712F3400129B92 /* NetworkServiceTests.swift */; };
 		FB3F0AA42567F54A0096CFEC /* DatabaseServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3F0AA32567F54A0096CFEC /* DatabaseServiceTests.swift */; };
 		FB63FF3B255A80CD0087F1A8 /* FakeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB63FF3A255A80CD0087F1A8 /* FakeData.swift */; };
@@ -77,7 +76,6 @@
 		FB0201602550211900039B7A /* RecipesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesListViewController.swift; sourceTree = "<group>"; };
 		FB1384D9255BDB900092B2EE /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		FB35252F256FEE8800129B92 /* RecipeInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeInfoView.swift; sourceTree = "<group>"; };
-		FB352531256FF04F00129B92 /* ColorNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorNavigationBar.swift; sourceTree = "<group>"; };
 		FB35253325712F3400129B92 /* NetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTests.swift; sourceTree = "<group>"; };
 		FB3F0AA32567F54A0096CFEC /* DatabaseServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseServiceTests.swift; sourceTree = "<group>"; };
 		FB63FF3A255A80CD0087F1A8 /* FakeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeData.swift; sourceTree = "<group>"; };
@@ -139,7 +137,6 @@
 			isa = PBXGroup;
 			children = (
 				5044D6F125233B9900384B62 /* Constants.swift */,
-				FB352531256FF04F00129B92 /* ColorNavigationBar.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -451,7 +448,6 @@
 				FB0201612550211900039B7A /* RecipesListViewController.swift in Sources */,
 				506602A5252344C9007759EC /* DetailViewController.swift in Sources */,
 				5044D6F225233B9900384B62 /* Constants.swift in Sources */,
-				FB352532256FF04F00129B92 /* ColorNavigationBar.swift in Sources */,
 				506A1B1E2522043A00CA8EDD /* NetworkServiceRecipe.swift in Sources */,
 				FBFF0373256BB8D9001CB933 /* StateView.swift in Sources */,
 				506A1B19252201CF00CA8EDD /* Reciplease.swift in Sources */,

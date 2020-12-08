@@ -23,18 +23,29 @@ class NetworkServiceTests: XCTestCase {
     }
     
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        URLProtocolMock.successData = nil
+        URLProtocolMock.error = nil
     }
     
     func testFetchRecipesSuccess() {
-        URLProtocolMock.mockError = .success(FakeData.incorrectData)
+       
+        URLProtocolMock.successData = FakeData.recipeData
         
-        let expectation = XCTestExpectation(description: "load request")
-        networkService.getRecipes(ingredients: "chicken") { (result)  in
-            
+        let expectation = XCTestExpectation(description: "load request triggers success")
+        
+        networkService.getRecipes(ingredients: "chicken") { (result) in
+     
             switch result {
-            case .success(let recipes):
-                XCTAssertEqual(recipes.recipes, FakeData.recipes)
+            case .success(let result):
+                XCTAssertEqual(result.recipes, FakeData.recipes)
+                
+                let recipe = try! XCTUnwrap(result.recipes.first, "recipe not found")
+                XCTAssertEqual(recipe.title, "Chicken Vesuvio")
+                XCTAssertEqual(recipe.imageUrl, "https://www.edamam.com/web-img/e42/e42f9119813e890af34c259785ae1cfb.jpg")
+                XCTAssertEqual(recipe.url, "http://www.seriouseats.com/recipes/2011/12/chicken-vesuvio-recipe.html")
+                XCTAssertEqual(recipe.portions, 4.0)
+                XCTAssertEqual(recipe.totalTime, 60.0)
+                XCTAssertEqual(recipe.ingredients.first, "1/2 cup olive oil")
             case .failure:
                 XCTFail()
             }
@@ -44,16 +55,18 @@ class NetworkServiceTests: XCTestCase {
     }
     
     func testFetchRecipesFailure() {
+
+        URLProtocolMock.error = AFError.explicitlyCancelled
         
-        let expectation = XCTestExpectation(description: "load request")
-        networkService.getRecipes(ingredients: "invalid") { (result)  in
+        let expectation = XCTestExpectation(description: "load request triggers error")
+        
+        networkService.getRecipes(ingredients: "error recipe") { result in
             
             switch result {
             case .success:
                 XCTFail()
             case .failure(let error):
-                XCTAssertTrue(((error.errorDescription?.contains("test me")) != nil))
-                //XCTAssertEqual(error.errorDescription, requestError.errorDescription)
+                XCTAssertNotNil(error.errorDescription?.contains("URLSessionTask failed with error"))
             }
             expectation.fulfill()
         }

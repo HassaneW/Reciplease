@@ -12,13 +12,19 @@ import CoreData
 
 class DatabaseServiceTests: XCTestCase {
 
-    var loadedRecipes: [Recipe] = []
+    private var loadedRecipes: [Recipe] = []
     
+    private static let managedObjectModel: NSManagedObjectModel = {
+        let managedObjectModel = NSManagedObjectModel.mergedModel(from: [Bundle.main])
+        return managedObjectModel!
+    }()
+
     let databaseService: DatabaseService = {
         let persistentStoreDescription = NSPersistentStoreDescription()
         persistentStoreDescription.type = NSInMemoryStoreType
         persistentStoreDescription.shouldAddStoreAsynchronously = false
-        let container = NSPersistentContainer(name: "Reciplease_Project")
+        
+        let container = NSPersistentContainer(name: "Reciplease_Project", managedObjectModel: managedObjectModel)
         container.persistentStoreDescriptions = [persistentStoreDescription]
         container.loadPersistentStores { description, error in
             precondition(description.type == NSInMemoryStoreType, "Precondition failed, store description is not of type in memory")
@@ -77,7 +83,6 @@ class DatabaseServiceTests: XCTestCase {
         } catch {
             XCTFail("error deleting recipe \(error.localizedDescription)")
         }
-        
         
         do {
             loadedRecipes = try databaseService.loadRecipes()
